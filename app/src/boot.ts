@@ -1,12 +1,13 @@
 // Shared boot: styles, theme, data loading, error display.
 import './styles/tokens.css';
 import './styles/base.css';
-import { initTheme } from './theme';
+import { initTheme, initChrome } from './theme';
 import { loadAll, type AppData } from './data';
 import { esc, fmtN } from './ui';
 
 export async function boot(run: (data: AppData) => void | Promise<void>): Promise<void> {
   initTheme();
+  initChrome();
   try {
     const data = await loadAll();
     const foot = document.getElementById('foot');

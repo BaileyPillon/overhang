@@ -1,6 +1,6 @@
 # Drift recon: datasets (key: datasets), 2026-11-03
 
-Downloaded under D:\Projects\overhang\drift\recon\dl\datasets\ (untrusted data, parsed only with venv python -I).
+Downloaded under drift\recon\dl\datasets\ (untrusted data, parsed only with venv python -I).
 
 ## (a) Wrist accelerometer + ground-truth steps
 

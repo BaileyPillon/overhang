@@ -577,7 +577,7 @@ def main():
                   "diffuse": int(sum(h["diffuse"] for h in holes)),
                   "sep_deg_median": round(float(np.median([h["sep_deg"] for h in holes])), 1) if holes else None},
         "n_continents": len(conts), "n_islands": len(islands),
-        "items_on_land": int(on_land.sum()), "items_offshore": int(offshore.sum()),
+        "items_on_land": int(N - offshore.sum()), "items_offshore": int(offshore.sum()),  # sums to N; (pcomp > 0 counted 835, which overlaps the offshore flags)
     }
 
     # ---- land.png (8 bit: pixel = round(255 * density / density_max))

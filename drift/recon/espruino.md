@@ -48,9 +48,9 @@ Licensing caveat: no license on the data repo (forum-contributed). Fine for loca
 - Needs 32-bit int (true on Windows x64). accMagSquared overflows int32 only if an axis exceeds about 26k counts (same as on device).
 - Gotcha: upstream main.c needs POSIX getline(); on Windows use `-include getline_shim.h` (provided).
 
-## What was built (D:\Projects\overhang\drift\recon\espruino-harness)
+## What was built (drift\recon\espruino-harness)
 - `wrap.c` (per-version wrapper: `drift_init()`, `drift_feed(int mag2)`, `drift_run(int16* xyz, n, int* perSample)`), `wrap_2v09.c`, `shim/jsutils.h`, `src/<commit>/stepcount.{c,h}` (verbatim `git show <commit>:libs/misc/stepcount.{c,h}`), `build.sh`, `run.py`, `bin/sc_<commit>.dll` (12 DLLs), `getline_shim.h`, `xcheck/` (upstream main.c reproduction).
-- Build command that worked: `D:\Projects\overhang\.venv\Scripts\python.exe -m ziglang cc -std=c99 -O2 -Wall -shared -I shim -I src/afb4943c wrap.c -o bin/sc_afb4943c.dll` (no warnings, ~190 KB per DLL).
+- Build command that worked: `.venv\Scripts\python.exe -m ziglang cc -std=c99 -O2 -Wall -shared -I shim -I src/afb4943c wrap.c -o bin/sc_afb4943c.dll` (no warnings, ~190 KB per DLL).
 - Run: `python -I run.py ../dl/espruino/step-count/data --flush` (ctypes; 17 traces x 12 versions in 2 s). `--flush` appends 7 repeated samples like upstream main.c; Espruino itself does not flush.
 - Cross-check: upstream main.c + afb4943c reproduces our DLL numbers exactly (6054, 2164, 2858, 9903, 45, 58, 67, 65, 407, 400, 1825, 0); upstream "orig" column = our 2v09 numbers (3223, 1042, 1909, 12222, ...).
 - Heart rate is NOT a good target here: libs/misc/heartrate.c is for Bangle.js 1 analog HRM; Bangle.js 2 uses a proprietary binary blob (heartrate_vc31_binary.c, since 2026-03). Steps are the right Espruino target.

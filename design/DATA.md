@@ -23,7 +23,7 @@ failed, 2 = missing or invalid input. The script writes only into `--out`.
  "models": ["BAAI/bge-base-en-v1.5","nomic-ai/nomic-embed-text-v1.5"],
  "pca": int, "k": int, "prereg_commit": "0549f44",
  "repo_url": "https://github.com/BaileyPillon/overhang",
- "video": {"title": "31 Claude Use Cases That Can Actually Change Your Life (2027)",
+ "video": {"title": "31 Life-Changing Ways to Use Claude in 2027",
            "channel": "Nick Saraev", "url": "https://www.youtube.com/watch?v=KDyPHt4lW60"},
  "generated": "ISO date", "replication_status": "pending"|"done"}
 ```

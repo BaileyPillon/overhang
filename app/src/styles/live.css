@@ -1,0 +1,110 @@
+/* LIVE: the drawer of Hacker News stories under the globe, and the hole-filler toasts. Loaded only when LIVE is switched on. */
+.gl-live.open {
+  position: absolute; z-index: 3; display: flex; flex-direction: column;
+  left: calc(16px + var(--g-rail) + 14px); right: calc(16px + var(--g-rail-r) + 14px); bottom: calc(var(--g-bot) + 6px); height: 236px;
+  background: var(--g-panel); border: 1px solid rgba(var(--g-acc-rgb), .42); padding: 9px 12px 8px;
+  -webkit-backdrop-filter: blur(7px); backdrop-filter: blur(7px);
+}
+.gl-live.open::before, .gl-live.open::after { content: ""; position: absolute; width: 9px; height: 9px; pointer-events: none; border: 0 solid rgba(var(--g-acc-rgb), .9); }
+.gl-live.open::before { left: -1px; top: -1px; border-left-width: 1px; border-top-width: 1px; }
+.gl-live.open::after { right: -1px; bottom: -1px; border-right-width: 1px; border-bottom-width: 1px; }
+.gl-lv-hd { display: flex; align-items: center; gap: 9px; min-width: 0; font: 400 10.5px/1 var(--mono); letter-spacing: .06em; color: var(--g-dim); }
+.gl-lv-hd b { font: 500 11px/1 var(--sans); letter-spacing: .24em; color: var(--g-acc); }
+.gl-lv-hd .sp { flex: 1; }
+.gl-lv-sub { white-space: nowrap; overflow: hidden; text-overflow: ellipsis; min-width: 0; font: 400 11.5px/1 var(--sans); letter-spacing: .02em; color: var(--g-dim); }
+.gl-lv-stat { white-space: nowrap; }
+.gl-lv-dot { position: relative; width: 8px; height: 8px; border-radius: 50%; background: var(--g-acc); flex: none; }
+.gl-lv-dot::after { content: ""; position: absolute; inset: -1px; border-radius: 50%; border: 1px solid var(--g-acc); animation: gl-pulse 1.7s ease-out infinite; }
+.gl-lv-btn { all: unset; box-sizing: border-box; cursor: pointer; flex: none; padding: 5px 8px 4px; border: 1px solid var(--g-line); font: 500 10px/1 var(--mono); letter-spacing: .1em; text-transform: uppercase; color: var(--g-ink); }
+.gl-lv-btn:hover:not(:disabled) { border-color: var(--g-acc); color: var(--g-acc); }
+.gl-lv-btn:disabled { opacity: .45; cursor: progress; }
+.gl-lv-btn:focus-visible { outline: 2px solid var(--g-acc); outline-offset: 1px; }
+.gl-lv-btn.x { font-size: 15px; padding: 2px 8px 3px; letter-spacing: 0; }
+.gl-lv-msg { margin-top: 8px; font: 400 12.5px/1.45 var(--sans); color: var(--g-ink); display: flex; align-items: center; gap: 10px; flex-wrap: wrap; }
+.gl-lv-msg[hidden] { display: none; }
+.gl-lv-msg.err { color: var(--g-ref); }
+.gl-lv-msg.warn { color: var(--g-star); }
+.gl-lv-msg b { font-weight: 600; }
+.gl-lv-bar { display: inline-block; width: 150px; height: 4px; background: rgba(var(--g-ink-rgb), .16); position: relative; flex: none; }
+.gl-lv-bar i { position: absolute; left: 0; top: 0; bottom: 0; background: var(--g-acc); transition: width .2s; }
+.gl-lv-list { flex: 1; min-height: 0; display: flex; gap: 8px; overflow-x: auto; overflow-y: hidden; padding: 8px 2px 6px; scrollbar-width: thin; scrollbar-color: rgba(var(--g-ink-rgb), .3) transparent; }
+.gl-lv-list:focus-visible { outline: 2px solid var(--g-acc); outline-offset: 1px; }
+.gl-lv-card { flex: none; width: 236px; display: flex; flex-direction: column; gap: 4px; padding: 7px 9px 7px; border: 1px solid var(--g-line); background: rgba(var(--g-ink-rgb), .025); cursor: pointer; overflow: hidden; }
+.gl-lv-card:hover, .gl-lv-card.hov { border-color: rgba(var(--g-star-rgb), .7); }
+.gl-lv-card.sel { border-color: var(--g-star); background: rgba(var(--g-star-rgb), .06); }
+.gl-lv-card:focus-visible { outline: 2px solid var(--g-acc); outline-offset: 1px; }
+.gl-lv-card.fill { border-color: rgba(var(--g-acc-rgb), .75); }
+.gl-lv-top { display: flex; align-items: center; justify-content: space-between; gap: 6px; font: 400 10.5px/1 var(--mono); color: var(--g-dim); }
+.gl-lv-pill { font: 500 9.5px/1 var(--mono); letter-spacing: .1em; padding: 3px 5px 2px; border: 1px solid rgba(var(--g-ink-rgb), .4); color: var(--g-ink); white-space: nowrap; cursor: help; }
+.gl-lv-pill span { font-weight: 400; letter-spacing: .02em; opacity: .75; }
+.gl-lv-pill.high { border-color: var(--g-acc); color: var(--g-acc); background: rgba(var(--g-acc-rgb), .12); }
+.gl-lv-pill.low { border-style: dashed; color: var(--g-dim); }
+.gl-lv-ttl { font: 600 12.5px/1.25 var(--sans); color: var(--g-ink); text-decoration: none; display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical; overflow: hidden; min-height: 31px; }
+.gl-lv-ttl:hover { color: var(--g-acc); text-decoration: underline; }
+.gl-lv-g { display: grid; grid-template-columns: 50px minmax(0, 1fr) 26px 28px; align-items: center; gap: 5px; font: 400 11.5px/1.2 var(--sans); cursor: help; }
+.gl-lv-g small { font: 400 8.5px/1 var(--mono); letter-spacing: .1em; color: var(--g-dim); }
+.gl-lv-g .v { white-space: nowrap; overflow: hidden; text-overflow: ellipsis; color: var(--g-ink); }
+.gl-lv-g .n { height: 3px; background: rgba(var(--g-ink-rgb), .16); position: relative; }
+.gl-lv-g .n i { position: absolute; left: 0; top: 0; bottom: 0; background: var(--g-ink); }
+.gl-lv-g em { font: 400 10px/1 var(--mono); font-style: normal; color: var(--g-dim); text-align: right; }
+.gl-lv-g.lo .v { color: var(--g-dim); font-style: italic; }
+.gl-lv-g.lo .n i { background: rgba(var(--g-ink-rgb), .45); }
+.gl-lv-hit { margin-top: auto; font: 500 9.5px/1 var(--mono); letter-spacing: .1em; text-transform: uppercase; color: var(--g-acc); padding: 4px 6px 3px; border: 1px solid rgba(var(--g-acc-rgb), .55);
+  background: repeating-linear-gradient(135deg, rgba(var(--g-acc-rgb), .1) 0, rgba(var(--g-acc-rgb), .1) 2px, transparent 2px, transparent 7px); }
+.gl-lv-foot { margin: 0; padding-top: 5px; border-top: 1px solid var(--g-line2); font: 400 10.5px/1.38 var(--sans); color: var(--g-dim); }
+
+/* the hole-filler toasts */
+.gl-toasts { position: absolute; z-index: 6; top: calc(var(--g-top) + 24px); left: 50%; transform: translateX(-50%); width: min(600px, calc(100% - 32px)); display: flex; flex-direction: column; gap: 6px; pointer-events: none; }
+.gl-toast { pointer-events: auto; display: flex; align-items: flex-start; gap: 10px; padding: 9px 11px 9px 12px; background: color-mix(in srgb, var(--g-bg) 92%, transparent); -webkit-backdrop-filter: blur(8px); backdrop-filter: blur(8px);
+  border: 1px solid var(--g-acc); box-shadow: 0 8px 28px rgba(0, 0, 0, .4); font: 400 12.5px/1.4 var(--sans); color: var(--g-ink); animation: gl-toast-in .35s ease-out; }
+.gl-toast i { flex: none; width: 9px; height: 9px; margin-top: 4px; border: 1px solid var(--g-acc); border-radius: 50%; background: var(--g-acc); box-shadow: 0 0 10px var(--g-acc); }
+.gl-toast span { flex: 1; min-width: 0; }
+.gl-toast a { color: var(--g-acc); font-weight: 600; text-decoration-color: rgba(var(--g-acc-rgb), .5); }
+.gl-toast em { font: 400 11px/1 var(--mono); font-style: normal; color: var(--g-dim); white-space: nowrap; }
+.gl-toast .gl-toast-n { display: block; margin-top: 3px; font: 400 11px/1.35 var(--sans); color: var(--g-dim); }
+.gl-toast button { all: unset; cursor: pointer; flex: none; font: 400 17px/1 var(--sans); color: var(--g-dim); padding: 0 2px; }
+.gl-toast button:hover { color: var(--g-ink); }
+.gl-toast button:focus-visible { outline: 2px solid var(--g-acc); }
+@keyframes gl-toast-in { from { opacity: 0; transform: translateY(-8px); } to { opacity: 1; transform: none; } }
+
+@media (max-width: 1260px) { .gl-live.open { height: 246px; } }
+@media (max-width: 1099.98px) {
+  .gl-live.open { position: relative; order: 3; left: auto; right: auto; bottom: auto; height: auto; margin: 12px var(--gutter) 0; -webkit-backdrop-filter: none; backdrop-filter: none; }
+  .gl-lv-card { width: min(78vw, 280px); scroll-snap-align: start; }
+  .gl-lv-list { min-height: 214px; scroll-snap-type: x proximity; }
+  .gl-lv-sub { display: none; }
+  .gl-toasts { top: 8px; }
+  .gl-lv-foot { font-size: 12px; }
+}
+@media (prefers-reduced-motion: reduce) { .gl-lv-dot::after { animation: none; } .gl-toast { animation: none; } }
+
+/* build 4: the drawer is one strip while it has nothing to list, asks before it downloads, and shows that the card row scrolls */
+.gl-live.open.compact { height: auto; min-height: 0; flex-direction: row; flex-wrap: wrap; align-items: center; gap: 4px 14px; padding: 8px 12px; }
+.gl-live.open.compact .gl-lv-list, .gl-live.open.compact .gl-lv-foot, .gl-live.open.compact .gl-lv-arrow { display: none; }
+.gl-live.open.compact .gl-lv-hd { flex: none; }
+.gl-live.open.compact .gl-lv-hd .sp, .gl-live.open.compact .gl-lv-sub { display: none; }
+.gl-live.open.compact .gl-lv-msg { margin: 0; flex: 1; min-width: 200px; }
+.gl-live.open.compact .gl-lv-hd { flex: 1 0 100%; order: 3; }
+.gl-live.open.compact .gl-lv-msg { order: 1; flex: 1 1 360px; }
+.gl-live.open.compact .gl-lv-hd { order: 2; flex: none; margin-left: auto; }
+.gl-lv-msg.ask { color: var(--g-ink); }
+.gl-lv-msg.ask .gl-lv-btn { padding: 8px 12px 7px; border-color: rgba(var(--g-acc-rgb), .6); color: var(--g-acc); }
+.gl-lv-msg.ask .gl-lv-btn[data-ask="no"] { border-color: var(--g-line); color: var(--g-dim); }
+.gl-live.open .gl-lv-list { -webkit-mask-image: linear-gradient(90deg, #000 calc(100% - 56px), transparent); mask-image: linear-gradient(90deg, #000 calc(100% - 56px), transparent); }
+.gl-live.open:not(.more) .gl-lv-list { -webkit-mask-image: none; mask-image: none; }
+.gl-lv-arrow { position: absolute; right: 10px; top: 50%; margin-top: -8px; width: 28px; height: 28px; display: none; align-items: center; justify-content: center; border: 1px solid rgba(var(--g-acc-rgb), .5); border-radius: 50%;
+  background: var(--g-panel); color: var(--g-acc); font: 400 20px/1 var(--sans); pointer-events: none; }
+.gl-live.open.more .gl-lv-arrow { display: flex; }
+.gl-live.open.compact .gl-lv-arrow { display: none; }
+@media (max-width: 1099.98px) {
+  .gl-live.open.compact { margin-top: 12px; }
+  .gl-live.open { margin: 12px 0 0; }
+}
+.gl-live.open.compact { flex-wrap: nowrap; padding: 6px 12px; min-height: 40px; }
+.gl-live.open.compact .gl-lv-msg { flex-wrap: nowrap; gap: 8px; min-width: 0; }
+.gl-live.open.compact .gl-lv-msg .t { flex: 1 1 auto; min-width: 0; }
+.gl-live.open.compact .gl-lv-stat, .gl-live.open.compact [data-act="refresh"] { display: none; }
+.gl-live.open.compact .gl-lv-hd { flex: none; order: 3; margin-left: 0; }
+.gl-live.open.compact .gl-lv-msg { order: 1; }
+.gl-lv-msg .gl-lv-bar { flex: none; }
+@media (max-width: 1099.98px) { .gl-live.open.compact { flex-wrap: wrap; } .gl-live.open.compact .gl-lv-msg { flex-wrap: wrap; } }

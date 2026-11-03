@@ -1,0 +1,10 @@
+import { launch, sleep, setup, shot } from './cdp.mjs';
+const c = await launch();
+await setup(c, { w: 1600, h: 1000, url: 'http://localhost:4173/?cam=-18,-48,0.86#OV-15' });
+await sleep(10000);
+await c.evaluate(`document.head.appendChild(Object.assign(document.createElement('style'),{textContent:'.topbar,.gl-panel,.gl-right,.gl-top,.gl-bottom,.gl-foot,.gl-vc,.gl-left,.gl-labels,.gl-ret,.gl-card,.gl-mk-l{display:none!important}'}))`);
+await sleep(2500);
+const r = await c.evaluate(`(()=>{const e=document.querySelector('canvas.gl-cv').getBoundingClientRect();return [e.left,e.top,e.width,e.height]})()`);
+console.log(r);
+await shot(c, '../og-src/globe-full.png');
+await c.close(); process.exit(0);

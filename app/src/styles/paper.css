@@ -239,3 +239,10 @@ table.pp-prior { min-width: 880px; }
   .pp-f2 svg { min-width: 540px; }
   .pp-f2-head::after { content: "Scroll each panel sideways."; flex: 1 1 100%; font: 500 var(--t-xs)/1 var(--mono); letter-spacing: .08em; text-transform: uppercase; color: var(--dim); }
 }
+
+/* ------------------------------------------------------------ the three BH-family readings (Table 4) */
+table.pp-bh { min-width: 760px; }
+.pp-bh thead th.num { text-align: right; }
+.pp-bh td.num small { color: var(--dim); font: 400 11.5px/1 var(--mono); margin-left: 4px; }
+.pp-bh td.num.pass { color: var(--void); font-weight: 500; box-shadow: inset 0 -2px 0 var(--void); }
+

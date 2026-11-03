@@ -1,10 +1,10 @@
 {
  "source": "sensitivity",
- "prereg": "D:\\Projects\\overhang\\runs\\r1\\holes.json",
- "run": "D:\\Projects\\overhang\\runs\\r2",
- "tags": "D:\\Projects\\overhang\\corpus\\facets\\tags.jsonl",
- "vocab": "D:\\Projects\\overhang\\corpus\\facets\\vocab.json",
- "new_ids_file": "D:\\Projects\\overhang\\runs\\grow\\new_ids.txt",
+ "prereg": "runs/r1/holes.json",
+ "run": "runs/r2",
+ "tags": "corpus/facets/tags.jsonl",
+ "vocab": "corpus/facets/vocab.json",
+ "new_ids_file": "runs/grow/new_ids.txt",
  "n_items": 1563,
  "n_new_ids": 1049,
  "min_expected": 1.0,
@@ -14,7 +14,7 @@
   "underpowered": "otherwise"
  },
  "official_check": {
-  "replication_json": "D:\\Projects\\overhang\\runs\\r2\\replication.json",
+  "replication_json": "runs/r2/replication.json",
   "z3_matches_official": true,
   "mismatches": []
  },

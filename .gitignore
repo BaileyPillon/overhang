@@ -27,3 +27,14 @@ drift/**/*.obj
 drift/**/*.pdb
 drift/**/*.lib
 drift/recon/harness/data/real_*.csv
+
+# Design iteration screenshots: working output, kept on disk but not published (design/shots/final/*.png stays tracked)
+design/shots/build-1/
+design/shots/build-2/
+design/shots/build-3/
+design/shots/build-4/
+design/shots/final/_work/
+design/shots/build-5/
+design/shots/default-view/
+app/.vercel/
+.vercel/

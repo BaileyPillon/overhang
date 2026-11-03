@@ -1,0 +1,11 @@
+import { launch, sleep, shot } from './cdp.mjs';
+import { pathToFileURL } from 'node:url';
+import { resolve } from 'node:path';
+const c = await launch();
+await c.send('Emulation.setDeviceMetricsOverride', { width: 1200, height: 630, deviceScaleFactor: 1, mobile: false });
+await c.send('Page.navigate', { url: pathToFileURL(resolve('../og-src/index.html')).href });
+await sleep(4000);
+await c.evaluate('document.fonts.ready.then(()=>1)');
+await sleep(500);
+await shot(c, '../og.png');
+await c.close(); process.exit(0);

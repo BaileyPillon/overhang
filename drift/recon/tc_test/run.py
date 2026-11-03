@@ -1,5 +1,8 @@
-import sys, subprocess, ctypes
-sys.path.insert(0, r"D:\Projects\overhang\drift")
+import os, sys, subprocess, ctypes
+from pathlib import Path
+HERE = Path(__file__).resolve().parent
+sys.path.insert(0, str(HERE.parents[1]))  # drift/ (for toolchain.py)
+os.chdir(HERE)                            # hello.c, fx.c, t.cpp and out/ live next to this file
 from toolchain import compile_c, compile_cpp
 for exe in (compile_c("hello.c","out/hello"), compile_cpp("t.cpp","out/t",defines={"NVAL":3}), compile_c("fx.c","out/fx",defines={"MAIN":None})):
     print(exe, subprocess.run([exe],capture_output=True,text=True).stdout.strip())

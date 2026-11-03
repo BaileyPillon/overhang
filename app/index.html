@@ -4,7 +4,22 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Overhang: the holes in the space of Claude use cases</title>
-<meta name="description" content="514 sourced reports of things people have done with Claude, and the pairs nobody has reported, tested on 1,049 new reports. Every claim checkable.">
+<meta name="description" content="1,563 things people have done with Claude, mapped on a globe, and the pairs nobody has reported. 19 holes were pre-registered and tested on 1,049 new reports. Every claim checkable.">
+<link rel="icon" href="/favicon.svg" type="image/svg+xml">
+<meta name="theme-color" content="#0A0F1C">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="Overhang">
+<meta property="og:title" content="Overhang: the holes in the space of Claude use cases">
+<meta property="og:description" content="1,563 things people have done with Claude, mapped on a globe, and the pairs nobody has reported. 19 holes were pre-registered and tested on 1,049 new reports. Every claim checkable.">
+<!-- %SITE_URL% is a placeholder: the deploy step replaces it with the absolute site URL (no trailing slash) -->
+<meta property="og:image" content="%SITE_URL%/og.png">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta property="og:image:alt" content="A globe of 1,563 reports with the holes between them marked, and the title Overhang.">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="Overhang: the holes in the space of Claude use cases">
+<meta name="twitter:description" content="1,563 things people have done with Claude, mapped on a globe, and the pairs nobody has reported. 19 holes were pre-registered and tested on 1,049 new reports. Every claim checkable.">
+<meta name="twitter:image" content="%SITE_URL%/og.png">
 <meta name="color-scheme" content="dark light">
 <script>
 /* Apply the stored theme before first paint. Auto = no data-theme attribute (follows the OS). */
@@ -20,10 +35,13 @@
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500&family=IBM+Plex+Sans+Condensed:ital,wght@0,400;0,500;0,600;1,400&family=Newsreader:ital,opsz,wght@0,6..72,300..600;1,6..72,300..600&family=Source+Serif+4:ital,opsz,wght@0,8..60,400..700;1,8..60,400..600&display=swap">
 </head>
 <body>
+<a class="sr" href="#gl-controls">Skip to the globe controls</a>
 <a class="sr" href="#abstract">Skip to the paper</a>
 <header class="topbar">
   <a class="wordmark" href="#plate">Overhang</a>
-  <nav class="sections" aria-label="Sections">
+  <a class="to-globe" id="to-globe" href="#plate" hidden>&uarr; Back to the globe</a>
+  <button type="button" class="menu-btn" id="menu-btn" aria-expanded="false" aria-controls="sections-nav">Menu</button>
+  <nav class="sections" id="sections-nav" aria-label="Sections">
     <a href="#plate">Globe</a>
     <a href="#matrix">Matrix</a>
     <a href="#steam">Steam method</a>
@@ -42,6 +60,10 @@
 </header>
 <main>
   <section id="plate" aria-label="Globe: the map of the reports and the holes between them"></section>
+  <div class="plate-bridge">
+    <p>The globe is a picture. <span>The evidence is below.</span></p>
+    <a class="read-evidence" href="#abstract">Read the evidence <span aria-hidden="true">&darr;</span></a>
+  </div>
   <div class="paper">
     <section id="abstract"></section>
     <section id="matrix"></section>

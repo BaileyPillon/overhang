@@ -190,7 +190,7 @@ export function initMatrix(el: HTMLElement, data: AppData): void {
       <div class="mx-key-row"><div class="mx-key-ramp" style="background:${sw}"></div>
         <div class="mx-key-ticks mono"><span>1</span><span>${fmtN(Math.max(2, Math.round(Math.sqrt(L.max))))}</span><span>${fmtN(L.max)}</span></div>
         <span class="mx-key-t"><b>Fill</b>: reports observed</span></div>
-      <div class="mx-key-row"><span class="mx-sw mx-sw-hole" aria-hidden="true"></span><span class="mx-key-t"><b>Hole</b>: none observed, E printed</span></div>
+      <div class="mx-key-row"><span class="mx-sw mx-sw-hole" aria-hidden="true"></span><span class="mx-key-t"><b>Hole</b>: ${pending ? 'none observed, E printed' : 'none at registration, E printed; a corner number is the pooled count of a refuted hole'}</span></div>
       <div class="mx-key-row"><span class="mx-sw mx-sw-st" aria-hidden="true"></span><span class="mx-key-t"><b>Structural</b> (a groove)</span></div>
       <div class="mx-key-row"><span class="mx-sw mx-sw-bar" aria-hidden="true"><i></i><i></i><i></i></span><span class="mx-key-t"><b>Bars</b>: row and column totals</span></div>
     </div>`;
@@ -320,12 +320,12 @@ export function initMatrix(el: HTMLElement, data: AppData): void {
   const nHoles = holes.length;
   capEl.innerHTML = `
     <p><b>Fill</b> is the number of reports that carry both tags, printed in the square when it is above zero. The scale runs from empty to the largest cell in the table, so single reports stay visible.
-    A <b>hatched, outlined square</b> is a hole: no report sits there, although its row and its column are both common enough that the cell should hold about <span class="mono">E</span> of them. <span class="mono">E</span> is printed inside.</p>
+    A <b>hatched, outlined square</b> is a hole: no report sat there when the holes were registered, although its row and its column are both common enough that the cell should hold about <span class="mono">E</span> of them. <span class="mono">E</span> is printed inside.${pending ? '' : ' A hole that later gained a report (a refuted one) keeps its hatch and prints the pooled count in its corner.'}</p>
     <p>The expectation is a <b>quasi-independence</b> model: what each cell would hold if the two tags were unrelated, after setting aside the <b>structural cells</b> (a small tick in the corner), pairings that are so over-full that the model fits them exactly and leaves them out when it estimates the rest. A cell counts as a hole when nothing is observed and <span class="mono">E</span> is at least 1. The hover tip gives the catalog code, and the same codes label the globe, the tables and the catalog.</p>
     ${
       pending
         ? `<p class="mx-pending"><span class="honesty">candidates</span> The ${nHoles} holes are candidates, not findings. Their list was pre-registered at <code>${esc(meta.prereg_commit)}</code> and is awaiting the out-of-sample test on a fresh sample, so none is called real yet.</p>`
-        : `<p class="mx-pending"><span class="honesty">pooled</span> These counts pool the ${fmtN(meta.N_r1)} original reports with the ${fmtN(meta.N - meta.N_r1)} new ones. ${nReg} holes (solid outline) were registered at ${fmtN(meta.N_r1)} reports; under the registered rule ${nReplicated} replicated, ${nRefuted} were refuted (a cell that gained a report prints its count in the corner) and ${nUnder} are underpowered. ${nExpl} more empty cells appear only after pooling (dashed outline): they are <span class="honesty exploratory">exploratory</span>.</p>`
+        : `<p class="mx-pending"><span class="honesty">pooled</span> These counts pool the ${fmtN(meta.N_r1)} original reports with the ${fmtN(meta.N - meta.N_r1)} new ones. ${nReg} holes (solid outline) were registered at ${fmtN(meta.N_r1)} reports; under the registered rule ${nReplicated} replicated, ${nRefuted} were refuted (a cell that gained a report prints its count in the corner) and ${nUnder} are underpowered. ${nExpl} more empty cells appear only after pooling (dashed outline): they are <span class="nowrap"><span class="honesty exploratory">exploratory</span>.</span></p>`
     }`;
 
   /* ------------------------------------------------------------ detail panel */

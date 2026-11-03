@@ -5,7 +5,7 @@ description: Onboard a new open-source wearable or sensor device into Drift, the
 
 # Onboard a new device target into Drift
 
-Drift compiles the metric algorithm of every released firmware version for the host and replays the **same recorded raw sensor data** through all of them (differential execution). The effect of a firmware update on a research metric becomes a measured number. This skill is the procedure for adding a new device ("target") to `D:\Projects\overhang\drift\`.
+Drift compiles the metric algorithm of every released firmware version for the host and replays the **same recorded raw sensor data** through all of them (differential execution). The effect of a firmware update on a research metric becomes a measured number. This skill is the procedure for adding a new device ("target") to `drift/`.
 
 Worked example throughout: `drift/targets/espruino_stepcount/` (Bangle.js step counter, `libs/misc/stepcount.c`). Read it before you start; it is the reference for every step below. Read `drift/SPEC.md` first for the Target protocol.
 
@@ -20,7 +20,7 @@ Worked example throughout: `drift/targets/espruino_stepcount/` (Bangle.js step c
 
 ## Prerequisites
 
-- Python: `D:\Projects\overhang\.venv\Scripts\python.exe`. Add pure-Python deps with `... -m pip install <pkg>` and record them in `drift/requirements.txt`.
+- Python: the project venv (`.venv` at the repo root; activate it, or call `.venv/Scripts/python` on Windows or `.venv/bin/python` elsewhere), shown as `python` below. Add pure-Python deps with `python -m pip install <pkg>` and record them in `drift/requirements.txt`.
 - Run scripts that read downloaded data with `-I`. Never commit to git unless the user asks. Do not touch `app/`.
 - C compiler: bundled zig/clang via `drift.toolchain` (`compile_c`, `compile_cpp`, `zig_version`). No system compiler needed.
 
@@ -86,7 +86,7 @@ compile_c([HERE / "wrap.c"], out, shared=True, std="-std=c99",
 `drift/buildcache.py` compiles each unique blob set once, keyed by blob SHAs, recipe hash and zig version, under `.cache/drift/build/`. Do not bypass it. Run:
 
 ```
-D:\Projects\overhang\.venv\Scripts\python.exe -m drift build --target <name>
+python -m drift build --target <name>
 ```
 
 Fix warnings; the Espruino wrapper builds with `-Wall` and no warnings. Set `recipe_extra` to a string describing the compiler settings so changing them invalidates the cache.
@@ -122,7 +122,7 @@ If a control is not identical, it is no longer a control: find out why (the shim
 ## Step 8. Register, replay, test
 
 1. Create `drift/targets/<name>/{__init__.py,target.py,wrap.c,shim/}`. `target.py` defines the class (`name`, `repo_url`, `algo_files`, `tag_glob`, `tag_min`, `datasets`, `recipe_files`, `adapt`, `build`, `run`, `describe`, `recordings`, `provenance`) and `TARGET_CLASS = <Class>`. Register the name in `drift/targets/__init__.py`.
-2. `python -m drift fetch|build|replay|all --target <name>` (from `D:\Projects\overhang`). Replay writes `.cache/drift/replay/<name>.json` plus an events archive.
+2. `python -m drift fetch|build|replay|all --target <name>` (from the repository root). Replay writes `.cache/drift/replay/<name>.json` plus an events archive.
 3. `python -m pytest drift/tests -q` must pass with nothing skipped.
 
 ## Step 9. Run and write the memo

@@ -6,6 +6,7 @@ import 'katex/dist/katex.min.css';
 import type { AppData, DryRunGap, Hole, Point, ReplicationRow } from './data';
 import { cellLabel, indexPoints } from './data';
 import { esc, fmtE, fmtF, fmtN, fmtP, fmtPct, honesty, pill, tooltip } from './ui';
+import { builtHTML as driftBuiltHTML, hydrateBuilt, type BuiltCtx } from './built';
 
 /* ================================================================== helpers */
 
@@ -110,14 +111,15 @@ function computeStats(d: AppData) {
   const nVerdict = (v: string) => rows.filter((r) => r.verdict === v).length;
   const anchors = points.filter((p) => p.id.startsWith('anchors-'));
   const anchorUrls = new Set(anchors.map((p) => p.s));
-  const pick = d.winner.status === 'pending' ? d.winner.pick : undefined;
+  const pick = d.winner.pick; // present for 'pending' and for 'built': the pick is an exception either way
   const fam = new Map<string, number>();
   for (const p of points) fam.set(hostFamily(host(p.s)), (fam.get(hostFamily(host(p.s))) ?? 0) + 1);
   const domainCount = new Map<string, number>();
   for (const p of points) domainCount.set(p.d, (domainCount.get(p.d) ?? 0) + 1);
   const topDomain = [...domainCount.entries()].sort((a, b) => b[1] - a[1])[0];
   const kappa = meta.kappa.r1;
-  const kVals = [kappa.move, kappa.material, kappa.for];
+  // every kappa we have: three axes, the first sample and the new one (the lowest is the new sample's audience axis, 0.876)
+  const kVals = [kappa.move, kappa.material, kappa.for, ...(meta.kappa.grow ? [meta.kappa.grow.move, meta.kappa.grow.material, meta.kappa.grow.for] : [])];
   const steamPt = points.find((p) => /steam/i.test(p.tx) && /\d[\d,]{4,}\s+steam games/i.test(p.tx));
   const steamMatch = steamPt ? /(\d[\d,]{4,})\s+Steam games/i.exec(steamPt.tx) : null;
   const steamSample = steamPt ? /samples\s+(\d[\d,]{3,})\s+points/i.exec(steamPt.tx) : null;
@@ -248,23 +250,28 @@ function abstractHTML(c: Ctx): string {
   const { d, S, tex, sn } = c;
   const fam = S.fam.filter(([n]) => n !== 'other sites').slice(0, 5).map(([n, k]) => `${esc(n)} ${fmtN(k)}`).join(' · ');
   const nRows = d.replication.rows.length;
+  const bhc = d.bhFamily?.counts;
+  // the headline is the registered rule's; the alternative family reading is disclosed beside it (Table 4), never as the result
+  const bhAlt = bhc && bhc.alternative['q_le_0.10_and_Enew_ge_2'] !== bhc.literal['q_le_0.10_and_Enew_ge_2']
+    ? ` The count is the same under the registered wording of the multiple-testing family and under the code&rsquo;s; one alternative reading of that family would make it ${word(bhc.alternative['q_le_0.10_and_Enew_ge_2'])}, which we report as a sensitivity (Table 4), not as the result.`
+    : '';
   const tested =
     S.status === 'done' && nRows
-      ? `We pre-registered them, then tested them on ${fmtN(S.nNew)} new reports tagged blind to the hypotheses (Figure 4). Under the registered rule, ${word(S.nReplicated)} of ${word(nRows)} replicated: ${word(S.nRefuted)} were refuted by a new report landing in the cell and ${word(S.nUnder)} are underpowered.`
+      ? `We pre-registered them, then tested them on ${fmtN(S.nNew)} new reports tagged blind to the hypotheses (Figure 4). Under the registered rule, ${word(S.nReplicated)} of ${word(nRows)} replicated: ${word(S.nRefuted)} were refuted by a new report landing in the cell and ${word(S.nUnder)} are underpowered.${bhAlt}`
       : `We pre-registered them, and test them on new reports tagged blind to the hypotheses. The test is under way.`;
   const pickLine = S.pick
-    ? `No hole has passed all three gates, so the one we are building from, <span class="nowrap">${esc(S.pick.code)}</span>, is an exception chosen after the result and reported as one.`
+    ? `No hole has passed all three gates, so the one we ${d.winner.status === 'built' ? 'built a tool for' : 'are building from'}, <span class="nowrap">${esc(S.pick.code)}</span>, is an exception chosen after the result and reported as one: under the registered rule it is ${esc(S.pick.stats.official_verdict)}.`
     : `Holes that replicate go to a prior-art search, and at most one is built.`;
   return `
 <p class="eyebrow pp-eyebrow">Research note</p>
 <h2 class="pp-title">Holes in the Space of Claude Use Cases</h2>
-<p class="pp-byline"><b>Overhang</b><span>${esc(monthYear(d.meta.generated))}</span><span class="mono">${fmtN(S.N)} sourced reports (${fmtN(S.N0)} + ${fmtN(S.nNew)} new) · ${word(d.meta.models.length)} embedding models</span></p>
+<p class="pp-byline"><b>Overhang</b><span>${esc(monthYear(d.meta.generated))}</span><span class="mono">${fmtN(S.N)} sourced reports (${fmtN(S.N0)} + ${fmtN(S.nNew)} new) · ${word(d.meta.models.length)} embedding models for the analysis, plus a third for the LIVE layer</span></p>
 <div class="pp-tbcol">
   <div class="glance pp-glance" aria-label="Key numbers">
     <div class="pp-stat"><span class="n">${fmtN(S.N)}</span><span class="l"><b>reports</b>: ${fmtN(S.N0)} at the start and ${fmtN(S.nNew)} gathered after the holes were registered; ${fmtN(S.nVideo)} are flagged as from one video</span></div>
     <div class="pp-stat"><span class="n">${fmtN(S.nPrereg)}</span><span class="l"><b>holes</b> registered at ${fmtN(S.N0)} reports: empty cells whose expected count is at least 1, across ${fmtN(S.cells)} cells in three tables</span></div>
     <div class="pp-stat"><span class="n acc">${S.nReplicated}/${S.nPrereg}</span><span class="l"><b>replicated</b> under the pre-registered rule (${S.nRefuted} refuted, ${S.nUnder} underpowered)</span></div>
-    <div class="pp-stat"><span class="n">${fmtF(S.kappaMin, 2)}</span><span class="l"><b>Cohen&rsquo;s &kappa;</b>, the lowest of three tag agreements between two blind taggers</span></div>
+    <div class="pp-stat"><span class="n">${fmtF(S.kappaMin, 3)}</span><span class="l"><b>Cohen&rsquo;s &kappa;</b>, the lowest of six tag agreements (three axes, two samples) between two blind taggers</span></div>
   </div>
   <div class="pp-abstract">
     <p class="pp-lbl">Abstract</p>
@@ -470,11 +477,11 @@ ${eq(String.raw`p \;=\; \Pr\!\left(X \le O \mid X \sim \mathrm{Poisson}(\tilde E
 <p>For a hole ${tex('O = 0', '<i>O</i> = 0')} and the sum collapses to a single term,</p>
 ${eq(String.raw`p \;=\; e^{-\tilde E}`, 'p = e<sup>−Ẽ</sup>', 'p equals e to the minus E tilde')}
 <p>so a cell expected to hold three reports and holding none has ${tex(String.raw`p = e^{-3} \approx 0.05`, 'p = e<sup>−3</sup> ≈ 0.05')}.</p>
-<p>That arithmetic is also a warning. The ${fmtN(S.cells)} cells give us many chances to see a surprising zero, so some will clear 0.05 by luck. We correct for it with the Benjamini–Hochberg procedure: sort the ${tex('m', '<i>m</i>')} p-values of the empty cells of one table (${tex('m', '<i>m</i>')} counts the empty cells of that pair of tags, not all its cells) and set</p>
+<p>That arithmetic is also a warning. The ${fmtN(S.cells)} cells give us many chances to see a surprising zero, so some will clear 0.05 by luck. We correct for it with the Benjamini–Hochberg procedure: sort the ${tex('m', '<i>m</i>')} p-values of one table's test family and set (${tex('m', '<i>m</i>')} counts the cells of that pair of tags with an expected count of at least 1, empty or not, which is what the code does; the registration worded the family differently, and the three readings are set side by side in the next section)</p>
 ${eq(String.raw`q_{(k)} \;=\; \min_{j \ge k} \; \frac{m}{j}\, p_{(j)}`, 'q<sub>(k)</sub> = min over j ≥ k of (m / j) p<sub>(j)</sub>', 'Benjamini-Hochberg adjusted q-value')}
 <p>so that <em>q</em> is the share of false discoveries we accept if we call every cell up to that rank a hole. At ${tex(`n = ${S.N0}`, `<i>n</i> = ${fmtN(S.N0)}`)} this settles little. Among the ${S.nPrereg} registered holes the smallest <em>p</em> is ${fmtP(S.pMin)} and only ${word(S.nP05)} falls under 0.05 before any correction, so <em>p</em> ranks the cells and does not certify them. The holes are hypotheses, not findings. That is what the pre-registration below is for.</p>
-<p>Each hole also faces three checks of its own. <strong>Bootstrap stability</strong> resamples the ${fmtN(S.N0)} reports with replacement ${tex('B', '<i>B</i>')} times (${fmtN(BOOT)} in our run), recounts the table, and records how often the cell is still a hole, which means empty with an expected count of at least 1:</p>
-${eq(String.raw`s_{ij} \;=\; \frac{1}{B}\sum_{b=1}^{B} \mathbf{1}\!\left[\,O^{*b}_{ij} = 0 \ \text{and}\ \tilde E^{*b}_{ij} \ge 1\,\right]`, 's<sub>ij</sub> = (1/B) Σ 1[O* = 0 and Ẽ* ≥ 1]', 'Bootstrap stability is the share of resamples in which the cell is still a hole')}
+<p>Each hole also faces three checks of its own. <strong>Bootstrap stability</strong> resamples the ${fmtN(S.N0)} reports with replacement ${tex('B', '<i>B</i>')} times (${fmtN(BOOT)} in our run), recounts the table, and records how often the cell is still a hole in the resample, which means empty with an expected count of at least 2 (the bar the code uses, a little stricter than the at-least-1 that defines a hole):</p>
+${eq(String.raw`s_{ij} \;=\; \frac{1}{B}\sum_{b=1}^{B} \mathbf{1}\!\left[\,O^{*b}_{ij} = 0 \ \text{and}\ \tilde E^{*b}_{ij} \ge 2\,\right]`, 's<sub>ij</sub> = (1/B) Σ 1[O* = 0 and Ẽ* ≥ 2]', 'Bootstrap stability is the share of resamples in which the cell is still a hole')}
 <p>The median registered hole is still a hole in ${fmtPct(S.stabMed)} of resamples; ${word(S.nStable50)} of ${S.nPrereg} ${S.nStable50 === 1 ? 'is' : 'are'} in more than half of them. <strong>A second tagger</strong>, blind to the first one&rsquo;s labels, tags every report again, and a hole is <em>tag-robust</em> if it is still empty under both: ${S.nRobust} of ${S.nPrereg} are. <strong>Embedding novelty</strong> asks whether the hole direction is also unusual in embedding space, ranked among all reports by distance to the ${S.k} nearest neighbours. The percentile runs from ${fmtF(S.knnMin, 1)} to ${fmtF(S.knnMax, 1)} with a median of ${fmtF(S.knnMed, 1)}, so most of the holes are not far from anything in embedding space, and the two ways of seeing a hole disagree. We report the disagreement instead of averaging it away.</p>
 <p>The taggers agree with each other as Cohen&rsquo;s <em>&kappa;</em> measures it, the agreement beyond what chance alone would give:</p>
 ${eq(String.raw`\kappa \;=\; \frac{p_o - p_e}{1 - p_e}`, 'κ = (p<sub>o</sub> − p<sub>e</sub>) / (1 − p<sub>e</sub>)', 'Cohen kappa equals observed agreement minus chance agreement over one minus chance agreement')}
@@ -563,7 +570,7 @@ function figure4HTML(c: Ctx): string {
     </div>
   </div>
   <div class="pp-f4-legend">${legend}</div>
-  <figcaption><span class="pp-fn">Figure 4.</span> <b>One row per pre-registered hole.</b> ${done ? 'The bar is the count expected in the new reports (E new, quasi-independence fitted to the new sample alone); the dot is the count observed. A dot at zero under a bar that reaches 2 or more is a hole that held. <em>q</em> is the Benjamini–Hochberg value on the pooled sample, over the empty cells of the same pair of tags.' : `The bar is the expected count when the hole was registered; the dot will be the count in the new reports, and <em>q</em> the Benjamini–Hochberg value after pooling. The figure fills in when the new sample is tagged.`}</figcaption>
+  <figcaption><span class="pp-fn">Figure 4.</span> <b>One row per pre-registered hole.</b> ${done ? 'The bar is the count expected in the new reports (E new, quasi-independence fitted to the new sample alone); the dot is the count observed. A dot at zero under a bar that reaches 2 or more is a hole that held. <em>q</em> is the Benjamini–Hochberg value on the pooled sample, over the cells with an expected count of at least 1 in the same table.' : `The bar is the expected count when the hole was registered; the dot will be the count in the new reports, and <em>q</em> the Benjamini–Hochberg value after pooling. The figure fills in when the new sample is tagged.`}</figcaption>
 </figure>`;
 }
 
@@ -602,15 +609,53 @@ function replicationHTML(c: Ctx): string {
 <p>Everything above was computed on the sample we used to look. Choosing a hole from a sample and then confirming it on the same sample proves nothing, because the choosing is where the luck gets in. So before any new report existed we wrote down the ${word(S.nPrereg)} holes, their expected counts and the test, and committed the file: ${hash}</p>
 <p>The new reports were gathered and tagged without the hypothesis list in front of the taggers. For every cell we ask two questions of the new data: how many reports would its row and column predict (<i>E</i><sub>new</sub>, quasi-independence fitted on the new sample alone), and how many are there (<i>O</i><sub>new</sub>)? The verdict is one of three, by a rule fixed in advance.</p>
 <dl class="pp-verdicts">
-  <div><dt>${pill('replicated')}</dt><dd>The cell stays empty in the new sample (<i>O</i><sub>new</sub> = 0), the new data alone expect at least two reports there (<i>E</i><sub>new</sub> &ge; 2), and the pooled <em>q</em>, corrected over the empty cells of its pair of tags, is at most 0.10.</dd></div>
+  <div><dt>${pill('replicated')}</dt><dd>The cell stays empty in the new sample (<i>O</i><sub>new</sub> = 0), the new data alone expect at least two reports there (<i>E</i><sub>new</sub> &ge; 2), and the pooled <em>q</em>, corrected over the cells of its table with an expected count of at least 1 (the code&rsquo;s family; the registered wording differs, see the three readings below), is at most 0.10.</dd></div>
   <div><dt>${pill('refuted')}</dt><dd>The cell gains any report in the new sample (<i>O</i><sub>new</sub> &gt; 0). The hole was an accident of the first sample.</dd></div>
   <div><dt>${pill('underpowered')}</dt><dd>Neither: the cell stayed empty, but the new data expect fewer than two reports there or the pooled <em>q</em> is above 0.10. This is not counted as a success.</dd></div>
 </dl>
+${disclosureHTML(c)}
 ${status}
 ${summary}
 ${figure4HTML(c)}
 ${refuting ? `<h3>Reports that refute a hole</h3><ul class="pp-plain">${refuting}</ul>` : ''}
-<p>The final column pools the old and new samples and corrects across the empty cells of the same pair of tags. A hole needs a small pooled <em>q</em>, not a single lucky zero. Nothing here is rescued by a different threshold afterwards: the rules above were written before the verdicts could be.</p>`;
+<p>The final column pools the old and new samples and corrects across the cells of the same table with an expected count of at least 1. A hole needs a small pooled <em>q</em>, not a single lucky zero. The thresholds and verdicts above were written before the data could change them. The one place where the code and the registered wording differ is the family for <em>q</em>, and that is the paragraph headed &ldquo;Which family did the registration mean?&rdquo;.</p>`;
+}
+
+/** The q-family disclosure (results/bh-family-ruling.md). Every number comes from bh_family.json (scripts/bh_family_readings.py),
+ *  none is typed here: the pooled q of the registered cells that stayed empty in the new sample, under three Benjamini-Hochberg families. */
+function disclosureHTML(c: Ctx): string {
+  const b = c.d.bhFamily;
+  const text = `<p>The registration says the pooled <em>q</em> is corrected &ldquo;across all empty cells of its axis pair&rdquo;. The replication code, <span class="mono">gapfind.facets.cell_pq</span>, which was written after registration and before any replication result was seen, corrects across every cell of the table with an expected count of at least 1, empty or not. A third reading restricts the family to the empty cells with <i>E</i> of at least 1, the cells that were eligible to be candidates.</p>`;
+  if (!b) return `<div class="pp-status pp-disclose"><p class="pp-lbl">Which family did the registration mean?</p>${text}<p>The three-reading table could not be loaded.</p></div>`;
+  const cnt = (k: 'literal' | 'code' | 'alternative') => b.counts[k]['q_le_0.10_and_Enew_ge_2'];
+  const empties = b.cells.filter((x) => x.observed_new === 0);
+  const six = empties.find((x) => x.code === 'OV-06');
+  // q to three decimals (four below 0.001): the ruling quotes 0.497, 0.286 and 0.037, and the shared fmtQ rounds those
+  const fq = (q: number | null): string => (q == null ? '–' : q >= 0.001 ? q.toFixed(3) : q.toFixed(4));
+  const qMax = b.q_max.toFixed(2);
+  const pass = (q: number | null) => (q != null && q <= b.q_max ? ' pass' : '');
+  const rows = empties
+    .map((x) => {
+      const lab = x.axes.map((a) => esc(x.cell[a] ?? '')).join(' &times; ');
+      const td = (q: number | null, m: number) => `<td class="num${pass(q)}">${fq(q)}<small> m=${fmtN(m)}</small></td>`;
+      return `<tr><td class="code">${esc(x.code ?? '')}</td><td class="pp-cell">${lab}</td><td class="num">${fmtE(x.E_new)}</td>${td(x.q_literal, x.m_literal)}${td(x.q_code, x.m_code)}${td(x.q_alternative, x.m_alternative)}</tr>`;
+    })
+    .join('');
+  const sixLine = six
+    ? `OV-06 (<em>${six.axes.map((a) => esc(six.cell[a] ?? '')).join(' &times; ')}</em>: none observed, ${fmtE(six.E_new)} expected in the new sample) has <em>q</em> = ${fq(six.q_literal)} under the literal wording and ${fq(six.q_code)} under the code&rsquo;s family, and fails the ${qMax} bar under both.`
+    : '';
+  const altLine = six ? ` The alternative reading would pass OV-06 (<em>q</em> = ${fq(six.q_alternative)}) and make the count ${word(cnt('alternative'))}.` : '';
+  const k15 = empties.find((x) => x.code === 'OV-15');
+  return `<div class="pp-status pp-disclose"><p class="pp-lbl">Which family did the registration mean?</p>
+${text}
+<p><strong>The official count is ${word(cnt('literal'))} of ${word(c.d.replication.rows.length)} replicated.</strong> It is ${word(cnt('literal'))} under the literal registered wording, which controls, and ${word(cnt('code'))} under the code&rsquo;s family. ${sixLine}${altLine} That is not what the registration says, so we report it as a sensitivity, <span class="honesty exploratory" title="Not part of the pre-registered test.">exploratory</span>, and never as the result.</p></div>
+<figure class="figure pp-tbl" id="tab-bh">
+  <div class="scroll-x"><table class="pp-holes pp-bh">
+    <thead><tr><th scope="col">Code</th><th scope="col">Cell</th><th scope="col" class="num">E new</th><th scope="col" class="num">Literal<small>all empty cells</small></th><th scope="col" class="num">Code<small>all cells, E &ge; 1</small></th><th scope="col" class="num">Alternative<small>empty cells, E &ge; 1</small></th></tr></thead>
+    <tbody>${rows}</tbody>
+  </table></div>
+  <figcaption><span class="pp-fn">Table 4.</span> <b>Pooled <em>q</em> of the registered holes that stayed empty in the new sample, under three Benjamini-Hochberg families.</b> <i>m</i> is the family size. Values that pass <em>q</em> &le; ${qMax} are marked. A pass is not a replication: the rule also needs <i>E</i> new of at least ${esc(String(b.e_new_min))}${k15 ? `, and OV-15 fails that gate at ${fmtE(k15.E_new)} under every reading` : ''}. Computed from the pooled tables by <span class="mono">scripts/bh_family_readings.py</span>; ruling in <span class="mono">results/bh-family-ruling.md</span>.</figcaption>
+</figure>`;
 }
 
 function sensitivityHTML(c: Ctx): string {
@@ -656,7 +701,7 @@ function sensitivityHTML(c: Ctx): string {
     <thead><tr><th scope="col" rowspan="2">Code</th><th scope="col" rowspan="2">Cell</th><th scope="col" rowspan="2" class="num">O new</th>${head}</tr><tr>${sub}</tr></thead>
     <tbody>${body}</tbody>
   </table></div>
-  <figcaption><span class="pp-fn">Table 3.</span> <b>The same ${word(sens.rows.length)} cells under four expectation models.</b> <i>E</i> new is the count the new reports alone predict; the verdict applies the registered rule to it. Real values from the sensitivity run; this analysis is <span class="honesty exploratory" title="Not part of the pre-registered test.">exploratory</span>.</figcaption>
+  <figcaption><span class="pp-fn">Table 3.</span> <b>The same ${word(sens.rows.length)} cells under four expectation models.</b> <i>E</i> new is the count the new reports alone predict; the verdict applies the registered rule to it. Real values from the sensitivity run; this analysis is <span class="nowrap"><span class="honesty exploratory" title="Not part of the pre-registered test.">exploratory</span>.</span></figcaption>
 </figure>
 <h3>The tagging audit</h3>
 <p>For the hole we picked, <span class="nowrap">${esc(aud.code)}</span>, three auditors reread the tags. Each read all ${fmtN(colN)} reports tagged for researchers and all ${fmtN(rowN)} tagged with the consumer-device material, and each ruled on whether the empty cell is real. They disagreed: ${aud.verdicts.map((v, i) => `${['strict', 'lenient', 'adversarial'][i] ?? 'another'} reading, ${esc(verdictWord(v))}`).join('; ')}.${c.sn(`The three readings are ${aud.verdicts.map(esc).join(', ')}. The audit prompts and answers are in results/evidence.json in the repository.`)}</p>
@@ -665,22 +710,15 @@ function sensitivityHTML(c: Ctx): string {
 
 /* ================================================================== #built */
 
+/** What the Drift results section (built.ts) needs from the paper: the data, the hole list, and Table 2, which keeps its numbering here. */
+function builtCtx(c: Ctx): BuiltCtx {
+  return { d: c.d, holes: c.S.holes, nReplicated: c.S.nReplicated, repoPublished: c.S.repoPublished, priorArt: () => priorArtHTML(c) };
+}
+
 function builtHTML(c: Ctx): string {
   const { d, S } = c;
   const w = d.winner;
-  if (w.status === 'built') {
-    const h = S.holes.find((x) => x.code === w.code);
-    const demo = (w.demo ?? {}) as Record<string, unknown>;
-    const demoUrl = typeof demo.url === 'string' ? demo.url : typeof demo.href === 'string' ? demo.href : null;
-    return `
-<p class="eyebrow pp-eyebrow">Built</p>
-<h2>${esc(cap(w.title))}</h2>
-<p class="pp-lead"><span class="code">${esc(w.code)}</span>${h ? ` · ${esc(cellLabel(h))} · expected ${fmtE(h.E)}, observed 0` : ''}</p>
-<p>${esc(w.pitch)}</p>
-${w.how_it_works.length ? `<h3>How it works</h3><ol class="pp-how">${w.how_it_works.map((s) => `<li>${esc(s)}</li>`).join('')}</ol>` : ''}
-<p>${demoUrl ? `<a href="${esc(demoUrl)}" rel="noopener noreferrer" target="_blank">Open the demo</a> · ` : ''}${S.repoPublished ? `<a href="${esc(d.meta.repo_url)}" rel="noopener noreferrer" target="_blank">Source</a> ` : ''}${w.repo_path ? `<span class="mono">${esc(w.repo_path)}</span>` : ''}</p>
-${priorArtHTML(c)}`;
-  }
+  if (w.status === 'built') return driftBuiltHTML(builtCtx(c));
   const nTested = d.replication.rows.length;
   const pick = w.pick;
   const stage = w.concept_stage;
@@ -750,11 +788,12 @@ function methodsHTML(c: Ctx): string {
 <p>Five things this note cannot do, in the order we would worry about them.</p>
 <ol class="pp-limits">
   <li><b>The corpus defines the world.</b> A hole here is an absence from what is <em>reported</em>, not from what is done. The ${fmtN(S.N)} reports are a hand-collected sample of what people choose to write about, and that choice has an editor. ${fmtN(S.nVideo)} are flagged as from a single video,${cite('video')} ${fmtN(S.nSecond)} we know only through a roundup, ${fmtN(S.nAnchors)} are representative tasks from Anthropic&rsquo;s usage reports and not one person&rsquo;s report, and the largest domain, <em>${esc(top.name)}</em>, holds ${fmtPct(topShare)} of everything. An empty cell can mean nobody has done it, or nobody wrote it down where we looked.</li>
-  <li><b>The tags are a model of meaning.</b> ${S.nMove} moves, ${S.nMat} materials and ${S.nFor} audiences are one way to carve a use of Claude into pieces, and a different vocabulary draws different cells. Two taggers agree (&kappa; of ${fmtF(S.kappaMin, 2)} to ${fmtF(S.kappaMax, 2)}), which shows the labels are repeatable and nothing about whether they are right. Tag robustness tests noise between taggers, not the choice of vocabulary.</li>
+  <li><b>The tags are a model of meaning.</b> ${S.nMove} moves, ${S.nMat} materials and ${S.nFor} audiences are one way to carve a use of Claude into pieces, and a different vocabulary draws different cells. Two taggers agree (&kappa; of ${fmtF(S.kappaMin, 3)} to ${fmtF(S.kappaMax, 3)} over both samples; ${fmtF(Math.min(S.kappa.move, S.kappa.material, S.kappa.for), 3)} to ${fmtF(Math.max(S.kappa.move, S.kappa.material, S.kappa.for), 3)} on the first ${fmtN(S.N0)}), which shows the labels are repeatable and nothing about whether they are right. Tag robustness tests noise between taggers, not the choice of vocabulary.</li>
   <li><b>The globe is a picture.</b> It projects a ${S.pca}-dimensional space onto a sphere. Clusters are roughly real; the distances between them are not, and empty-looking ocean is not evidence of anything. Nothing we score is computed on the picture. That is why a selected hole lights the two groups of reports it sits between, rather than a patch of blank map.</li>
   <li><b>A hole can be empty because it is nonsense.</b> Expected counts come from how common a row and a column are, and know nothing about whether they belong together. Two common margins can predict a pairing nobody wants. Replication tells us a cell is really empty. Only judgment, which is the third gate, can say it should be filled.</li>
   <li><b>&ldquo;No prior art found&rdquo; is a statement about a search, not about the world.</b> It means a bounded search of the web and of code repositories found nothing close enough to count. It does not mean nobody has built it: work can be private, behind a login, in another language, or just badly indexed. The results for the concepts we carried forward are listed in Table 2, close or not, so a reader can judge how close <em>close</em> was; the rest are in the repository.</li>
 </ol>
+<p><b>A lesson from the registration itself.</b> A pre-registration has to name its multiple-testing family exactly. Ours said &ldquo;all empty cells of the pair&rdquo;, the code used &ldquo;all cells with an expected count of at least 1&rdquo;, and a third reading, &ldquo;empty cells with an expected count of at least 1&rdquo;, moves the headline from none replicated to one (Table 4). The official result is none under the first two readings; the third is a sensitivity. The family, the cell set and the expected-count cut-off belong in the registration, and the code should be checked against the wording before the first replication result is seen.</p>
 <p>None of this means the method does not work. It means what the method gives you is a short list of well-tested questions, each with its evidence one click away: the report counts behind a cell are in <a href="catalog.html">the catalog</a>, the pre-registration is in the repository, and the data files are the ones the figures read.</p>`;
 }
 
@@ -875,6 +914,7 @@ export function initPaper(data: AppData): void {
   set('replication', replicationHTML(c));
   set('sensitivity', sensitivityHTML(c));
   set('built', builtHTML(c));
+  if (data.winner.status === 'built') hydrateBuilt(builtCtx(c));
   set('methods', methodsHTML(c));
   set('references', referencesHTML(c));
 

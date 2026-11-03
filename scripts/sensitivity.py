@@ -18,6 +18,14 @@ from pathlib import Path
 ROOT = Path(__file__).resolve().parent.parent
 sys.path.insert(0, str(ROOT))
 
+
+def _rel(p) -> str:
+    """Repo-relative POSIX path when p lies inside the repo, so the written JSON holds no machine paths."""
+    try:
+        return Path(p).resolve().relative_to(ROOT).as_posix()
+    except ValueError:
+        return str(p)
+
 from gapfind.cli import _load_items  # noqa: E402
 from gapfind.facets import Tags, load_vocab  # noqa: E402
 from gapfind.io import InputError, read_json, write_json  # noqa: E402
@@ -58,11 +66,11 @@ def main(argv=None) -> int:
                     or abs(r["E_pooled"] - m["E_pooled"]) > 1e-3
                     or r["observed_new"] != c["observed_new"]):
                 bad.append(c["prereg_id"])
-        check = {"replication_json": str(rep_path), "z3_matches_official": not bad,
+        check = {"replication_json": _rel(rep_path), "z3_matches_official": not bad,
                  "mismatches": bad}
 
-    doc = {"source": "sensitivity", "prereg": str(a.prereg), "run": str(a.run),
-           "tags": str(a.tags), "vocab": str(a.vocab), "new_ids_file": str(a.new_ids),
+    doc = {"source": "sensitivity", "prereg": _rel(a.prereg), "run": _rel(a.run),
+           "tags": _rel(a.tags), "vocab": _rel(a.vocab), "new_ids_file": _rel(a.new_ids),
            "n_items": len(items), "n_new_ids": len(new_ids), "min_expected": a.min_expected,
            "rule": {"replicated": "O_new == 0 and E_new >= 2 and q_pooled <= 0.10",
                     "refuted": "O_new > 0", "underpowered": "otherwise"},

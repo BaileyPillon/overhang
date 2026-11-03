@@ -113,7 +113,7 @@
 }
 .mx-cell .e i { font: 500 max(9px, 26cqw)/1 var(--sans); font-style: normal; letter-spacing: .06em; text-transform: uppercase; opacity: .9; }
 .mx-cell .e b { font: 600 clamp(12px, 44cqw, 15px)/1 var(--mono); letter-spacing: -.02em; }
-.mx-cell .seen-n { position: absolute; top: 1px; left: 2px; font: 600 8px/1 var(--mono); color: var(--ink); }
+.mx-cell .seen-n { position: absolute; top: 1px; left: 2px; font: 600 10.5px/1 var(--mono); color: var(--ink); text-shadow: 0 0 3px var(--panel), 0 0 3px var(--panel); }
 .mx-cell.sel { z-index: 5; box-shadow: 0 0 0 2px var(--panel), 0 0 0 3.5px var(--ink); }
 /* exploratory holes (found after pooling): the hatch is the same, the outline is dashed */
 .mx-cell.hole.expl { box-shadow: none; outline: 1px dashed var(--void); outline-offset: -1px; background: repeating-linear-gradient(135deg, color-mix(in srgb, var(--void) 70%, transparent) 0 1px, transparent 1px 5px), transparent; }
@@ -176,6 +176,7 @@
 .mx > figcaption .mono, .mx > figcaption code { color: var(--ink); }
 .mx-pending { padding-top: 4px; }
 .mx-pending .honesty { margin-right: 6px; }
+.mx-pending .honesty.exploratory { margin-right: 0; }
 
 /* ------------------------------------------------------------ narrow screens */
 @media (max-width: 1099.98px) {

@@ -1,4 +1,4 @@
-# Drift runtime + tests (venv: D:\Projects\overhang\.venv). All pure-Python or wheels; no system packages.
+# Drift runtime + tests (install into the project venv, `.venv` at the repo root). All pure-Python or wheels; no system packages.
 numpy>=1.26
 scipy>=1.11        # polyphase resampling (Clemson 15 Hz -> 12.5 Hz)
 requests>=2.31     # dataset downloads

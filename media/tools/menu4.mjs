@@ -1,0 +1,14 @@
+import { launch, sleep, setup, shot } from './cdp.mjs';
+const base = process.argv[2] || 'http://localhost:5173';
+const c = await launch(9346);
+await setup(c, { w: 390, h: 844, dpr: 1, mobile: true, dark: true, url: base + '/' });
+await sleep(5000);
+await c.evaluate(`document.getElementById('menu-btn').click()`); await sleep(400);
+await shot(c, '../../design/shots/build-4/mobile-menu.png');
+console.log(await c.evaluate(`JSON.stringify({exp: document.getElementById('menu-btn').getAttribute('aria-expanded'), items: document.querySelectorAll('#sections-nav a').length, h: document.getElementById('sections-nav').getBoundingClientRect().height})`));
+await c.evaluate(`document.querySelector('#sections-nav a[href="#matrix"]').click()`); await sleep(800);
+console.log(await c.evaluate(`JSON.stringify({exp: document.getElementById('menu-btn').getAttribute('aria-expanded'), y: scrollY})`));
+await c.send('Page.navigate', { url: base + '/catalog.html' }); await sleep(4000);
+await shot(c, '../../design/shots/build-4/mobile-catalog.png');
+console.log(await c.evaluate(`JSON.stringify({sw: document.documentElement.scrollWidth, cw: document.documentElement.clientWidth})`));
+await c.close(); process.exit(0);

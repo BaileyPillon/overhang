@@ -61,6 +61,7 @@ code, kbd, .mono { font-family: var(--mono); font-size: .86em; font-variant-nume
 .ui { font-family: var(--sans); font-size: var(--t-ui); }
 .eyebrow { font: 500 var(--t-xs)/1.2 var(--mono); letter-spacing: .14em; text-transform: uppercase; color: var(--dim); }
 .sr { position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0 0 0 0); white-space: nowrap; }
+.sr:focus-visible { width: auto; height: auto; clip: auto; left: 12px; top: 8px; z-index: 200; padding: 10px 14px; background: var(--ink); color: var(--bg); font: 500 var(--t-ui)/1 var(--sans); border-radius: 3px; text-decoration: none; }
 
 /* focus, always visible for keyboard users */
 :focus-visible { outline: 2px solid var(--void); outline-offset: 2px; border-radius: 2px; }
@@ -70,8 +71,8 @@ code, kbd, .mono { font-family: var(--mono); font-size: .86em; font-variant-nume
 .topbar {
   position: sticky; top: 0; z-index: 50; height: var(--bar-h);
   display: flex; align-items: center; gap: 24px; padding: 0 var(--gutter);
-  background: color-mix(in srgb, var(--bg) 86%, transparent);
-  backdrop-filter: saturate(1.2) blur(10px);
+  background: color-mix(in srgb, var(--bg) 97%, transparent);
+  backdrop-filter: saturate(1.2) blur(16px);
   border-bottom: 1px solid var(--rule);
   font-family: var(--sans); font-size: var(--t-ui);
 }
@@ -87,6 +88,13 @@ code, kbd, .mono { font-family: var(--mono); font-size: .86em; font-variant-nume
 }
 .theme-toggle button + button { border-left: 1px solid var(--rule); }
 .theme-toggle button:hover { color: var(--ink); }
+/* the group clips its buttons (rounded corners), so the focus ring is drawn inside them */
+.theme-toggle button:focus-visible { outline-offset: -3px; border-radius: 0; }
+
+.menu-btn { display: none; font: 500 12px/1 var(--mono); letter-spacing: .08em; text-transform: uppercase; color: var(--ink); background: transparent; border: 1px solid var(--rule); border-radius: 4px; padding: 0 12px; min-height: 40px; cursor: pointer; flex: none; }
+.to-globe { font: 500 12px/1 var(--mono); letter-spacing: .08em; text-transform: uppercase; color: var(--void); text-decoration: none; border: 1px solid var(--void-line); border-radius: 4px; padding: 8px 10px; white-space: nowrap; flex: none; }
+.to-globe[hidden] { display: none; }
+.to-globe:hover { background: var(--void-wash); }
 .theme-toggle button[aria-pressed="true"] { background: var(--ink); color: var(--bg); }
 
 /* ------------------------------------------------------------ plate (full-bleed hero) */
@@ -178,15 +186,34 @@ td.num, th.num { text-align: right; }
 body.page-catalog .foot { width: min(var(--breakout), 100% - 2 * var(--gutter)); }
 
 /* ------------------------------------------------------------ small screens */
+/* the console hands over to the paper: a band that carries the eye down instead of a hard edge */
+.plate-bridge { position: relative; margin-top: -1px; padding: 56px var(--gutter) 40px; text-align: center; background: linear-gradient(to bottom, color-mix(in srgb, var(--void) 7%, var(--bg)) 0, var(--bg) 100%); }
+.plate-bridge::before { content: ""; position: absolute; left: 50%; top: 0; width: 1px; height: 36px; background: linear-gradient(to bottom, var(--void-line), transparent); }
+.plate-bridge p { margin: 0 auto 18px; max-width: 34em; font: italic 400 21px/1.35 var(--display); color: var(--ink); }
+.plate-bridge p span { color: var(--dim); }
+.read-evidence { display: inline-flex; align-items: center; gap: 10px; min-height: 44px; padding: 0 20px; font: 500 13px/1 var(--mono); letter-spacing: .14em; text-transform: uppercase; text-decoration: none; color: var(--bg); background: var(--ink); border-radius: 3px; }
+.read-evidence:hover { background: var(--void); }
+.read-evidence span { display: inline-block; }
+
 @media (max-width: 900px) {
   /* the section links scroll sideways: fade the right edge so it is clear there are more */
   .sections { -webkit-mask-image: linear-gradient(90deg, #000 calc(100% - 34px), transparent); mask-image: linear-gradient(90deg, #000 calc(100% - 34px), transparent); padding-right: 30px; }
 }
 @media (max-width: 700px) {
   body { font-size: 17px; }
-  .topbar { gap: 12px; }
+  .topbar { gap: 10px; }
+  .menu-btn { display: inline-flex; align-items: center; margin-left: auto; }
+  .sections { display: none; margin: 0; }
+  .topbar.menu-open .sections {
+    display: flex; flex-direction: column; gap: 0; position: absolute; left: 0; right: 0; top: 100%; height: calc(100svh - var(--bar-h)); z-index: 49; overflow-y: auto; border-bottom: 1px solid var(--rule);
+    padding: 8px var(--gutter) 24px; background: var(--bg); -webkit-mask-image: none; mask-image: none;
+  }
+  .topbar.menu-open .sections a { padding: 14px 4px; min-height: 48px; font-size: 18px; border-bottom: 1px solid var(--rule); color: var(--ink); }
+  .to-globe { display: none; }
+  .theme-toggle button { min-height: 40px; }
+  .sections a { min-height: 40px; }
   .paper section { padding-top: 48px; }
-  .theme-toggle button { padding: 8px 8px; font-size: 11px; letter-spacing: .04em; }
+  .theme-toggle button { padding: 0 9px; font-size: 11px; letter-spacing: .04em; }
   .figure, .breakout, .paper figure { left: 0; transform: none; width: 100%; }
 }
 
@@ -194,9 +221,22 @@ body.page-catalog .foot { width: min(var(--breakout), 100% - 2 * var(--gutter));
   html { scroll-behavior: auto; }
   *, *::before, *::after { animation-duration: .001ms !important; animation-iteration-count: 1 !important; transition-duration: .001ms !important; }
 }
+/* the same, chosen on the page (the Motion toggle next to the sensor controls) for people whose OS setting is off */
+html[data-motion-off] { scroll-behavior: auto; }
+html[data-motion-off] *, html[data-motion-off] *::before, html[data-motion-off] *::after { animation-duration: .001ms !important; animation-iteration-count: 1 !important; transition-duration: .001ms !important; scroll-behavior: auto !important; }
 
 /* ------------------------------------------------------------ catalog page */
 .catalog-page { width: min(var(--breakout), 100% - 2 * var(--gutter)); margin-inline: auto; padding: 48px 0 0; }
 .catalog-page > * { max-width: none; }
 
 .hero-boot { margin: 0; padding: 38vh 16px; text-align: center; font: 500 var(--t-xs)/1 var(--mono); letter-spacing: .14em; text-transform: uppercase; color: var(--dim); }
+
+/* touch targets: 40 px on phones for the controls that are not inline text */
+@media (max-width: 700px) {
+  .wordmark { display: inline-flex; align-items: center; min-height: 40px; }
+  .mx-seg button, .mx-more, .mx-catlink { min-height: 40px; display: inline-flex; align-items: center; }
+  .mx-detail a { display: inline-block; padding: 11px 0; }
+  .pp-ref-url { display: inline-block; padding: 11px 0; }
+  .pp-refs li { padding-block: 2px; }
+  .foot a { display: inline-block; padding: 11px 2px; }
+}

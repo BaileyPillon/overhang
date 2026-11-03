@@ -1,0 +1,7 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 32" role="img" aria-label="Overhang">
+  <title>Overhang</title>
+  <rect width="32" height="32" rx="7" fill="#0A0F1C"/>
+  <!-- a ring with a gap: the void between two coastlines -->
+  <circle cx="16" cy="16" r="8.5" fill="none" stroke="#8FD3E8" stroke-width="3" stroke-linecap="round" stroke-dasharray="41 12.4" transform="rotate(-62 16 16)"/>
+  <circle cx="16" cy="16" r="1.7" fill="#E9E6DD"/>
+</svg>

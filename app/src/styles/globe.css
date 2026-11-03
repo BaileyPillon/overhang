@@ -245,7 +245,9 @@ svg.gl-ret * { vector-effect: non-scaling-stroke; }
 .gl-hlinks a:hover { color: var(--g-ink); }
 
 .gl-cat { padding: 9px 14px 9px; border-color: rgba(var(--g-acc-rgb), .35); }
-.gl-grid4 { display: grid; grid-template-columns: repeat(5, 1fr); gap: 3px; margin-top: 7px; }
+.gl-grid4 { display: grid; grid-template-columns: repeat(5, minmax(0, 1fr)); gap: 3px; margin-top: 7px; }
+/* the narrower right rail (1100 to 1260): four to a row, so a code and its E (which can read 1.998) are never cut off */
+@media (min-width: 1100px) and (max-width: 1260px) { .gl-grid4:not(.pooled) { grid-template-columns: repeat(4, minmax(0, 1fr)); } }
 .gl-grid4.pooled { grid-template-columns: repeat(5, 1fr); margin-top: 6px; max-height: 92px; overflow: auto; }
 .gl-c {
   all: unset; box-sizing: border-box; border: 1px solid rgba(var(--g-acc-rgb), .26); padding: 3px 4px; cursor: pointer; display: flex; justify-content: space-between; align-items: baseline; gap: 2px;
@@ -285,7 +287,9 @@ svg.gl-ret * { vector-effect: non-scaling-stroke; }
 .gl-seg button:focus-visible { outline: 2px solid var(--g-acc); outline-offset: -2px; }
 
 .gl-foot {
-  position: absolute; z-index: 1; left: 50%; transform: translateX(-50%); bottom: 58px; width: min(640px, calc(100% - var(--g-rail) - var(--g-rail-r) - 80px));
+  position: absolute; z-index: 1; bottom: 58px;
+  /* centred in the free column between the two rails (they are not the same width), with a gutter on each side */
+  left: calc(16px + var(--g-rail) + 24px); right: calc(16px + var(--g-rail-r) + 24px); margin-inline: auto; width: min(640px, calc(100% - var(--g-rail) - var(--g-rail-r) - 80px));
   text-align: center; font: 400 10px/1.45 var(--mono); letter-spacing: .05em; color: rgba(var(--g-dim-rgb), 1); pointer-events: none; text-transform: uppercase;
 }
 .gl-foot b { font-weight: 500; color: rgba(var(--g-ink-rgb), .82); }
@@ -339,3 +343,284 @@ svg.gl-ret * { vector-effect: non-scaling-stroke; }
 .gl-tel-m b { color: var(--g-ink); font-weight: 400; }
 
 @media (prefers-reduced-motion: reduce) { .gl-lbl, .gl-call, .gl-trk { transition: none; } }
+
+/* ------------------------------------------------------------ build 3: concepts, prior art, hover cards, coast labels, LIVE toggle */
+.gl-layer.ref .bx { border-color: rgba(var(--g-ref-rgb), .75); }
+.gl-layer.ref[aria-pressed="true"] .bx { background: var(--g-ref); }
+.gl-layer.ref[aria-pressed="true"] .nm, .gl-layer.ref[aria-pressed="true"] .ct { color: var(--g-ref); }
+.gl-layer.live .bx.dot { border-radius: 50%; border-color: rgba(var(--g-acc-rgb), .75); }
+.gl-layer.live[aria-pressed="true"] .bx.dot { background: var(--g-acc); }
+.gl-layer.live[aria-pressed="true"] .bx.dot::after { content: ""; position: absolute; inset: -1px; border-radius: 50%; border: 1px solid var(--g-acc); animation: gl-pulse 1.7s ease-out infinite; }
+.gl-layer.live .nm { letter-spacing: .2em; }
+.gl-layer.live[aria-pressed="true"] .nm, .gl-layer.live[aria-pressed="true"] .ct { color: var(--g-acc); }
+@keyframes gl-pulse { from { transform: scale(1); opacity: .9; } to { transform: scale(2.8); opacity: 0; } }
+
+.gl-live:not(.open) { display: none; }
+.gl[data-live] .gl-foot { display: none; }
+
+/* markers (positioned by the frame loop; the layer itself ignores the pointer, picking is done on the canvas) */
+.gl-mks { position: absolute; inset: 0; pointer-events: none; overflow: hidden; }
+.gl-mk-g[hidden] { display: none; }
+.gl-mk { position: absolute; left: 0; top: 0; will-change: transform, opacity; opacity: 0; }
+.gl-cs { width: 24px; height: 24px; margin: -12px 0 0 -12px; color: var(--g-acc); }
+.gl-cs svg { display: block; overflow: visible; }
+.gl-cs path { fill: none; stroke: currentColor; stroke-width: 1.4; stroke-linejoin: round; vector-effect: non-scaling-stroke; }
+.gl-cs.hot svg { filter: drop-shadow(0 0 5px currentColor); }
+.gl-cs.hot path { stroke-width: 2.2; }
+.gl-cs.pick svg { transform: scale(1.75); }
+.gl-cs.pick path { fill: currentColor; fill-opacity: .88; }
+.gl-mk-l { position: absolute; left: 32px; top: 6px; white-space: nowrap; font: 500 11px/1 var(--mono); letter-spacing: .14em; color: var(--g-acc); -webkit-text-stroke: 3px var(--g-bg); paint-order: stroke; }
+.gl-cs.edge svg { transform: scale(1.25); }
+.gl-cs.edge .gl-mk-l::after { content: " · FAR SIDE"; letter-spacing: .08em; opacity: .75; }
+.gl-cs.edge-l .gl-mk-l { left: auto; right: 32px; }
+.gl-ps { width: var(--s, 9px); height: var(--s, 9px); margin: calc(var(--s, 9px) * -.5) 0 0 calc(var(--s, 9px) * -.5); border-radius: 50%; background: rgba(var(--g-ref-rgb), .9); box-shadow: 0 0 0 1px var(--g-bg), 0 0 9px rgba(var(--g-ref-rgb), .55); }
+.gl-ps.hot { box-shadow: 0 0 0 1.5px var(--g-ref), 0 0 0 3.5px var(--g-bg), 0 0 14px rgba(var(--g-ref-rgb), .9); }
+
+/* hover card */
+.gl-card {
+  position: absolute; left: 0; top: 0; z-index: 4; width: 304px; max-width: calc(100% - 12px); padding: 10px 13px 11px;
+  background: color-mix(in srgb, var(--g-bg) 90%, transparent); -webkit-backdrop-filter: blur(8px); backdrop-filter: blur(8px);
+  border: 1px solid rgba(var(--g-acc-rgb), .5); color: var(--g-ink); box-shadow: 0 10px 30px rgba(0, 0, 0, .35); transition: opacity .12s;
+}
+.gl-card[hidden] { display: none; }
+.gl-card[data-k="p"] { border-color: rgba(var(--g-ref-rgb), .55); }
+.gl-card.pinned { box-shadow: 0 0 0 1px rgba(var(--g-acc-rgb), .3), 0 14px 36px rgba(0, 0, 0, .45); }
+.gl-cd-k { display: flex; align-items: center; gap: 8px; font: 500 10px/1 var(--mono); letter-spacing: .14em; color: var(--g-acc); margin-bottom: 7px; }
+.gl-cd-k.ref { color: var(--g-ref); }
+.gl-cd-k > span:first-child { flex: 1; min-width: 0; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+.gl-cd-pick { flex: none; background: var(--g-acc); color: var(--g-on); padding: 3px 5px 2px; }
+.gl-cd-x { all: unset; cursor: pointer; flex: none; width: 18px; height: 18px; text-align: center; font: 400 17px/17px var(--sans); color: var(--g-dim); margin: -4px -6px -4px 0; }
+.gl-cd-x:hover { color: var(--g-ink); }
+.gl-cd-x:focus-visible { outline: 2px solid var(--g-acc); }
+.gl-card h4 { font: 600 14px/1.25 var(--sans); letter-spacing: .005em; color: var(--g-ink); margin: 0 0 5px; }
+.gl-card p { font: 400 12.5px/1.42 var(--sans); color: rgba(var(--g-ink-rgb), .86); margin: 0 0 4px; display: -webkit-box; -webkit-line-clamp: 6; -webkit-box-orient: vertical; overflow: hidden; }
+.gl-card p.what { -webkit-line-clamp: 7; }
+.gl-cd-row { display: flex; align-items: center; flex-wrap: wrap; gap: 5px 6px; margin-top: 7px; font: 400 12px/1.25 var(--sans); }
+.gl-cd-row small { flex: none; width: 66px; font: 400 9.5px/1 var(--mono); letter-spacing: .12em; color: var(--g-dim); }
+.gl-cd-row b { font: 500 11.5px/1 var(--mono); color: var(--g-ink); }
+.gl-cd-row a { color: var(--g-ink); text-decoration-color: rgba(var(--g-ink-rgb), .4); font: 400 11px/1.2 var(--mono); overflow-wrap: anywhere; }
+.gl-cd-row a:hover { color: var(--g-acc); }
+.gl-pv { font: 500 9.5px/1 var(--mono); letter-spacing: .08em; text-transform: uppercase; padding: 3px 5px 2px; border: 1px solid rgba(var(--g-ink-rgb), .38); color: rgba(var(--g-ink-rgb), .8); white-space: nowrap; }
+.gl-pv.part { border-style: dashed; }
+.gl-pv.done { border-color: var(--g-ref); color: var(--g-ref); background: rgba(var(--g-ref-rgb), .1); }
+.gl-pv.none { border-color: var(--g-acc); color: var(--g-acc); background: rgba(var(--g-acc-rgb), .1); }
+.gl-pc { font: 400 11px/1 var(--mono); color: var(--g-dim); }
+.gl-pc b { font-size: 12px; color: var(--g-acc); }
+.gl-pc sup { font-size: 8px; vertical-align: 4px; margin-left: 1px; }
+.gl-pc-n { font: 400 9.5px/1 var(--mono); letter-spacing: .08em; color: var(--g-dim); }
+.gl-cd-hole { all: unset; cursor: pointer; font: 400 11.5px/1.25 var(--display); font-style: italic; color: var(--g-ink); border-bottom: 1px solid rgba(var(--g-acc-rgb), .6); }
+.gl-cd-hole b { font: 500 11px/1 var(--mono); font-style: normal; color: var(--g-acc); margin-right: 4px; }
+.gl-cd-hole:hover { color: var(--g-acc); }
+.gl-cd-hole:focus-visible { outline: 2px solid var(--g-acc); }
+.gl-cd-go { font: 500 10.5px/1 var(--mono) !important; letter-spacing: .12em; text-transform: uppercase; color: var(--g-acc) !important; text-decoration: none; border-bottom: 1px solid var(--g-acc); padding-bottom: 2px; }
+.gl-cd-bar { width: 64px; height: 4px; background: rgba(var(--g-ink-rgb), .14); position: relative; }
+.gl-cd-bar i { position: absolute; left: 0; top: 0; bottom: 0; background: var(--g-ref); }
+.gl-ai { font: 500 9.5px/1 var(--mono); letter-spacing: .1em; padding: 3px 5px 2px; border: 1px solid rgba(var(--g-ink-rgb), .3); color: var(--g-dim); margin-left: auto; }
+.gl-ai.y { border-color: var(--g-acc); color: var(--g-acc); }
+.gl-cd-k.live { color: var(--g-acc); }
+
+/* the two coasts of the selected hole */
+.gl-coast { width: 184px; font: 500 10px/1.3 var(--mono); letter-spacing: .08em; text-transform: uppercase; white-space: normal; }
+.gl-coast i { position: absolute; left: -4px; top: -4px; width: 8px; height: 8px; border: 1px solid currentColor; border-radius: 50%; background: var(--g-bg); }
+.gl-coast > span { position: absolute; left: 10px; top: -7px; width: 170px; }
+.gl-coast small { display: block; font-weight: 400; font-size: 9px; letter-spacing: .14em; opacity: .72; }
+.gl-coast em { font-style: normal; opacity: .6; letter-spacing: .04em; }
+.gl-coast.r { color: var(--g-acc); }
+.gl-coast.c { color: var(--g-ink); }
+
+/* concepts aimed at the selected hole */
+.gl-hconc { margin-top: 8px; display: flex; align-items: center; gap: 8px; flex-wrap: wrap; }
+.gl-hconc > small { font: 400 9.5px/1 var(--mono); letter-spacing: .12em; color: var(--g-dim); }
+.gl-hconc > div { display: flex; gap: 4px; flex-wrap: wrap; }
+.gl-hc { all: unset; box-sizing: border-box; cursor: pointer; padding: 4px 7px 3px; border: 1px solid rgba(var(--g-acc-rgb), .4); font: 500 10.5px/1 var(--mono); letter-spacing: .06em; color: var(--g-acc); }
+.gl-hc:hover { border-color: var(--g-acc); background: rgba(var(--g-acc-rgb), .1); }
+.gl-hc:focus-visible { outline: 2px solid var(--g-acc); outline-offset: 1px; }
+.gl-hc.pk { background: var(--g-acc); color: var(--g-on); border-color: transparent; }
+
+/* the left rail has to fit the shorter screens: drop the long continents list, then the flat map, as the viewport gets lower */
+@media (min-width: 1100px) { .gl-layer { height: 26px; } }
+@media (min-width: 1100px) and (max-height: 959px) { .gl-conts-sect { display: none; } .gl-hfoot { display: none; } }
+@media (min-width: 1100px) and (max-height: 799px) { .gl-mapwrap { display: none; } }
+
+@media (max-width: 1099.98px) {
+  .gl-card { width: 280px; }
+  .gl-coast { display: none; }
+}
+@media (prefers-reduced-motion: reduce) { .gl-layer.live[aria-pressed="true"] .bx.dot::after { animation: none; } .gl-card { transition: none; } }
+
+/* ============================================================ build 4: review fixes */
+
+/* the console is a little shorter at the low end, so the bottom bar stays above the fold on a 700 px window */
+#plate.gl { border-bottom: 0; }
+@media (min-width: 1100px) { #plate.gl { height: clamp(620px, calc(100svh - var(--bar-h)), 960px); } }
+
+/* top strip: at 1260 and under the badge and the headline cannot share a row, so the headline gets its own row */
+@media (min-width: 1100px) and (max-width: 1260px) {
+  #plate.gl { --g-top: 82px; }
+  .gl-top { grid-template-columns: minmax(0, 1fr) auto; grid-template-rows: auto auto; row-gap: 8px; align-content: start; }
+  .gl-cls { grid-column: 1; grid-row: 1; }
+  .gl-meta { grid-column: 2; grid-row: 1; }
+  .gl-brand { grid-column: 1 / -1; grid-row: 2; max-width: none; }
+  .gl-brand h1 { font-size: clamp(17px, 1.9vw, 22px); white-space: nowrap; }
+}
+
+/* labels: tracked contact and selected hole callouts are two lines, no more; the long wording is in the panel */
+.gl-trk .tx, .gl-call .tx { white-space: normal; text-transform: none; }
+.gl-trk .tx { width: 250px; font: 500 12px/1.35 var(--sans); letter-spacing: .01em; }
+.gl-call .tx { width: 236px; font: 500 12px/1.35 var(--sans); letter-spacing: .01em; }
+.gl-trk .tx .l1 { display: block; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+/* the ring's callout wraps its cell name onto a second line instead of running off the disc and ending in an ellipsis */
+.gl-call .tx .l1 { display: -webkit-box; -webkit-box-orient: vertical; -webkit-line-clamp: 2; white-space: normal; overflow: hidden; }
+.gl-call .tx .l1 b { font: 500 12px/1 var(--mono); letter-spacing: .08em; }
+.gl-trk .tx small, .gl-call .tx small { display: block; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; font: 400 10.5px/1.5 var(--mono); letter-spacing: .06em; text-transform: uppercase; }
+.gl-trk .id { position: absolute; left: 22px; top: -7px; white-space: nowrap; font: 500 11px/1 var(--mono); letter-spacing: .1em; color: var(--g-star); -webkit-text-stroke: 3px var(--g-bg); paint-order: stroke; display: none; }
+.gl-nnl { font-size: 11px; }
+.gl-vidl, .gl-cont small { font-size: 10.5px; }
+
+/* HUD hierarchy: the selected hole is the story, so it comes first, in the larger type and the accent frame; the tracked contact is second */
+.gl-right { overflow-y: auto; scrollbar-width: thin; scrollbar-color: rgba(var(--g-ink-rgb), .25) transparent; }
+.gl-right::-webkit-scrollbar { display: block; width: 6px; }
+.gl-right::-webkit-scrollbar-thumb { background: rgba(var(--g-ink-rgb), .25); border-radius: 3px; }
+.gl-holec { order: 1; border-color: rgba(var(--g-acc-rgb), .7); background: color-mix(in srgb, var(--g-acc) 5%, var(--g-panel)); box-shadow: 0 0 0 1px rgba(var(--g-acc-rgb), .12), 0 0 28px rgba(var(--g-acc-rgb), .06); }
+.gl-contact { order: 2; }
+.gl-cat { order: 3; }
+/* wide console: the hole catalog is the navigation, so it sits directly under the selected hole and is always on the first screen;
+   the tracked contact follows and its list of neighbours scrolls inside the rail */
+@media (min-width: 1100px) { .gl-cat { order: 2; } .gl-contact { order: 3; } }
+@media (min-width: 1100px) and (max-height: 959px) { .gl-catkey { display: none; } }
+.gl-hcode { font-size: 30px; }
+.gl-hcell { font-size: 18px; }
+.gl-ttl { font: 500 14.5px/1.25 var(--sans); }
+.gl-body { display: block; -webkit-line-clamp: unset; overflow: visible; }
+.gl-more { all: unset; cursor: pointer; font: 500 11px/1 var(--mono); letter-spacing: .08em; text-transform: uppercase; color: var(--g-acc); border-bottom: 1px solid rgba(var(--g-acc-rgb), .5); padding: 3px 0 1px; }
+.gl-more:hover { color: var(--g-ink); }
+.gl-more:focus-visible { outline: 2px solid var(--g-acc); outline-offset: 2px; }
+.gl-chips { grid-template-columns: 1fr 1fr 1fr; align-items: stretch; }
+.gl-chip { overflow: hidden; }
+.gl-chip span { white-space: normal; display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical; overflow: hidden; min-height: 2.3em; line-height: 1.15; overflow-wrap: anywhere; font-size: 11.5px; }
+.gl-chip small { white-space: nowrap; overflow: hidden; text-overflow: clip; letter-spacing: .08em; }
+.gl-nn-more[hidden] { display: none; }
+.gl-nn-tg { all: unset; cursor: pointer; display: block; margin-top: 4px; font: 500 11px/1 var(--mono); letter-spacing: .08em; text-transform: uppercase; color: var(--g-dim); padding: 4px 0; }
+.gl-nn-tg:hover { color: var(--g-ink); }
+.gl-nn-tg:focus-visible { outline: 2px solid var(--g-acc); outline-offset: 1px; }
+
+/* rails that scroll inside their own box say so */
+.gl-left { overflow: hidden; }
+.gl-lin { display: flex; flex-direction: column; flex: 1; min-height: 0; overflow-y: auto; scrollbar-width: none; margin: -12px -13px -10px; padding: 12px 13px 10px; }
+.gl-lin::-webkit-scrollbar { display: none; }
+.gl-lin[data-more], .gl-right[data-more] { -webkit-mask-image: linear-gradient(#000 calc(100% - 34px), transparent); mask-image: linear-gradient(#000 calc(100% - 34px), transparent); }
+.gl-lin[data-less]:not([data-more]), .gl-right[data-less]:not([data-more]) { -webkit-mask-image: linear-gradient(transparent, #000 22px); mask-image: linear-gradient(transparent, #000 22px); }
+.gl-lin[data-more][data-less], .gl-right[data-more][data-less] { -webkit-mask-image: linear-gradient(transparent, #000 22px, #000 calc(100% - 34px), transparent); mask-image: linear-gradient(transparent, #000 22px, #000 calc(100% - 34px), transparent); }
+.gl-conts .row { cursor: default; }
+.gl-conts .row:hover, .gl-conts .row:focus-visible { background: rgba(var(--g-ink-rgb), .07); outline: 0; }
+.gl-grid4.pooled { max-height: 112px; overflow-y: auto; scrollbar-width: thin; padding-bottom: 14px; -webkit-mask-image: linear-gradient(#000 calc(100% - 22px), transparent); mask-image: linear-gradient(#000 calc(100% - 22px), transparent); }
+
+/* telemetry: findings first and clear, the camera dimmer; nothing under 11 px */
+.gl-tel { gap: 22px; }
+.gl-tel small { font-size: 11px; letter-spacing: .14em; }
+.gl-tel b { font-size: 13px; }
+.gl-tel .cam small { color: rgba(var(--g-dim-rgb), .75); }
+.gl-tel .cam b { color: var(--g-dim); }
+.gl-tel .fnd b { color: var(--g-ink); font-weight: 500; }
+.gl-modes small { font-size: 11px; }
+.gl-modes { gap: 8px; }
+.gl-mot { all: unset; box-sizing: border-box; cursor: pointer; padding: 8px 12px 7px; margin-right: 10px; border: 1px solid var(--g-line); font: 500 11px/1 var(--sans); letter-spacing: .14em; text-transform: uppercase; color: var(--g-ink); }
+.gl-mot[aria-pressed="true"] { color: var(--g-dim); border-style: dashed; }
+.gl-mot:hover { border-color: var(--g-acc); }
+.gl-mot:focus-visible { outline: 2px solid var(--g-acc); outline-offset: 1px; }
+.gl-legend2, .gl-catkey { font-size: 11px; }
+.gl-hd .m { font-size: 11px; }
+.gl-hfoot { font-size: 11px; }
+.gl-metrics small, .gl-chip small, .gl-nnh em, .gl-facet small, .gl-hconc > small { font-size: 10.5px; }
+.gl-foot { font-size: 11px; }
+
+/* keyboard: a visible focus on the globe canvas and the keys it answers to */
+.gl-stage canvas.gl-cv:focus-visible { outline: 3px solid var(--g-acc); outline-offset: -4px; }
+.gl-keyhint { position: absolute; left: 50%; top: 10px; transform: translateX(-50%); margin: 0; padding: 6px 10px; background: var(--g-panel); border: 1px solid var(--g-acc); font: 400 11px/1.2 var(--mono); letter-spacing: .04em; color: var(--g-ink); opacity: 0; pointer-events: none; z-index: 5; white-space: nowrap; }
+.gl-keyhint kbd { display: inline-block; min-width: 18px; padding: 2px 4px; margin-right: 2px; border: 1px solid var(--g-line); text-align: center; font: 500 10.5px/1 var(--mono); color: var(--g-acc); }
+.gl-cv:focus-visible ~ .gl-keyhint { opacity: 1; }
+.gl-selbar { display: none; }
+.gl-conts .row:focus-visible, .gl-layer:focus-visible { outline: 2px solid var(--g-acc); outline-offset: -2px; }
+
+/* markers: diamonds for concepts, squares for prior art, double rings for pooled holes */
+.gl-cs path { stroke-width: 1.6; }
+.gl-cs .dot { fill: currentColor; stroke: none; }
+.gl-cs.pick svg { transform: scale(1.9); }
+.gl-cs.pick path { fill: currentColor; fill-opacity: .9; }
+.gl-cs.pick .dot { fill: var(--g-on); }
+.gl-ps { border-radius: 0; background: rgba(var(--g-ref-rgb), .95); box-shadow: 0 0 0 1.5px var(--g-bg), 0 0 0 2.5px rgba(var(--g-ref-rgb), .7), 0 0 10px rgba(var(--g-ref-rgb), .6); }
+.gl-ps.hot { box-shadow: 0 0 0 2px var(--g-ref), 0 0 0 4px var(--g-bg), 0 0 16px rgba(var(--g-ref-rgb), .95); }
+
+/* light (paper) console: inks stay readable on the pale sphere, the plate sits on the page */
+#plate.gl[data-light] .gl-cont { color: rgba(var(--g-ink-rgb), .86); }
+#plate.gl[data-light] .gl-cont small { color: rgba(var(--g-ink-rgb), .72); }
+#plate.gl[data-light] .gl-vidl { color: rgba(var(--g-ink-rgb), .92); }
+#plate.gl[data-light] .gl-hl, #plate.gl[data-light] .gl-coast.r, #plate.gl[data-light] .gl-mk-l, #plate.gl[data-light] .gl-call .tx, #plate.gl[data-light] .gl-call .tx small { color: #0F5870; }
+#plate.gl[data-light] .gl-trk .tx, #plate.gl[data-light] .gl-trk .tx small, #plate.gl[data-light] .gl-nnl, #plate.gl[data-light] .gl-trk .id { color: #6E3D08; }
+#plate.gl[data-light] .gl-foot { color: rgba(var(--g-dim-rgb), 1); }
+#plate.gl[data-light] .gl-map { background: #E8EDF5; }
+#plate.gl[data-light] .gl-legend2 { color: #4A5262; }
+
+/* ------------------------------------------------------------ phones and small tablets */
+@media (max-width: 1099.98px) {
+  .gl-left { order: 3; }
+  .gl-bottom { order: 4; }
+  .gl-right { order: 5; }
+  .gl-foot { order: 6; }
+  .gl-lin { display: block; margin: 0; padding: 0; overflow: visible; }
+  .gl-left { padding: 12px 0 10px 13px; }
+  .gl-left .gl-hd { padding-right: 13px; }
+  /* the layer toggles sit directly under the globe, as a row of pills that scrolls sideways */
+  #gl-layers { display: flex !important; gap: 8px; overflow-x: auto; padding: 2px 13px 8px 0; margin-top: 10px !important; scroll-snap-type: x proximity; scrollbar-width: none;
+    -webkit-mask-image: linear-gradient(90deg, #000 calc(100% - 38px), transparent); mask-image: linear-gradient(90deg, #000 calc(100% - 38px), transparent); }
+  #gl-layers::-webkit-scrollbar { display: none; }
+  .gl-layer { width: auto; flex: none; height: 40px; padding: 0 14px; border: 1px solid var(--g-line); border-radius: 20px; scroll-snap-align: start; white-space: nowrap; }
+  .gl-layer:first-child { border-top: 1px solid var(--g-line); }
+  .gl-layer .nm { flex: none; }
+  .gl-layer[aria-pressed="true"] { border-color: rgba(var(--g-ink-rgb), .55); background: rgba(var(--g-ink-rgb), .06); }
+  .gl-layer.hole[aria-pressed="true"] { border-color: rgba(var(--g-acc-rgb), .7); }
+  .gl-left .gl-sect { padding-right: 13px; }
+  .gl-tel { display: flex; flex-wrap: wrap; gap: 8px 20px; padding-bottom: 6px; }
+  .gl-tel .cam, .gl-tel .opt { display: none; }
+  .gl-modes { flex-wrap: wrap; }
+  .gl-mot { min-height: 40px; margin-right: 0; }
+  .gl-seg button { min-height: 40px; }
+  .gl-modes small:first-child { display: none; }
+  .gl-c { min-height: 36px; }
+  .gl-nn { height: 40px; }
+  .gl-nn-tg, .gl-more { min-height: 40px; display: inline-flex; align-items: center; }
+  .gl-hlinks { gap: 6px; flex-wrap: wrap; }
+  .gl-hlinks a { display: inline-flex; align-items: center; min-height: 40px; padding: 0 4px; border-bottom: 0; text-decoration: underline; text-decoration-color: rgba(var(--g-acc-rgb), .5); text-underline-offset: 5px; }
+  .gl-src { min-height: 40px; }
+  .gl-src a { display: inline-flex; align-items: center; min-height: 40px; }
+  .gl-cd-x { width: 40px; height: 40px; line-height: 40px; }
+  .gl-trk .id { display: block; }
+  .gl-conts .row { min-height: 32px; }
+  /* the selected hole stays in reach while the page scrolls past the panels */
+  .gl-selbar { display: flex; align-items: center; gap: 10px; position: sticky; bottom: 0; z-index: 30; order: 9; margin: 14px 0 -20px; padding: 6px var(--gutter) 6px; min-height: 52px; background: var(--g-panel); border-top: 1px solid rgba(var(--g-acc-rgb), .55);
+    -webkit-backdrop-filter: blur(10px); backdrop-filter: blur(10px); font: 400 13px/1.2 var(--sans); }
+  .gl-selbar .k { font: 500 10.5px/1 var(--mono); letter-spacing: .12em; text-transform: uppercase; color: var(--g-dim); }
+  .gl-selbar b { font: 500 16px/1 var(--mono); color: var(--g-acc); }
+  .gl-selbar .n { flex: 1; min-width: 0; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; color: var(--g-ink); font-style: italic; font-family: var(--display); font-size: 14px; }
+  .gl-sb-go { all: unset; cursor: pointer; flex: none; min-height: 40px; padding: 0 12px; display: inline-flex; align-items: center; border: 1px solid rgba(var(--g-acc-rgb), .6); font: 500 11px/1 var(--mono); letter-spacing: .1em; text-transform: uppercase; color: var(--g-acc); }
+  .gl-sb-go:focus-visible { outline: 2px solid var(--g-acc); outline-offset: 1px; }
+  .gl-keyhint { display: none; }
+}
+@media (min-width: 700px) and (max-width: 1099.98px) {
+  .gl-right { display: grid; grid-template-columns: 1fr 1fr; align-items: start; }
+  .gl-holec { order: 1; } .gl-contact { order: 2; grid-row: span 2; } .gl-cat { order: 3; }
+}
+
+.gl-hl.sel.f-l .gl-hlt { left: auto; right: 9px; }
+.gl-hl.sel.f-u .gl-hlt { left: -16px; top: -21px; }
+.gl-hl.sel.f-d .gl-hlt { left: -16px; top: 7px; }
+
+@media (min-width: 1100px) and (max-width: 1439.98px) { .gl-tel .opt { display: none; } }
+@media (max-width: 1099.98px) {
+  .gl-hc { min-height: 36px; padding: 0 12px; display: inline-flex; align-items: center; }
+  .gl-more { min-width: 44px; justify-content: center; }
+}
+
+/* catalog cells: a code and an E such as 1.998 must both fit in a fifth of the rail */
+.gl-grid4:not(.pooled) .gl-hc { padding-inline: 4px; letter-spacing: .02em; white-space: nowrap; overflow: hidden; }
+.gl-grid4:not(.pooled) { grid-template-columns: repeat(4, minmax(0, 1fr)); }

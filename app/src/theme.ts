@@ -53,3 +53,65 @@ export function isLight(): boolean {
 export function token(name: string): string {
   return getComputedStyle(document.documentElement).getPropertyValue(name).trim();
 }
+
+/* ---------------------------------------------------------------- motion toggle (defaults to the OS setting) */
+const MOTION_KEY = 'overhang-motion';
+/** True when motion is off: the viewer chose "off", or chose nothing and the OS asks for reduced motion. */
+export function motionOff(): boolean {
+  try {
+    const v = localStorage.getItem(MOTION_KEY);
+    if (v === 'off') return true;
+    if (v === 'on') return false;
+  } catch {
+    /* storage unavailable: follow the OS */
+  }
+  return window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+}
+
+export function setMotionOff(off: boolean): void {
+  try {
+    localStorage.setItem(MOTION_KEY, off ? 'off' : 'on');
+  } catch {
+    /* the choice lasts for this page view only */
+  }
+  applyMotion();
+}
+
+function applyMotion(): void {
+  const off = motionOff();
+  document.documentElement.toggleAttribute('data-motion-off', off);
+  window.dispatchEvent(new CustomEvent('overhang:motion', { detail: { off } }));
+}
+
+/** Page chrome shared by index.html and catalog.html: the motion attribute, the phone menu, the "back to the globe" link. */
+export function initChrome(): void {
+  applyMotion();
+  window.matchMedia('(prefers-reduced-motion: reduce)').addEventListener('change', applyMotion);
+  const btn = document.getElementById('menu-btn');
+  const bar = document.querySelector<HTMLElement>('.topbar');
+  const nav = document.getElementById('sections-nav');
+  if (btn && bar && nav) {
+    const set = (open: boolean): void => {
+      bar.classList.toggle('menu-open', open);
+      btn.setAttribute('aria-expanded', String(open));
+      btn.textContent = open ? 'Close' : 'Menu';
+    };
+    btn.addEventListener('click', () => set(!bar.classList.contains('menu-open')));
+    nav.addEventListener('click', (e) => {
+      if ((e.target as HTMLElement).closest('a')) set(false);
+    });
+    document.addEventListener('keydown', (e) => {
+      if (e.key === 'Escape' && bar.classList.contains('menu-open')) {
+        set(false);
+        btn.focus();
+      }
+    });
+  }
+  const back = document.getElementById('to-globe');
+  const plate = document.getElementById('plate');
+  if (back && plate && 'IntersectionObserver' in window) {
+    new IntersectionObserver((es) => {
+      back.hidden = es.some((e) => e.isIntersecting);
+    }, { threshold: 0.05 }).observe(plate);
+  }
+}

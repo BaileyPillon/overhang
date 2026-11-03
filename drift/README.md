@@ -34,7 +34,7 @@ Already measured and reproduced against upstream's own `main.c` (Bangle.js recor
 
 ## Quickstart
 
-Run from `D:\Projects\overhang` with the project venv (`D:\Projects\overhang\.venv\Scripts\python.exe`, shown as `python`).
+Run from the repository root with the project venv active (the commands below show it as `python`; on Windows call `.venv\Scripts\python.exe` directly if you do not activate it).
 
 ```
 python -m pip install -r drift/requirements.txt
@@ -82,7 +82,7 @@ Citations:
 
 ## Limits
 
-- **The Clemson transfer to Bangle.js is unvalidated.** On the six native Bangle.js walking files (one wearer, no resampling) the boundary shifts disagree with Clemson's: 2v09 to 2v10 +36 points on average against -0.11, 2v10 to 2v11 negative in 6 of 6 files (median -3.4, range -28.8 to -2.1) against -0.9, 2v11 to 2v12 -3.0 on average (4 of 6 files beyond ±2) against +0.01. 2v09 on the native walks has a mean error of -30.5% (range -55.7% to +22.0%) against Clemson's +2.7% median, and 2v12 undercounts them by 5.0% on average against -0.8% mean (Clemson, regular). The cause (resampling, wrist placement, wearer, sensor, single subject) is not identified. Drift reports both and downgrades a Clemson "comparable" to "not confirmed" when the native walks disagree.
+- **The Clemson transfer to Bangle.js is unvalidated.** On the six native Bangle.js walking files (one wearer, no resampling) the boundary shifts disagree with Clemson's: 2v09 to 2v10 +36 points on average against -0.11, 2v10 to 2v11 negative in 6 of 6 files (median -3.4, range -28.8 to -2.1) against -0.9, 2v11 to 2v12 -3.0 on average (4 of 6 files beyond ±2) against +0.01. 2v09 on the native walks has a mean error of -30.5% (range -55.7% to +22.0%) against Clemson's +2.7% median, and 2v12 undercounts them by 5.0% on average against -1.8% mean (-0.3% median) on Clemson regular gait. The cause (resampling, wrist placement, wearer, sensor, single subject) is not identified. Drift reports both and downgrades a Clemson "comparable" to "not confirmed" when the native walks disagree.
 - **A "comparable" verdict is about the mean.** It means the 95% bootstrap CI of the mean paired shift lies within ±2 points. Individual participants can still change more (the memo reports the SD, the number of subjects beyond ±2 and the largest change); 6 pairs x 4 gaits are examined without multiplicity correction; the margin is a convention; percentile bootstrap intervals are a few percent narrower than t-intervals at n = 30 (`ci_t_pct` in the JSON).
 - **Resampler-sensitive.** Clemson is 15 Hz and is resampled to the device's 12.5 Hz (polyphase by default). Linear interpolation gives materially different count errors for semi-regular and irregular gait and different boundary CIs; the results JSON and the memo show both. The Clemson wrist sensor recorded only -2 to +2 g, so strong peaks are clipped; the Bangle counter works on int16 at 8192 counts per g (about ±4 g). The column order of the Clemson files is undocumented: "first three of nine columns = wrist" is an assumption (the paper lists wrist, hip, ankle; the ankle triple is clearly the most energetic in all 90 files, wrist and hip cannot be told apart by amplitude).
 - **Algorithm layer only.** Drift replays the metric algorithm on recorded sensor data. Sensor-driver changes (gain, LED current, ADC, sampling interval; for InfiniTime the gain change in 1.9.0 and the 1.13.0 retune) change the raw counts and cannot be replayed from recordings.

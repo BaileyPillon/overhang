@@ -1,0 +1,33 @@
+<!doctype html>
+<html lang="en"><head><meta charset="utf-8">
+<title>Overhang social card</title>
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500&family=IBM+Plex+Sans+Condensed:wght@400;500&family=Newsreader:ital,opsz,wght@0,6..72,300..500;1,6..72,300..500&display=swap">
+<style>
+  :root{--bg:#0A0F1C;--panel:#10172A;--ink:#E9E6DD;--dim:#8C95A8;--rule:#243049;--void:#8FD3E8}
+  *{box-sizing:border-box;margin:0}
+  html,body{width:1200px;height:630px;background:var(--bg);overflow:hidden}
+  .card{position:relative;width:1200px;height:630px;background:
+    radial-gradient(ellipse 620px 620px at 905px 315px,#16223f 0%,rgba(10,15,28,0) 70%),var(--bg);color:var(--ink)}
+  .grid{position:absolute;inset:0;background-image:linear-gradient(var(--rule) 1px,transparent 1px),linear-gradient(90deg,var(--rule) 1px,transparent 1px);background-size:60px 60px;opacity:.16;
+    -webkit-mask-image:radial-gradient(ellipse 80% 90% at 75% 50%,#000,transparent);mask-image:radial-gradient(ellipse 80% 90% at 75% 50%,#000,transparent)}
+  .globe{position:absolute;right:-150px;top:-35px;width:700px;height:700px;background:url(globe.png) center/cover no-repeat;
+    -webkit-mask-image:radial-gradient(circle closest-side,#000 90%,transparent 100%);mask-image:radial-gradient(circle closest-side,#000 90%,transparent 100%)}
+  .vc{position:absolute;width:22px;height:22px;border:1.5px solid var(--void);opacity:.7}
+  .tl{left:28px;top:28px;border-right:0;border-bottom:0}.tr{right:28px;top:28px;border-left:0;border-bottom:0}
+  .bl{left:28px;bottom:28px;border-right:0;border-top:0}.br{right:28px;bottom:28px;border-left:0;border-top:0}
+  .tag{position:absolute;left:64px;top:62px;font:500 14px/1 'IBM Plex Mono',monospace;letter-spacing:.14em;color:var(--bg);background:var(--ink);padding:8px 12px}
+  h1{position:absolute;left:60px;top:182px;font:300 140px/1 'Newsreader',serif;letter-spacing:-.02em;font-optical-sizing:auto}
+  p{position:absolute;left:64px;top:360px;width:560px;font:400 33px/1.28 'Newsreader',serif;color:var(--ink)}
+  p em{color:var(--void);font-style:italic}
+  .foot{position:absolute;left:64px;bottom:62px;display:flex;gap:28px;font:400 14px/1 'IBM Plex Mono',monospace;letter-spacing:.12em;text-transform:uppercase;color:var(--dim)}
+  .foot b{color:var(--void);font-weight:500}
+</style></head>
+<body><div class="card">
+  <div class="grid"></div><div class="globe"></div>
+  <i class="vc tl"></i><i class="vc tr"></i><i class="vc bl"></i><i class="vc br"></i>
+  <div class="tag">PRE-REGISTERED // TESTED ON NEW REPORTS</div>
+  <h1>Overhang</h1>
+  <p>1,563 things people have done with Claude, and <em>the holes between them</em></p>
+  <div class="foot"><span><b>19</b> registered holes</span><span><b>1,049</b> new reports</span><span>every claim checkable</span></div>
+</div></body></html>

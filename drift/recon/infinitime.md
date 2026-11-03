@@ -13,7 +13,7 @@ Key: infinitime. Date: 2026-11-03. Everything below was verified from git histor
 
 ## 1. Repo and downloads
 
-- Repo: https://github.com/InfiniTimeOrg/InfiniTime. Cloned blobless with full history (needed for the history analysis; `--filter=blob:none`, 31 MB on disk): `D:\Projects\overhang\drift\recon\dl\infinitime` (no checkout; read with `git show <tag>:<path>`). Not a shallow clone, because a depth-1 clone cannot give release history.
+- Repo: https://github.com/InfiniTimeOrg/InfiniTime. Cloned blobless with full history (needed for the history analysis; `--filter=blob:none`, 31 MB on disk): `drift\recon\dl\infinitime` (no checkout; read with `git show <tag>:<path>`). Not a shallow clone, because a depth-1 clone cannot give release history.
 - HEAD at clone time: 9ad16304f5fd526b781a760cf1313813d232645e (2026-11-03, = 1.16.0-28-g9ad1630). Latest release: 1.16.1 = e172b9b3c447e2b79c45510c751855a090a208b4 (2026-07-05, "Set version to 1.16.1", only CMakeLists.txt changed vs 1.16.0 for HR purposes: Ppg blobs identical).
 - arduinoFFT (InfiniTime submodule `src/libs/arduinoFFT`, same pin in 1.13.0 through 1.16.1): https://github.com/kosme/arduinoFFT at 419d7b044e56b87de8efbcf76f09c04759628fb4 (2023-05-26, "Merge pull request #83 from FintasticMan/customisable_sqrt", describe v1.5.5-23-g419d7b0; library.properties says 1.9.2). Cloned and checked out: `dl\arduinoFFT` (335 KB). Header-only (`src/arduinoFFT.h` 15277 B, `defs.h`, `types.h`).
 - Extracted per-release HR sources (read-only copies via `git show`): `dl\infinitime-src\<tag>\components\heartrate\` for 0.11.0, 1.0.0, 1.1.0, 1.2.0, 1.8.0, 1.12.0, 1.13.0, 1.15.0, 1.16.1; plus `dl\infinitime-src\stubs\` (nrf_log.h stub, msvc_compat.h shim).
@@ -67,7 +67,7 @@ What was needed (InfiniTime source untouched):
 - Include root: `-I<tag>` (so `components/heartrate/Ppg.h` and, for 1.13+, `libs/arduinoFFT/src/arduinoFFT.h` resolve). For 1.13/1.15/1.16.1 the pinned arduinoFFT `src/` was copied to `<tag>\libs\arduinoFFT\src`. Biquad.cpp/Ptagc.cpp are compiled for gen A only.
 - Ppg.h (1.13+) sets `#define sqrt_internal sqrtf` and `FFT_SPEED_OVER_PRECISION` itself, so no extra flags.
 
-Command that worked (from `recon\harness`, via `cmd /c "D:\Projects\overhang\drift\recon\harness\build.bat"`; one line of it):
+Command that worked (from `recon\harness`, via `cmd /c "drift\recon\harness\build.bat"`; one line of it):
 `cl /nologo /std:c++17 /O2 /EHsc /w /DAPI=4 /FI<SRC>\stubs\msvc_compat.h /I<SRC>\stubs /I<SRC>\1.16.1 /I<SRC>\1.16.1\components\heartrate ppg_harness.cpp <SRC>\1.16.1\components\heartrate\Ppg.cpp /Fe ppg_1.16.1.exe`
 Result: `bin\ppg_{0.11.0,1.0.0,1.1.0,1.2.0,1.8.0,1.12.0,1.13.0,1.15.0,1.16.1}.exe` all built, about 190 KB each.
 

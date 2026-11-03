@@ -1,0 +1,11 @@
+import { launch, sleep } from './cdp.mjs';
+import { writeFileSync } from 'node:fs';
+const c = await launch();
+await c.send('Emulation.setDeviceMetricsOverride', { width: 1600, height: 1000, deviceScaleFactor: 1, mobile: false });
+await c.send('Emulation.setEmulatedMedia', { features: [{ name: 'prefers-color-scheme', value: 'dark' }] });
+await c.send('Page.addScriptToEvaluateOnNewDocument', { source: "try{localStorage.setItem('overhang-theme','dark')}catch(e){}" });
+await c.send('Page.navigate', { url: 'http://localhost:4173/#OV-15' });
+await sleep(9000);
+const r = await c.send('Page.captureScreenshot', { format: 'png' });
+writeFileSync('../frames/probe.png', Buffer.from(r.data, 'base64'));
+await c.close();

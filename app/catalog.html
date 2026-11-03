@@ -5,6 +5,21 @@
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Overhang catalog: every report</title>
 <meta name="description" content="Every report in the Overhang corpus, one row each, with its tags, its source, and the hole it belongs to. Filter by hole code (OV-NN).">
+<link rel="icon" href="/favicon.svg" type="image/svg+xml">
+<meta name="theme-color" content="#0A0F1C">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="Overhang">
+<meta property="og:title" content="Overhang catalog: every report">
+<meta property="og:description" content="Every report in the Overhang corpus, one row each, with its tags, its source, and the hole it belongs to. Filter by hole code (OV-NN).">
+<!-- %SITE_URL% is a placeholder: the deploy step replaces it with the absolute site URL (no trailing slash) -->
+<meta property="og:image" content="%SITE_URL%/og.png">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta property="og:image:alt" content="A globe of 1,563 reports with the holes between them marked, and the title Overhang.">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="Overhang catalog: every report">
+<meta name="twitter:description" content="Every report in the Overhang corpus, one row each, with its tags, its source, and the hole it belongs to. Filter by hole code (OV-NN).">
+<meta name="twitter:image" content="%SITE_URL%/og.png">
 <meta name="color-scheme" content="dark light">
 <script>
 (function () {
@@ -22,7 +37,8 @@
 <a class="sr" href="#catalog">Skip to the catalog</a>
 <header class="topbar">
   <a class="wordmark" href="index.html">Overhang</a>
-  <nav class="sections" aria-label="Sections">
+  <button type="button" class="menu-btn" id="menu-btn" aria-expanded="false" aria-controls="sections-nav">Menu</button>
+  <nav class="sections" id="sections-nav" aria-label="Sections">
     <a href="index.html#plate">Globe</a>
     <a href="index.html#matrix">Matrix</a>
     <a href="index.html#steam">Steam method</a>

@@ -28,8 +28,8 @@ EVIDENCE = [
              "landed during data collection; the paper describes it as replacing the filter used for heart-beat "
              "detection, and two participants did the 24 h condition once before and once after it. The paper does "
              "not report a before/after comparison of step counts, so what that update did to steps is unmeasured. "
-             "The Bangle.js 2 undercounted at every treadmill speed, heavily at slow ones (mean absolute percent error "
-             "56.0% at 2 mph, 14.3% at 3, 14.6% at 4, 6.1% at 5 mph), so a near-zero bias measured on young adults "
+             "The Bangle.js 2 undercounted at the slower treadmill speeds, heavily at 2 mph (mean absolute percent error "
+             "56.0%; 14.3% at 3 mph, 14.6% at 4 mph), and reached acceptable error at the fastest (6.1% at 5 mph), so a near-zero bias measured on young adults "
              "walking at a normal pace does not carry over to slow or older walkers. The authors describe its step "
              "algorithm as a finite state machine."},
     # Woolley et al. 2019 is CC BY-NC: paraphrased here, with the source linked.
@@ -39,7 +39,7 @@ EVIDENCE = [
      "url": "https://pmc.ncbi.nlm.nih.gov/articles/PMC7062347/",
      "text": "Read the changelogs of six wrist-worn trackers (device models used in clinical-trial registrations): "
              "194 update items, 32% judged as possibly affecting device validation. Only the Polar changelog carried "
-             "dates, and for that one the intervals between updates ranged from 5 to 218 days. Because devices can "
+             "dates, and for that one the intervals between updates that could affect validation ranged from 5 to 218 days. Because devices can "
              "update during synchronisation, firmware changes can be applied in the middle of a study without the "
              "researchers noticing. The authors conclude that firmware updates can nullify device validations."},
     {"key": "collins2019",
@@ -356,7 +356,7 @@ def build_memo(metrics: dict, start: date, end: date, population: str = EXAMPLE_
         if len(zero_in) == len(cons):
             bl.append(f"For {gname} gait on the Clemson recordings the data cannot tell the generations apart on average: "
                       f"the 95% CI of the mean shift includes 0 at every adjacent boundary: "
-                      + "; ".join(f"{cons_names[k]} {_ci(drifts[k]['ci_pct'])}" for k in cons_ov) + ". "
+                      + "; ".join(f"{cons_names[k]} {_ci(drifts[k]['ci_pct'], 2)}" for k in cons_ov) + ". "
                       f"That is absence of evidence of a mean shift, not evidence that counts are interchangeable: the same "
                       f"intervals are too wide to rule out shifts larger than ±{threshold_pct:g} points at {n_wide} of {len(cons)} boundaries.")
         else:
@@ -378,15 +378,15 @@ def build_memo(metrics: dict, start: date, end: date, population: str = EXAMPLE_
                   f"participants' counts can still differ (section 3).")
         if big:
             d = drifts[(big[0]["gen_id"], big[1]["gen_id"])]
-            bl.append(f"Largest point shift in walking count error for {gname} gait on Clemson: {_pm(d['shift_pct'])} points "
-                      f"{_ci(d['ci_pct'])} at {_short(big[0]['label'])} → {_short(big[1]['label'])}.")
+            bl.append(f"Largest point shift in walking count error for {gname} gait on Clemson: {_pm(d['shift_pct'], 2)} points "
+                      f"{_ci(d['ci_pct'], 2)} at {_short(big[0]['label'])} → {_short(big[1]['label'])}.")
     if native_all and cons:
         # the boundary where the native walks and Clemson disagree most
         worst_n = max(cons, key=lambda ab: abs((N(*ab) or {"mean_pct": 0})["mean_pct"] - drifts[(ab[0]["gen_id"], ab[1]["gen_id"])]["shift_pct"]))
         nn, dd = N(*worst_n), drifts[(worst_n[0]["gen_id"], worst_n[1]["gen_id"])]
         bl.append(f"**The native Bangle.js walking recordings ({native_all['n_files']} files, {len(native_all['wearers'])} wearer) "
                   f"disagree with Clemson.** At {_short(worst_n[0]['label'])} → {_short(worst_n[1]['label'])} the Clemson "
-                  f"mean shift is {_pm(dd['shift_pct'])} points but the native walks move by a mean of {_pm(nn['mean_pct'])} "
+                  f"mean shift is {_pm(dd['shift_pct'], 2)} points but the native walks move by a mean of {_pm(nn['mean_pct'])} "
                   f"(range {_pm(nn['min_pct'])} to {_pm(nn['max_pct'])}). The transfer from the Clemson recordings "
                   f"(young adults, 15 Hz sensor resampled to 12.5 Hz) to Bangle.js data is **unvalidated**; treat the Clemson "
                   f"shifts as estimates for that cohort and resampler only.")
