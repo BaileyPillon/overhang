@@ -1,5 +1,5 @@
 <p align="center">
-  <img src="media/overhang-globe.png" alt="Overhang: a globe of 1,563 reports of things people have done with Claude, with the empty cells between them marked as rings" width="760">
+  <a href="https://overhang-ebon.vercel.app"><img src="media/overhang-globe.png" alt="Overhang: a globe of 1,563 reports of things people have done with Claude, with the empty cells between them marked as rings" width="760"></a>
 </p>
 
 <h1 align="center">Overhang</h1>
@@ -12,10 +12,12 @@
   <a href="LICENSE"><img alt="License: MIT" src="https://img.shields.io/badge/license-MIT-blue.svg"></a>
   <img alt="Python 3.10 to 3.13" src="https://img.shields.io/badge/python-3.10%E2%80%933.13-3776AB.svg">
   <a href="https://github.com/BaileyPillon/overhang/commit/363f0e1"><img alt="Pre-registered" src="https://img.shields.io/badge/pre--registered-363f0e1-0B7285.svg"></a>
+  <a href="https://overhang-ebon.vercel.app"><img alt="Live demo" src="https://img.shields.io/badge/live-overhang--ebon.vercel.app-8FD3E8.svg"></a>
 </p>
 
 <p align="center">
-  <a href="app/"><b>The app</b></a> &nbsp;|&nbsp;
+  <a href="https://overhang-ebon.vercel.app"><b>Open the globe</b></a> &nbsp;|&nbsp;
+  <a href="app/">App source</a> &nbsp;|&nbsp;
   <a href="docs/METHOD.md">Methods</a> &nbsp;|&nbsp;
   <a href="PREREG.md">Pre-registration</a> &nbsp;|&nbsp;
   <a href="docs/gapfind.md">gapfind</a> &nbsp;|&nbsp;
