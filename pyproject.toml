@@ -1,0 +1,35 @@
+[build-system]
+requires = ["hatchling"]
+build-backend = "hatchling.build"
+
+[project]
+name = "gapfind"
+version = "0.1.0"
+description = "Map a corpus of short texts in embedding space, find the biggest empty regions, and score concepts that fill them."
+readme = "README.md"
+requires-python = ">=3.10,<3.14"
+dependencies = [
+    "numpy>=1.26",
+    "fastembed>=0.4",
+    "umap-learn>=0.5.5",
+    "matplotlib>=3.8",
+]
+
+[project.optional-dependencies]
+# Local embedding fallback if fastembed cannot load the model (pulls in torch).
+st = ["sentence-transformers>=3.0"]
+dev = ["pytest>=8"]
+
+[project.scripts]
+gapfind = "gapfind.cli:main"
+
+[tool.hatch.build.targets.wheel]
+packages = ["gapfind"]
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+filterwarnings = [
+    "ignore::DeprecationWarning",
+    "ignore::FutureWarning",
+    "ignore::UserWarning",
+]

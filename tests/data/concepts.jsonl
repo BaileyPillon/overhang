@@ -1,0 +1,3 @@
+{"id": "c-near", "title": "Receipt scanner (close to an existing item)", "text": "Sorts a stack of 400 scanned shop receipts into expense categories and produces a spreadsheet for the accountant.", "target_gap": "gap-01"}
+{"id": "c-between", "title": "Garden irrigation planner", "text": "Reads soil-moisture sensor logs and a seven-day forecast, rewrites a vegetable garden's watering schedule, and texts the family when a bed needs hand watering."}
+{"id": "c-odd", "title": "Whale song translator", "text": "Aligns hydrophone recordings of humpback whale song with tagged behavior video to build a dictionary of repeated phrases.", "target_gap": "gap-02"}
