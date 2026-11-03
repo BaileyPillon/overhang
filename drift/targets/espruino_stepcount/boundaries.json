@@ -1,0 +1,47 @@
+{
+  "authored_by": "Claude, from the code diff (git diff of libs/misc/stepcount.c between the commits each generation builds from; 2v09 is read from RELEASE_2V09:libs/banglejs/jswrap_bangle.c). Plain-language reading, not upstream documentation.",
+  "boundaries": [
+    {
+      "from": "inline", "to": "9c2c3738",
+      "title": "2v09 to 2v10: from a simple threshold counter to a filtered, gated counter",
+      "summary": "Before, a step was counted whenever the squared acceleration magnitude dipped below 1 g minus 80 counts and then rose above 1 g plus 80 counts. From 2v10 on, the magnitude is first passed through a 57-tap band-pass filter that keeps roughly 1.3 to 2.5 Hz (typical walking cadence), and a step is a swing from below to above a threshold in the filtered signal. A step is only counted if the step five steps earlier happened less than 75 samples (6 seconds) ago, so isolated movements stop counting.",
+      "changes": ["inline hysteresis on |a|^2 replaced by a 57-tap band-pass FIR on |a|",
+                  "threshold crossing in the filtered signal instead of raw magnitude",
+                  "a history gate: 5 steps within 75 samples before steps count (the steps that opened the gate are not credited)"],
+      "expected_effect": "far fewer counts when the wearer is not walking, and a different bias when walking"
+    },
+    {
+      "from": "9c2c3738", "to": "e33e1183",
+      "title": "2v10 to 2v11: a short filter, peak detection and a step-timing state machine",
+      "summary": "The 57-tap filter and the fixed threshold are gone. The signal goes through a 7-tap filter, a step is a local peak in the filtered signal, and a small state machine accepts a step only if it follows the previous one after 4 to 16 samples (about 0.33 to 1.3 s). Six accepted steps in a row start the count, and those six are then credited at once, so steps are no longer lost at the start of each walk. A raw-signal gate additionally keeps the counter closed unless the unfiltered signal has moved by more than 14 units (of 32 counts) for 3 samples.",
+      "changes": ["7-tap FIR (-11, -15, 44, 68, 44, -15, -11) instead of 57 taps",
+                  "peak detection and a state machine with 4 to 16 sample step spacing and 6 steps in a row",
+                  "retroactive credit of the first steps of a run",
+                  "raw activity gate (threshold 14, 3 samples)"],
+      "expected_effect": "the largest behaviour change in the lineage: fewer non-walking counts again, different bias on slow or irregular walking"
+    },
+    {
+      "from": "e33e1183", "to": "afb4943c",
+      "title": "2v11 to 2v12: a moving DC offset instead of a fixed 1 g",
+      "summary": "The magnitude used to be shifted by a fixed 8192 counts (1 g). It now subtracts an exponential moving average of the magnitude (a time constant of 12 samples, about one second), so slow changes in orientation or gravity no longer leak into the signal. The raw gate threshold goes from 14 to 15. The square-root helper moves into a shared header with no change in behaviour.",
+      "changes": ["exponential moving-average DC removal (alpha 1/12) replacing the fixed 8192 offset",
+                  "raw gate threshold 14 to 15",
+                  "int_sqrt32 moved to jsutils.h (no behaviour change)"],
+      "expected_effect": "small change in walking bias, further reduction in counts while the wrist is still but tilting"
+    },
+    {
+      "from": "afb4943c", "to": "3138205d",
+      "title": "2v12-2v21 to 2v22-2v28: cosmetic",
+      "summary": "Only the order of the keywords in one declaration (static const) and a whitespace change. The compiled behaviour is the same, and Drift's null control confirms identical counts and step events on every recording.",
+      "changes": ["static const ordering", "whitespace"],
+      "expected_effect": "none (null control)"
+    },
+    {
+      "from": "3138205d", "to": "2913ca0a",
+      "title": "2v22-2v28 to 2v29: a clamp bug fix on an unreachable line",
+      "summary": "When the filter output fell below -32768 the old code set it to +32768 instead of -32768. The fix corrects the sign. With the 7-tap filter the output is bounded by about 6,700 in magnitude (inputs are clipped to -128..127 and the taps sum to 208 in absolute value, shifted right by 2), so the line cannot be reached. Counts and step events are identical on all 126 recordings, and Drift treats this release as a second null control.",
+      "changes": ["lower clamp sets -32768 instead of +32768"],
+      "expected_effect": "none (null control)"
+    }
+  ]
+}

@@ -13,9 +13,9 @@ Decided 2026-11-03 by the lead session. Bailey asked to be surprised, so the pic
 
 ## The pick: Drift, firmware forensics for science (from concept H1-c1)
 
-Consumer wearables are used as research instruments, and vendors silently change their step, heart-rate and sleep algorithms in firmware updates. Collins et al. 2019 (Sensors) and "Not all steps are equal" document this, and it makes cohort data from before and after an update non-comparable. Drift:
+Consumer wearables are used as research instruments, and vendors change their step, heart-rate and sleep algorithms in firmware updates, which can make cohort data from before and after an update non-comparable. The literature argues the risk rather than measuring it: Collins et al. 2019 (Sensors 19(7):1705) argue that validity is not maintained when updates change device performance and recommend version reporting (their own experiment tested a single firmware version), and Woolley et al. 2019 (BMJ Health Care Inform 26(1):e100083) found that 32% of 194 changelog items across six trackers could affect validation. Neither measures an update's effect on a metric; that is what Drift's own differential runs do. (The 2017 BJSM blog post "Not all steps are equal", Alharbi et al., is about a Fitbit change in how moderate-to-vigorous activity minutes are counted in 10-minute bouts; it is a blog post, not a study of step or firmware drift, and is not used as support.) Drift:
 
-1. Takes two or more firmware versions of an **open-source** wearable (Bangle.js / Espruino, PineTime / InfiniTime), so there are no legal grey zones.
+1. Takes two or more firmware versions of an **open-source** wearable (Bangle.js / Espruino, PineTime / InfiniTime). The firmware is open source; the recordings are third-party data that are fetched from their owners, cited and never redistributed.
 2. Locates the code on the metric path, from sensor input to reported metric, and shows what changed.
 3. Runs **differential execution**: it compiles the metric algorithm from each version for the host and feeds every version the *same recorded raw sensor data*, so the effect is a measured number, not a guess.
 4. Writes a dated **data-validity memo** for a research team: which date ranges are not comparable, by how much, and a suggested sensitivity check.

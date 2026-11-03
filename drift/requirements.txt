@@ -1,0 +1,6 @@
+# Drift runtime + tests (venv: D:\Projects\overhang\.venv). All pure-Python or wheels; no system packages.
+numpy>=1.26
+scipy>=1.11        # polyphase resampling (Clemson 15 Hz -> 12.5 Hz)
+requests>=2.31     # dataset downloads
+ziglang==0.16.0    # bundled clang: python -m ziglang cc (see drift/toolchain.py)
+pytest>=8

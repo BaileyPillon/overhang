@@ -10,3 +10,20 @@ runs/
 
 # Drift cache (third-party datasets, firmware source clones, compiled DLLs)
 .cache/drift/
+
+# Drift: recon scratch is third-party data, firmware source copies and build outputs; never tracked
+# (only the recon notes and our own small scripts are).
+drift/recon/dl/
+drift/recon/espruino-harness/src/
+drift/recon/espruino-harness/xcheck/
+drift/recon/harness/binobj_*/
+drift/recon/harness/out/
+drift/recon/tc_test/out/
+drift/**/bin/
+drift/**/*.dll
+drift/**/*.so
+drift/**/*.exe
+drift/**/*.obj
+drift/**/*.pdb
+drift/**/*.lib
+drift/recon/harness/data/real_*.csv
