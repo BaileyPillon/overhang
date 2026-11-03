@@ -1,0 +1,266 @@
+{
+ "axes": {
+  "move": [
+   {
+    "value": "reverse-engineer or unlock",
+    "definition": "Works out how a closed or undocumented thing works (decompile, decode a protocol, map a file format) or takes control of it (jailbreak, root, patch, mod, exploit).",
+    "rule": "Use when decoding or defeating something closed is the main effort and the output is access, understanding or control. Moving already-understood code to a new platform is port or translate; a standalone product meant to stand in for a named incumbent is build a replacement; reporting flaws without taking control is audit or diagnose."
+   },
+   {
+    "value": "audit or diagnose",
+    "definition": "Inspects something that already exists (code, device, bill, return, contract, symptom, finished analysis) to find what is wrong or why it fails, and usually reports or fixes it.",
+    "rule": "Use when the verb is find the fault, known or hidden, in a specific artifact. Open-ended questions about the world are investigate a question; probing a hypothetical future is simulate or predict; contesting the result with a counterparty is negotiate or dispute."
+   },
+   {
+    "value": "build or modify software",
+    "definition": "Writes new or changed software for a defined need: app, game, script, integration, dashboard, server, firmware, plugin, site, or an optimization of existing code.",
+    "rule": "Use when the deliverable is working code a person operates and nothing more specific fits. Recurring unattended processing is automate a routine chore; a stand-in for a named paid, closed or lost product is build a replacement; moving existing code to another platform is port or translate."
+   },
+   {
+    "value": "build a replacement",
+    "definition": "Makes your own version that stands in for a subscription, vendor app, locked-down firmware, discontinued service or lost original.",
+    "rule": "Use only when substitution of a named incumbent is the stated motive or the output. Decoding alone is reverse-engineer or unlock; a new tool with no incumbent is build or modify software."
+   },
+   {
+    "value": "port or translate",
+    "definition": "Converts something that already works into another programming language, platform, file format or human language while preserving its behavior or meaning.",
+    "rule": "Use when equivalence to a legible source is the goal. If the source must first be decoded, use reverse-engineer or unlock. Reworking prose for a new purpose in the same language is draft routine documents."
+   },
+   {
+    "value": "design a physical thing",
+    "definition": "Specifies and makes a tangible or molecular artifact: circuit board, enclosure, printed part, gadget, sensor rig, protein, antibody, garden bed.",
+    "rule": "Use when something that will exist physically or chemically is being created. Writing only the software for a device is build or modify software; fixing an existing board is audit or diagnose."
+   },
+   {
+    "value": "create creative media",
+    "definition": "Invents and produces something to be read, heard, seen or told: story, song, film, picture, name, campaign narrative, bedtime story.",
+    "rule": "Use when expression or entertainment is the point. A game that is software to be played is build or modify software; functional text such as emails and resumes is draft routine documents."
+   },
+   {
+    "value": "draft routine documents",
+    "definition": "Writes the ordinary functional text of working or personal life: emails, proposals, letters, reports, READMEs, resumes, ad copy, filings, study cards, usually for the user to edit and send.",
+    "rule": "Use when the text is functional and mostly one-off. Pressing an opposing party for a concrete ask is negotiate or dispute; condensing existing material is distill a corpus; fiction, toasts and names are create creative media."
+   },
+   {
+    "value": "distill a corpus",
+    "definition": "Reduces a large or messy body of text, audio or notes to a summary, brief, minutes, playbook or study guide.",
+    "rule": "Use when the output is shorter than the input and keeps its content. Pulling fields into rows is extract and structure; combining sources to answer a new question is investigate a question."
+   },
+   {
+    "value": "extract and structure",
+    "definition": "Turns unstructured items (scans, receipts, photos, emails, forms, records) into structured rows, labels, folders or filled forms in a one-off pass.",
+    "rule": "Use when a pile of input becomes records or categories once. If it keeps running on new arrivals, use automate a routine chore; if the goal is a ranked list of options, use screen rank or map."
+   },
+   {
+    "value": "negotiate or dispute",
+    "definition": "Argues for the user against a counterparty to change a price, refund, bill, claim, denial or deadline.",
+    "rule": "Use when there is an opposing party and a concrete ask. An internal review with no contact is audit or diagnose; a polite reply with no dispute is draft routine documents."
+   },
+   {
+    "value": "investigate a question",
+    "definition": "Open-ended inquiry that produces new knowledge: analyze data for a pattern, trace a lineage, interpret results, find a candidate, prove a theorem.",
+    "rule": "Use when the answer was not known beforehand and no specific artifact is being checked for defects. Checking a finished piece of work for errors is audit or diagnose; scoring a fixed list of options is screen rank or map."
+   },
+   {
+    "value": "screen rank or map",
+    "definition": "Evaluates many options against criteria to shortlist, score, match or find gaps in a space: leads, listings, applicants, funders, targets, game concepts.",
+    "rule": "Use when the output is a filtered or ordered list or a named gap. Re-running the same filter continually is monitor over time or automate a routine chore; interpreting one result is investigate a question."
+   },
+   {
+    "value": "simulate or predict",
+    "definition": "Runs a model, simulation or calculation to forecast or stress-test an outcome before committing.",
+    "rule": "Use when the output is an estimate of something not yet observed (power of an experiment, race time, game balance, risk). Reading what already happened is investigate a question; tracking actual readings is monitor over time."
+   },
+   {
+    "value": "monitor over time",
+    "definition": "Repeatedly records and reports a changing quantity (health metric, spend, price, device state, tender feed) as trends or alerts.",
+    "rule": "Use when the trend or the repeated check is the point. A one-off trend read is investigate a question; pushing each incoming item through a workflow is automate a routine chore."
+   },
+   {
+    "value": "tutor or explain",
+    "definition": "Teaches, explains or advises one person interactively: walks through a concept, critiques their work, interprets a report, talks through a worry, drills a skill.",
+    "rule": "Use when the person's understanding or skill is the deliverable. A written artifact on their behalf is draft routine documents or distill a corpus; a time-ordered schedule is plan or schedule."
+   },
+   {
+    "value": "plan or schedule",
+    "definition": "Produces a time-ordered or resource-allocated plan: itinerary, meal plan, training plan, lesson plan, event timeline, project sequence.",
+    "rule": "Use when the output is a plan for future action. Coaching dialogue is tutor or explain; an app that holds the plan is build or modify software."
+   },
+   {
+    "value": "automate a routine chore",
+    "definition": "Sets up or runs a recurring process that handles a stream of incoming items with little attention: triage, outreach, expense or invoice handling, scheduled reports, month-end close.",
+    "rule": "Use when the same process repeats on arriving items or on a schedule. A one-time batch is extract and structure; a bespoke app a person operates is build or modify software."
+   },
+   {
+    "value": "operate a live system",
+    "definition": "Acts directly in a live environment over many steps: runs a shop, works a web form or chat, drives a robot or car, controls a telescope, operates an app on a phone.",
+    "rule": "Use when the model itself takes the real-world actions. Building the controller is build or modify software; a rule-based repeating chore is automate a routine chore; many cooperating agents is coordinate many agents."
+   },
+   {
+    "value": "coordinate many agents",
+    "definition": "Orchestrates several AI agents or instances working in parallel or in sequence, where the coordination itself is the notable feature.",
+    "rule": "Use when a multi-agent architecture (leader and workers, parallel instances, voted protocols) is the described mechanism. Subagents as an incidental detail of a single-threaded task do not count."
+   }
+  ],
+  "material": [
+   {
+    "value": "a codebase",
+    "definition": "Source code, repositories, queries, builds, configs, tests and developer tooling for general software.",
+    "rule": "Use when general software is the object. Software bound to one retail device goes to consumer-device firmware or hardware; custom boards go to circuits and printable parts; closed compiled artifacts go to a compiled binary or game ROM; new games go to a playable game."
+   },
+   {
+    "value": "consumer-device firmware or hardware",
+    "definition": "The internals of an existing off-the-shelf product: firmware, wireless protocol, companion app, vendor cloud, drivers, preinstalled ads.",
+    "rule": "Use when a retail device is acted on. Custom boards and parts you design go to circuits and printable parts; routers and automation hubs go to home network and smart home; moving machines go to robots, vehicles and drones."
+   },
+   {
+    "value": "circuits and printable parts",
+    "definition": "Custom electronics and fabricated parts: schematics, PCBs, microcontroller projects, enclosures, 3D models.",
+    "rule": "Use when you design or program your own hardware. A retail product's firmware goes to consumer-device firmware or hardware; a car or robot goes to robots, vehicles and drones."
+   },
+   {
+    "value": "home network and smart home",
+    "definition": "Routers, VPNs, firewalls, home servers, Home Assistant and its automations and dashboards.",
+    "rule": "Use when the home system is the object. A single gadget's own firmware goes to consumer-device firmware or hardware."
+   },
+   {
+    "value": "robots, vehicles and drones",
+    "definition": "Cars, robots, robot vacuums, drones, robot arms and their controls and buses.",
+    "rule": "Use when the moving machine or vehicle is the object. A stationary gadget goes to consumer-device firmware or hardware."
+   },
+   {
+    "value": "a compiled binary or game ROM",
+    "definition": "A closed compiled artifact: retro game ROM, disc image, game executable, legacy app, malware sample.",
+    "rule": "Use when a compiled artifact is what is decoded, ported or modded. Source-level game work goes to a playable game; a retail device's firmware goes to consumer-device firmware or hardware."
+   },
+   {
+    "value": "a playable game",
+    "definition": "A game or game-like toy being designed, built, balanced or played: rules, levels, mechanics, interface, text adventure.",
+    "rule": "Use when the game itself is the thing made or studied and no compiled third-party artifact is the starting point. Stories and films go to creative works."
+   },
+   {
+    "value": "creative works",
+    "definition": "Stories, songs, films, images, drawings, names, scripts and blog posts.",
+    "rule": "Use for non-game creative artifacts. A game goes to a playable game; a family history goes to personal and family archives."
+   },
+   {
+    "value": "financial and legal paperwork",
+    "definition": "Taxes, statements, receipts, invoices, contracts, claims, visas, permits and filings of a person or small firm.",
+    "rule": "Use when the document is the object. Hospital bills and clinical documents go to medical records and bills; a business's ongoing customers and workflow go to business operations; legislation and statistics go to public records and policy."
+   },
+   {
+    "value": "medical records and bills",
+    "definition": "Clinical documents: labs, scans, charts, prescriptions, symptom descriptions, hospital and insurance bills.",
+    "rule": "Use for provider-produced documents and described symptoms. Wearable and tracker streams go to body and biometric data; raw DNA goes to genome."
+   },
+   {
+    "value": "body and biometric data",
+    "definition": "Self-collected streams: wearable, glucose, blood-pressure, sleep, workout and nutrition logs.",
+    "rule": "Use for personal health streams and fitness records. Clinical documents go to medical records and bills; sequence data goes to genome."
+   },
+   {
+    "value": "genome",
+    "definition": "Raw DNA files, variants and population genetic data.",
+    "rule": "Use when sequence or variant data is the object. A family tree built from records goes to personal and family archives."
+   },
+   {
+    "value": "business operations",
+    "definition": "A business's customers, staff, sales, bookkeeping, support queues, workflows and tools.",
+    "rule": "Use when how an organization runs is the object. Tax and statutory paperwork go to financial and legal paperwork; other people's offers go to a marketplace or other people's offers."
+   },
+   {
+    "value": "a marketplace or other people's offers",
+    "definition": "Listings, leads, dealers, job postings, funders, applicants, dating profiles and prospects.",
+    "rule": "Use when the object is a set of external offers or people to be engaged. The user's own invoices go to financial and legal paperwork."
+   },
+   {
+    "value": "personal and family archives",
+    "definition": "A person's accumulated photos, messages, journals, family trees, deeds and historical family records.",
+    "rule": "Use for a personal or family collection. Contracts and tax documents go to financial and legal paperwork; raw DNA goes to genome."
+   },
+   {
+    "value": "a body of text or recordings",
+    "definition": "Transcripts, emails, books, notes, podcasts, lyrics and other bulk text or audio read for content.",
+    "rule": "Use for generic text or audio. Published research papers go to public datasets and papers; private photos and journals go to personal and family archives; contracts go to financial and legal paperwork."
+   },
+   {
+    "value": "public datasets and papers",
+    "definition": "Astronomical surveys, population data, sports and economics statistics, published papers and results used for research.",
+    "rule": "Use for research-scale public data and literature. Government filings, legislation and benefit rules go to public records and policy; a person's own records go to medical, body or genome values."
+   },
+   {
+    "value": "a math or theory problem",
+    "definition": "Open problems, proofs, formal verification, physics derivations and algorithm design questions.",
+    "rule": "Use when a formal question is the object. Numeric datasets go to public datasets and papers."
+   },
+   {
+    "value": "molecules and lab experiments",
+    "definition": "Proteins, antibodies, assays, CRISPR screens, lab protocols and instrument or experimental data.",
+    "rule": "Use for wet-lab or molecular objects and raw experimental data. Genome files go to genome."
+   },
+   {
+    "value": "a physical space",
+    "definition": "A room, house, garden, hotel room or building layout and its furnishings.",
+    "rule": "Use when the space is the object. Itineraries go to trips, meals and household logistics."
+   },
+   {
+    "value": "trips, meals and household logistics",
+    "definition": "Itineraries, menus, groceries, weddings, schedules and chores.",
+    "rule": "Use for everyday planning objects. A room or house layout goes to a physical space."
+   },
+   {
+    "value": "learning material and skills",
+    "definition": "A learner's lessons, homework, essays, quizzes, flashcards, curricula and language practice.",
+    "rule": "Use when the learner's content or skill is the object. A learner's feelings go to feelings and relationships."
+   },
+   {
+    "value": "feelings and relationships",
+    "definition": "A person's worries, dreams, conflicts, mood and interpersonal situations.",
+    "rule": "Use for the emotional or interpersonal situation. Medical symptoms go to medical records and bills."
+   },
+   {
+    "value": "public records and policy",
+    "definition": "Legislation, government filings, benefit rules, procurement, campaign finance, statistics and nonprofit tax filings.",
+    "rule": "Use for public-sector and civic data. A private tax return goes to financial and legal paperwork; scientific datasets go to public datasets and papers."
+   }
+  ],
+  "for": [
+   {
+    "value": "self",
+    "definition": "The user's own life, hobby, health, money, job search or curiosity.",
+    "rule": "Default when no one else is named as beneficiary."
+   },
+   {
+    "value": "a child",
+    "definition": "A minor as player, learner, maker or patient, including a child co-building with a parent.",
+    "rule": "Use when a child is the main beneficiary or collaborator."
+   },
+   {
+    "value": "family or household",
+    "definition": "A partner, parents, relatives, the whole household or a pet in care.",
+    "rule": "Use when the benefit is shared by or aimed at non-child family members."
+   },
+   {
+    "value": "a business or its customers",
+    "definition": "A company, team or employer, including its staff and clients.",
+    "rule": "Use for work aimed at an organization that earns money. Nonprofits and agencies go to a nonprofit or public agency."
+   },
+   {
+    "value": "a nonprofit or public agency",
+    "definition": "A food bank, charity, caseworkers, a council or the people such an organization serves.",
+    "rule": "Use for organizations serving a community without profit motive."
+   },
+   {
+    "value": "the public or a community",
+    "definition": "An open-ended audience: players of a released game, a hobby or friend group, open-source users, viewers.",
+    "rule": "Use for released or shared work. A single named person goes to self, child or family."
+   },
+   {
+    "value": "researchers or science",
+    "definition": "Scientists, labs, research programs, or experiments testing AI capability and autonomy.",
+    "rule": "Use when the beneficiary is a research field or the test itself."
+   }
+  ]
+ },
+ "version": 1
+}

@@ -186,14 +186,17 @@ def format_holes(doc: dict, per_pair: int = 10, n_thin: int = 5) -> str:
         L.append("")
         L.append(f"{a} x {b}: {len(pr['rows'])} x {len(pr['cols'])} table, N={pr['N']}, "
                  f"{pr['n_empty']} empty cells ({pr['n_empty_below_min_expected']} with expected "
-                 f"below {doc['params']['min_expected']:g}, not ranked), {pr['n_thin']} thin")
+                 f"below {doc['params']['min_expected']:g}, not ranked), {pr['n_thin']} thin"
+                 + (f", {pr['n_structural']} structural" if pr.get("n_structural") is not None else ""))
         for hid in pr["holes"][:per_pair]:
             g = byid[hid]
             alt = ""
             if g["alt"] is not None:
                 alt = (" | 2nd tagger: hole kept" if g["alt"]["survives"]
                        else f" | 2nd tagger: GONE (obs {g['alt']['observed']}, E {g['alt']['expected']:.1f})")
-            L.append(f"  {hid}  {g['cell'][a]} x {g['cell'][b]}  E={g['expected']:.1f} "
+            ind = (f" (indep {g.get('expected_indep', g['expected']):.1f})"
+                   if g.get("expected_quasi") is not None else "")
+            L.append(f"  {hid}  {g['cell'][a]} x {g['cell'][b]}  E={g['expected']:.1f}{ind} "
                      f"p={g['p']:.1e}  stability {g['stability']:.2f}{alt}")
             L.append(f"      embedding: emptier than {g['percentile']:.1f}% of items "
                      f"(k-NN score {g['score']:.3f}, 1-NN {g['g1']:.3f})")
@@ -210,12 +213,14 @@ def format_holes(doc: dict, per_pair: int = 10, n_thin: int = 5) -> str:
 
 
 def format_hole_table(doc: dict) -> str:
-    L = ["| hole | cell | E | p | stab | 2nd tagger | emb pct |", "|---|---|---|---|---|---|---|"]
+    L = ["| hole | cell | E | p | stab | 2nd tagger | emb pct | E indep |",
+         "|---|---|---|---|---|---|---|---|"]
     for g in doc["gaps"]:
         a, b = g["axes"]
         alt = "-" if g["alt"] is None else ("kept" if g["alt"]["survives"] else "gone")
         L.append(f"| {g['id']} | {g['cell'][a]} x {g['cell'][b]} | {g['expected']:.1f} | "
-                 f"{g['p']:.1e} | {g['stability']:.2f} | {alt} | {g['percentile']:.1f} |")
+                 f"{g['p']:.1e} | {g['stability']:.2f} | {alt} | {g['percentile']:.1f} | "
+                 f"{g.get('expected_indep', g['expected']):.1f} |")
     return "\n".join(L)
 
 
@@ -227,6 +232,8 @@ def cmd_facets(a) -> int:
     tags = Tags(run.items, axes, vocab, a.tags)
     if a.top < 1 or a.boot < 0:
         raise InputError("--top must be positive and --boot non-negative")
+    if a.structural_z <= 0:
+        raise InputError("--structural-z must be positive")
 
     # the working space: find's (same centering, PCA and k, so percentiles are comparable)
     # unless --pca / --k are given or find has not been run
@@ -256,11 +263,12 @@ def cmd_facets(a) -> int:
     res = facet_holes(run.items, Y, d_knn, tags, vocab, defs, pairs=pairs, top=a.top,
                       boot=a.boot, seed=a.seed, min_expected=a.min_expected,
                       thin_frac=a.thin_frac, k=k, n_neighbors=a.neighbors,
-                      group_field=a.group_field)
+                      group_field=a.group_field, quasi=a.quasi, structural_z=a.structural_z)
     doc = {
         "source": "facet",
         "params": {"axes": axes, "pairs": [list(p) for p in pairs], "top": a.top, "boot": a.boot,
                    "seed": a.seed, "min_expected": a.min_expected, "thin_frac": a.thin_frac,
+                   "quasi": a.quasi, "structural_z": a.structural_z, "structural_max_rounds": 5,
                    "k": k, "pca": space.dim, "neighbors": a.neighbors,
                    "group_field": a.group_field, "space_from": space_from,
                    "model": run.meta["model"], "tags": str(a.tags), "vocab": str(a.vocab)},
@@ -525,6 +533,13 @@ def build_parser() -> argparse.ArgumentParser:
                          "least this (default %(default)s)")
     fa.add_argument("--thin-frac", type=float, default=0.25,
                     help="thin cell: observed >= 1 but <= this fraction of expected "
+                         "(default %(default)s)")
+    fa.add_argument("--quasi", action=argparse.BooleanOptionalAction, default=True,
+                    help="rank holes by quasi-independence expected counts (cells above "
+                         "--structural-z are masked and E is refitted by IPF); --no-quasi "
+                         "uses plain independence (default: on)")
+    fa.add_argument("--structural-z", type=float, default=3.0,
+                    help="a cell with Pearson residual (O-E)/sqrt(E) above this is structural "
                          "(default %(default)s)")
     fa.add_argument("--pca", type=int, default=None,
                     help="working-space PCA dimension; default: the one `find` used, else 32")

@@ -65,7 +65,7 @@ Flags (defaults in brackets):
 | command | flags |
 |---|---|
 | `embed` | `--model` [`BAAI/bge-base-en-v1.5`], `--backend` [auto], `--cache-dir` [`.cache`], `--model-dir`, `--batch-size`, `--on-dup-id` [error] |
-| `facets` | `--tags`, `--vocab` (required), `--axes` [all vocab axes; every pair among them], `--top` [30 per axis pair], `--boot` [1000], `--seed` [42], `--min-expected` [1], `--thin-frac` [0.25], `--pca` / `--k` [find's, else 32 / 5], `--neighbors` [8], `--group-field` [`domain`] |
+| `facets` | `--tags`, `--vocab` (required), `--axes` [all vocab axes; every pair among them], `--top` [30 per axis pair], `--boot` [1000], `--seed` [42], `--min-expected` [1], `--thin-frac` [0.25], `--quasi` / `--no-quasi` [quasi on], `--structural-z` [3.0], `--pca` / `--k` [find's, else 32 / 5], `--neighbors` [8], `--group-field` [`domain`] |
 | `find` | `--samples` [320000], `--top` [30], `--seed` [42], `--k` [5], `--pca` [32; 0 = full dimension], `--coh-band LO HI` [0.3 0.8], `--coh-q` (alias: sets only LO), `--min-weight` [0 = off], `--nms` [0.25], `--p-k2` [0.6], `--neighbors` [8], `--batch` [8192, memory only], `--group-field` [`domain`] |
 | `stability` | `--pca` [16 32 64], `--seeds` [1 2 3], `--match` [0.8], `--topk` [the primary `--top`], `--samples` [the primary's] |
 | `check` | `--gaps` [`gaps.json`], `--models` (comma list), `--min-percentile` [90], `--neighbors` [5], plus the embedding flags |
@@ -120,10 +120,25 @@ that need them and counted in the output (`tagging`).
 material x for) gapfind builds the contingency table and, for every cell, the observed count
 `O`, the expected count `E = n_row * n_col / N` under independence, and the Poisson p-value
 `P(X <= O | E)` (for an empty cell that is `exp(-E)`). A **hole** is a cell with `O = 0`;
-holes are ranked by `E`, most expected but absent first, ties broken by `p`. Cells that are
+holes are ranked by `E_quasi` (below; `E_indep` with `--no-quasi`), most expected but absent
+first, ties broken by the `p` computed from that `E`. Cells that are
 empty only because both values are rare (`E` below `--min-expected`, 1 by default) are
 counted but not ranked: nothing is "missing" from a cell nobody was expected to fill. **Thin**
 cells (`1 <= O <= E/4`) are reported separately.
+
+**Quasi-independence.** Plain independence misleads when a row's mass sits in one natural
+partner column (the move "build or modify software" with the material "a codebase"): every
+other cell of that row then looks like a hole with an inflated `E`. So gapfind fits
+independence, marks the cells whose Pearson residual `(O-E)/sqrt(E)` exceeds `--structural-z`
+(3.0) as structural, and refits `E` by iterative proportional fitting over the non-structural
+cells only, matching the margins of that part while each structural cell keeps `E = O` and
+absorbs exactly its own mass. It repeats until no new structural cell appears (at most 5
+rounds); when deciding what is structural, the residuals come from a reference fit that also
+leaves out the empty cells with residual below `-z`, because a genuine hole lowers its row and
+column margins and would otherwise make its populated neighbours look structural. Every cell
+keeps `E_indep` next to `E_quasi` and a `structural` flag, the bootstrap and the second-tagger
+check use `E_quasi` (structural set recomputed per resample), and `--no-quasi` restores the
+plain model.
 
 **Bootstrap stability.** Items are resampled with replacement `--boot` times (1000). A
 hole's `stability` is the fraction of resamples in which the cell is still empty *and* its
@@ -239,10 +254,11 @@ full centered dimension).
 
 `holes.json`: `tagging` (tagged counts, unknown values, alt-label counts, per-axis tagger
 agreement) and `pairs[]` (axes, `N`, row/column values, the `observed` and `expected`
-tables, `n_empty`, `n_empty_below_min_expected`, `holes` (ids), `thin` cells with their
+tables (plus `expected_indep`, `expected_quasi`, `structural` cell by cell and `n_structural`), `n_empty`, `n_empty_below_min_expected`, `holes` (ids), `thin` cells with their
 `p`). Each entry of `gaps[]` is a hole: `id` (`hole-move-material-07`), `source`, `axes`,
 `cell` (`{axis: value}`), `observed` (0), `expected`, `p`, `n_row`, `n_col`, `N`,
-`stability` (bootstrap), `alt` (`{observed, expected, survives}` or `null`) and `tag_robust`,
+`expected_indep`, `expected_quasi` (`null` with `--no-quasi`; `expected` is the one that ranks), `structural`
+(always `false` for a hole), `stability` (bootstrap), `alt` (`{observed, expected, expected_indep, survives}` or `null`) and `tag_robust`,
 `examples` (per axis: value, definition, n, 3 items), and the embedding validation: `score`,
 `g1`, `percentile`, `neighbors`, `domain_mix`, `parents` (the example items, equal weights),
 `coherence`, `vector`.
@@ -284,7 +300,7 @@ review. Nothing is dropped automatically.
 ### Tests
 
 `python -m pytest` (about a minute; the first run downloads the models). Facet holes: a
-planted co-occurrence hole (two frequent values that never co-occur must be the top hole with
+planted co-occurrence hole (also under quasi-independence, where a row with 80% of its mass in one column must not fill the ranking with false holes, checked on a table and through `facets`; two frequent values that never co-occur must be the top hole with
 stability above 0.9; a cell empty only because both marginals are tiny must not rank), thin
 cells, Poisson and bootstrap checks (including bootstrap vs direct resampling), tag
 robustness with second-tagger labels, hole vectors and examples, `check --gaps holes` with a
