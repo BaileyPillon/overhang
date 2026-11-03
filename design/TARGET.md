@@ -1,9 +1,9 @@
 # Approved target: the Overhang app
 
-Bailey picked **Mix A + B + C** on 2026-11-02 from the three mockups in `mockups/`:
-- `a-sky-survey/shot-desktop-dark.png`
-- `b-zwicky-box/shot-desktop-light.png`
-- `c-paper/shot-desktop-light-full.png`
+Bailey picked **Mix A + B + C** on 2026-11-02 from the three mockups (screenshots in `design/options/`):
+- `design/options/a-sky-survey.png`
+- `design/options/b-zwicky-box.png`
+- `design/options/c-paper.png`
 
 ## Why the mix works
 
@@ -33,7 +33,7 @@ Each direction is strongest at one job:
 Bailey pointed at bilawalsidhu/gods-eye-view: a real-data 3D globe console with a HUD, layers, click-to-track and sensor reskins. That reframes the **hero and the overall shell**, so the options round is redone for that area only.
 
 - **The direction:** a use-case globe built from a spherical UMAP of the embeddings, which is honest because normalized embeddings live on a hypersphere. Continents are dense clusters, oceans are sparse regions, and holes are uncharted rings between two coastlines. Click-to-track gives a contact panel; there are layers, sensor modes, and a LIVE layer of new reports.
-- **The options**, in `mockups/globe/`: G1 Orbital Console, G2 Globe then paper, G3 Mission wall.
+- **The options**, in `design/options/`: G1 Orbital Console, G2 Globe then paper, G3 Mission wall.
 - **Unchanged:** the matrix (B) and the paper and replication sections (C) stay as the evidence layer.
 - **Rule:** use the genre, not a clone. No "God's Eye View" name, logo or copied layout.
 - **Picked 2026-11-03: G1 + paper below.** G1's full Orbital Console is the first screen: layers, the tracked-contact panel, the hole catalog, sensor modes, and the equirectangular inset. "Read the evidence" leads into the paper sections: the matrix (B), the Steam-method failure, the pre-registered replication, sensitivity, the tagging audit, prior art, the winner, methods, and the catalog. The 2D plate from A is retired; the globe replaces it.
