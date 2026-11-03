@@ -1,0 +1,503 @@
+{
+ "status": "done",
+ "rows": [
+  {
+   "code": "OV-01",
+   "cell_label": "audit or diagnose × a playable game",
+   "axes": [
+    "move",
+    "material"
+   ],
+   "E_prereg": 2.3756,
+   "observed_new": 1,
+   "E_new": 2.639,
+   "p_new": 0.25995,
+   "observed_pooled": 1,
+   "E_pooled": 4.6686,
+   "q_pooled": 0.932734,
+   "stability": 0.251,
+   "verdict": "refuted",
+   "refuting": [
+    {
+     "id": "g-audit-024",
+     "t": "Mobile game crash investigation"
+    }
+   ]
+  },
+  {
+   "code": "OV-02",
+   "cell_label": "investigate a question × a codebase",
+   "axes": [
+    "move",
+    "material"
+   ],
+   "E_prereg": 2.3115,
+   "observed_new": 6,
+   "E_new": 10.0827,
+   "p_new": 0.125015,
+   "observed_pooled": 6,
+   "E_pooled": 5.8488,
+   "q_pooled": 0.932734,
+   "stability": 0.002,
+   "verdict": "refuted",
+   "refuting": [
+    {
+     "id": "g-agents-041",
+     "t": "Measuring whether extra agents earn their keep"
+    },
+    {
+     "id": "g-investigate-007",
+     "t": "Forensic analysis of 2011 Mt. Gox code"
+    },
+    {
+     "id": "g-investigate-012",
+     "t": "Weights in a social feed's open-sourced ranking code"
+    },
+    {
+     "id": "g-investigate-017",
+     "t": "Commit-history speed comparison"
+    },
+    {
+     "id": "g-investigate-034",
+     "t": "Release-by-release bug rates in rsync"
+    },
+    {
+     "id": "g-rand-hn-029",
+     "t": "Mapping a legacy Yii2 codebase"
+    }
+   ]
+  },
+  {
+   "code": "OV-03",
+   "cell_label": "operate a live system × a codebase",
+   "axes": [
+    "move",
+    "material"
+   ],
+   "E_prereg": 2.2613,
+   "observed_new": 11,
+   "E_new": 9.8622,
+   "p_new": 0.712338,
+   "observed_pooled": 11,
+   "E_pooled": 5.817,
+   "q_pooled": 0.995331,
+   "stability": 0.0,
+   "verdict": "refuted",
+   "refuting": [
+    {
+     "id": "g-business-038",
+     "t": "Website user-journey discovery"
+    },
+    {
+     "id": "g-operate-011",
+     "t": "Terraform destroy on live AWS"
+    },
+    {
+     "id": "g-operate-014",
+     "t": "Mac controlled by mouse and keyboard"
+    },
+    {
+     "id": "g-operate-024",
+     "t": "Server operations through a messenger bot"
+    },
+    {
+     "id": "g-operate-025",
+     "t": "Development VMs run from a phone chat"
+    },
+    {
+     "id": "g-operate-029",
+     "t": "Merging dozens of pull requests"
+    },
+    {
+     "id": "g-operate-030",
+     "t": "Server maintenance over SSH aliases"
+    },
+    {
+     "id": "g-operate-039",
+     "t": "Quitting vim from a screenshot"
+    },
+    {
+     "id": "g-operate-046",
+     "t": "Desktop GUI control across twenty tasks"
+    },
+    {
+     "id": "g-operate-054",
+     "t": "Android phone driven over ADB for testing"
+    },
+    {
+     "id": "g-science-051",
+     "t": "Planning and reviewing nf-core pipelines"
+    }
+   ]
+  },
+  {
+   "code": "OV-04",
+   "cell_label": "audit or diagnose × body and biometric data",
+   "axes": [
+    "move",
+    "material"
+   ],
+   "E_prereg": 1.5107,
+   "observed_new": 2,
+   "E_new": 3.036,
+   "p_new": 0.415179,
+   "observed_pooled": 2,
+   "E_pooled": 2.2882,
+   "q_pooled": 0.932734,
+   "stability": 0.061,
+   "verdict": "refuted",
+   "refuting": [
+    {
+     "id": "g-body-015",
+     "t": "Nightscout report and pump settings review"
+    },
+    {
+     "id": "g-body-017",
+     "t": "Stalled VO2max diagnosed from Garmin export"
+    }
+   ]
+  },
+  {
+   "code": "OV-05",
+   "cell_label": "audit or diagnose × genome",
+   "axes": [
+    "move",
+    "material"
+   ],
+   "E_prereg": 1.3685,
+   "observed_new": 0,
+   "E_new": 0.4094,
+   "p_new": 0.664022,
+   "observed_pooled": 0,
+   "E_pooled": 1.5541,
+   "q_pooled": 0.932734,
+   "stability": 0.045,
+   "verdict": "underpowered",
+   "refuting": []
+  },
+  {
+   "code": "OV-06",
+   "cell_label": "extract and structure × a codebase",
+   "axes": [
+    "move",
+    "material"
+   ],
+   "E_prereg": 1.3339,
+   "observed_new": 0,
+   "E_new": 4.8602,
+   "p_new": 0.007749,
+   "observed_pooled": 0,
+   "E_pooled": 6.3339,
+   "q_pooled": 0.285786,
+   "stability": 0.603,
+   "verdict": "underpowered",
+   "refuting": []
+  },
+  {
+   "code": "OV-07",
+   "cell_label": "audit or diagnose × robots, vehicles and drones",
+   "axes": [
+    "move",
+    "material"
+   ],
+   "E_prereg": 1.1911,
+   "observed_new": 3,
+   "E_new": 1.7859,
+   "p_new": 0.893551,
+   "observed_pooled": 3,
+   "E_pooled": 1.4864,
+   "q_pooled": 0.995331,
+   "stability": 0.014,
+   "verdict": "refuted",
+   "refuting": [
+    {
+     "id": "g-robots-035",
+     "t": "Betaflight blackbox tuning skill"
+    },
+    {
+     "id": "g-robots-036",
+     "t": "Offline flight log tuning advisor"
+    },
+    {
+     "id": "g-robots-041",
+     "t": "Robot arm safety refusal test"
+    }
+   ]
+  },
+  {
+   "code": "OV-08",
+   "cell_label": "coordinate many agents × financial and legal paperwork",
+   "axes": [
+    "move",
+    "material"
+   ],
+   "E_prereg": 1.1359,
+   "observed_new": 0,
+   "E_new": 0.6038,
+   "p_new": 0.546734,
+   "observed_pooled": 0,
+   "E_pooled": 1.6625,
+   "q_pooled": 0.932734,
+   "stability": 0.031,
+   "verdict": "underpowered",
+   "refuting": []
+  },
+  {
+   "code": "OV-09",
+   "cell_label": "reverse-engineer or unlock × a business or its customers",
+   "axes": [
+    "move",
+    "for"
+   ],
+   "E_prereg": 3.2281,
+   "observed_new": 0,
+   "E_new": 12.295,
+   "p_new": 5e-06,
+   "observed_pooled": 0,
+   "E_pooled": 2.6559,
+   "q_pooled": 0.963199,
+   "stability": 0.662,
+   "verdict": "underpowered",
+   "refuting": []
+  },
+  {
+   "code": "OV-10",
+   "cell_label": "reverse-engineer or unlock × family or household",
+   "axes": [
+    "move",
+    "for"
+   ],
+   "E_prereg": 1.9981,
+   "observed_new": 1,
+   "E_new": 1.9377,
+   "p_new": 0.423118,
+   "observed_pooled": 1,
+   "E_pooled": 1.0839,
+   "q_pooled": 0.982906,
+   "stability": 0.059,
+   "verdict": "refuted",
+   "refuting": [
+    {
+     "id": "g-firmware-061",
+     "t": "Stripping ads from a family streaming TV"
+    }
+   ]
+  },
+  {
+   "code": "OV-11",
+   "cell_label": "design a physical thing × a business or its customers",
+   "axes": [
+    "move",
+    "for"
+   ],
+   "E_prereg": 1.5944,
+   "observed_new": 2,
+   "E_new": 2.0542,
+   "p_new": 0.662019,
+   "observed_pooled": 2,
+   "E_pooled": 5.1657,
+   "q_pooled": 0.963199,
+   "stability": 0.146,
+   "verdict": "refuted",
+   "refuting": [
+    {
+     "id": "g-circuits-059",
+     "t": "Ceramics product with scripted 3D work"
+    },
+    {
+     "id": "g-physical-043",
+     "t": "Library parts from a part number"
+    }
+   ]
+  },
+  {
+   "code": "OV-12",
+   "cell_label": "reverse-engineer or unlock × a child",
+   "axes": [
+    "move",
+    "for"
+   ],
+   "E_prereg": 1.0474,
+   "observed_new": 1,
+   "E_new": 0.201,
+   "p_new": 0.982314,
+   "observed_pooled": 1,
+   "E_pooled": 0.2385,
+   "q_pooled": null,
+   "stability": 0.0,
+   "verdict": "refuted",
+   "refuting": [
+    {
+     "id": "g-family-009",
+     "t": "Offline Logo programming for kids' robot"
+    }
+   ]
+  },
+  {
+   "code": "OV-13",
+   "cell_label": "consumer-device firmware or hardware × family or household",
+   "axes": [
+    "material",
+    "for"
+   ],
+   "E_prereg": 1.6805,
+   "observed_new": 2,
+   "E_new": 0.7007,
+   "p_new": 0.965775,
+   "observed_pooled": 2,
+   "E_pooled": 4.7581,
+   "q_pooled": 0.967723,
+   "stability": 0.107,
+   "verdict": "refuted",
+   "refuting": [
+    {
+     "id": "g-family-038",
+     "t": "Baby monitor that waits before alerting"
+    },
+    {
+     "id": "g-firmware-061",
+     "t": "Stripping ads from a family streaming TV"
+    }
+   ]
+  },
+  {
+   "code": "OV-14",
+   "cell_label": "circuits and printable parts × family or household",
+   "axes": [
+    "material",
+    "for"
+   ],
+   "E_prereg": 1.3345,
+   "observed_new": 4,
+   "E_new": 1.2612,
+   "p_new": 0.990544,
+   "observed_pooled": 4,
+   "E_pooled": 1.8312,
+   "q_pooled": 0.991976,
+   "stability": 0.0,
+   "verdict": "refuted",
+   "refuting": [
+    {
+     "id": "g-circuits-061",
+     "t": "Cat food pouch dispenser in CadQuery"
+    },
+    {
+     "id": "g-family-014",
+     "t": "Dog training webcam for separation anxiety"
+    },
+    {
+     "id": "g-family-032",
+     "t": "Retired father writing Arduino code"
+    },
+    {
+     "id": "g-physical-027",
+     "t": "Cat food dispenser in CadQuery"
+    }
+   ]
+  },
+  {
+   "code": "OV-15",
+   "cell_label": "consumer-device firmware or hardware × researchers or science",
+   "axes": [
+    "material",
+    "for"
+   ],
+   "E_prereg": 1.3217,
+   "observed_new": 0,
+   "E_new": 1.5332,
+   "p_new": 0.215852,
+   "observed_pooled": 0,
+   "E_pooled": 10.5138,
+   "q_pooled": 0.002607,
+   "stability": 0.89,
+   "verdict": "underpowered",
+   "refuting": []
+  },
+  {
+   "code": "OV-16",
+   "cell_label": "circuits and printable parts × the public or a community",
+   "axes": [
+    "material",
+    "for"
+   ],
+   "E_prereg": 1.2634,
+   "observed_new": 2,
+   "E_new": 4.4013,
+   "p_new": 0.184993,
+   "observed_pooled": 2,
+   "E_pooled": 3.1392,
+   "q_pooled": 0.967723,
+   "stability": 0.04,
+   "verdict": "refuted",
+   "refuting": [
+    {
+     "id": "g-circuits-063",
+     "t": "KiCad skills for PCB workflow"
+    },
+    {
+     "id": "g-revenge-016",
+     "t": "FPGA bitstream format"
+    }
+   ]
+  },
+  {
+   "code": "OV-17",
+   "cell_label": "consumer-device firmware or hardware × a business or its customers",
+   "axes": [
+    "material",
+    "for"
+   ],
+   "E_prereg": 1.1435,
+   "observed_new": 0,
+   "E_new": 0.321,
+   "p_new": 0.725416,
+   "observed_pooled": 0,
+   "E_pooled": 1.9038,
+   "q_pooled": 0.967723,
+   "stability": 0.133,
+   "verdict": "underpowered",
+   "refuting": []
+  },
+  {
+   "code": "OV-18",
+   "cell_label": "circuits and printable parts × researchers or science",
+   "axes": [
+    "material",
+    "for"
+   ],
+   "E_prereg": 1.0496,
+   "observed_new": 1,
+   "E_new": 2.7597,
+   "p_new": 0.238031,
+   "observed_pooled": 1,
+   "E_pooled": 4.0464,
+   "q_pooled": 0.967723,
+   "stability": 0.161,
+   "verdict": "refuted",
+   "refuting": [
+    {
+     "id": "g-physical-035",
+     "t": "Board designed with no manual edits"
+    }
+   ]
+  },
+  {
+   "code": "OV-19",
+   "cell_label": "financial and legal paperwork × the public or a community",
+   "axes": [
+    "material",
+    "for"
+   ],
+   "E_prereg": 1.0206,
+   "observed_new": 0,
+   "E_new": 6.3814,
+   "p_new": 0.001693,
+   "observed_pooled": 0,
+   "E_pooled": 4.0284,
+   "q_pooled": 0.854554,
+   "stability": 0.872,
+   "verdict": "underpowered",
+   "refuting": []
+  }
+ ]
+}

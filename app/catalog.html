@@ -1,0 +1,48 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Overhang catalog: every report</title>
+<meta name="description" content="Every report in the Overhang corpus, one row each, with its tags, its source, and the hole it belongs to. Filter by hole code (OV-NN).">
+<meta name="color-scheme" content="dark light">
+<script>
+(function () {
+  try {
+    var t = localStorage.getItem('overhang-theme');
+    if (t === 'dark' || t === 'light') document.documentElement.setAttribute('data-theme', t);
+  } catch (e) { /* storage blocked: stay on Auto */ }
+})();
+</script>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500&family=IBM+Plex+Sans+Condensed:ital,wght@0,400;0,500;0,600;1,400&family=Newsreader:ital,opsz,wght@0,6..72,300..600;1,6..72,300..600&family=Source+Serif+4:ital,opsz,wght@0,8..60,400..700;1,8..60,400..600&display=swap">
+</head>
+<body class="page-catalog">
+<a class="sr" href="#catalog">Skip to the catalog</a>
+<header class="topbar">
+  <a class="wordmark" href="index.html">Overhang</a>
+  <nav class="sections" aria-label="Sections">
+    <a href="index.html#plate">Globe</a>
+    <a href="index.html#matrix">Matrix</a>
+    <a href="index.html#steam">Steam method</a>
+    <a href="index.html#counting">Counting</a>
+    <a href="index.html#replication">Replication</a>
+    <a href="index.html#sensitivity">Sensitivity</a>
+    <a href="index.html#built">Built</a>
+    <a href="index.html#methods">Limits</a>
+    <a href="catalog.html" aria-current="true">Catalog</a>
+  </nav>
+  <div class="theme-toggle" role="group" aria-label="Theme" id="theme-toggle">
+    <button type="button" data-theme-choice="auto" aria-pressed="true">Auto</button>
+    <button type="button" data-theme-choice="dark" aria-pressed="false">Dark</button>
+    <button type="button" data-theme-choice="light" aria-pressed="false">Paper</button>
+  </div>
+</header>
+<main>
+  <section id="catalog" class="paper catalog-page" aria-label="Catalog"></section>
+</main>
+<footer class="foot" id="foot"></footer>
+<script type="module" src="/src/catalog-main.ts"></script>
+</body>
+</html>

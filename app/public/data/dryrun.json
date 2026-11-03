@@ -1,0 +1,228 @@
+{
+ "N": 514,
+ "chance": 0.0261,
+ "gaps": [
+  {
+   "rank": 1,
+   "pct": 96.69,
+   "stability": 1.0,
+   "coherence": 0.7126,
+   "nn_cos": 0.9066,
+   "parents": [
+    "Prototypes a phone tree for a legal team",
+    "Trails of excerpts across 100 books"
+   ]
+  },
+  {
+   "rank": 2,
+   "pct": 92.61,
+   "stability": 0.6667,
+   "coherence": 0.7477,
+   "nn_cos": 0.9422,
+   "parents": [
+    "Pokemon Emerald ROM hack with new modes",
+    "Rewrites weak ads in bulk"
+   ]
+  },
+  {
+   "rank": 3,
+   "pct": 92.02,
+   "stability": 0.5556,
+   "coherence": 0.7292,
+   "nn_cos": 0.9079,
+   "parents": [
+    "Wedding guest concierge on personal chat links",
+    "Scanned Hebrew astronomy books translated by pipeline"
+   ]
+  },
+  {
+   "rank": 4,
+   "pct": 91.44,
+   "stability": 0.8889,
+   "coherence": 0.7064,
+   "nn_cos": 0.8891,
+   "parents": [
+    "Lab robot protocols planned in plain English",
+    "Walkthrough for placing photo frames"
+   ]
+  },
+  {
+   "rank": 5,
+   "pct": 90.47,
+   "stability": 0.1111,
+   "coherence": 0.7001,
+   "nn_cos": 0.8787,
+   "parents": [
+    "Build a React pricing table",
+    "Sleep apnea suspected from dialysis patient's headaches"
+   ]
+  },
+  {
+   "rank": 6,
+   "pct": 89.88,
+   "stability": 0.4444,
+   "coherence": 0.7175,
+   "nn_cos": 0.8999,
+   "parents": [
+    "Automate a dating app",
+    "Guide a recursion bug fix"
+   ]
+  },
+  {
+   "rank": 7,
+   "pct": 89.49,
+   "stability": 0.5556,
+   "coherence": 0.7461,
+   "nn_cos": 0.9509,
+   "parents": [
+    "Homeschool management in a Git repository",
+    "Glioma germline susceptibility workups",
+    "Antibody lead optimization from lab data"
+   ]
+  },
+  {
+   "rank": 8,
+   "pct": 89.11,
+   "stability": 0.0,
+   "coherence": 0.7169,
+   "nn_cos": 0.8778,
+   "parents": [
+    "Bilingual Sudoku site with graded puzzles",
+    "Mine glucose and genome data for health"
+   ]
+  },
+  {
+   "rank": 9,
+   "pct": 88.91,
+   "stability": 0.2222,
+   "coherence": 0.7554,
+   "nn_cos": 0.9127,
+   "parents": [
+    "Family road trip driving distances",
+    "Candidate Erdős proofs tested and found incorrect"
+   ]
+  },
+  {
+   "rank": 10,
+   "pct": 88.33,
+   "stability": 0.2222,
+   "coherence": 0.6975,
+   "nn_cos": 0.8435,
+   "parents": [
+    "Scanned Hebrew astronomy books translated by pipeline",
+    "Design a clinic booking schema"
+   ]
+  },
+  {
+   "rank": 11,
+   "pct": 88.33,
+   "stability": 0.6667,
+   "coherence": 0.7019,
+   "nn_cos": 0.8573,
+   "parents": [
+    "Podcast archive distilled into a playbook",
+    "Lab robot protocols planned in plain English"
+   ]
+  },
+  {
+   "rank": 12,
+   "pct": 88.33,
+   "stability": 0.3333,
+   "coherence": 0.7042,
+   "nn_cos": 0.8848,
+   "parents": [
+    "Slicer tuning loop for translucent PETG",
+    "Rules file turning a chatbot into game master"
+   ]
+  },
+  {
+   "rank": 13,
+   "pct": 88.33,
+   "stability": 0.4444,
+   "coherence": 0.7427,
+   "nn_cos": 0.8782,
+   "parents": [
+    "Controlling humanoid, dog and arm robots",
+    "Design a clinic booking schema"
+   ]
+  },
+  {
+   "rank": 14,
+   "pct": 87.74,
+   "stability": 0.6667,
+   "coherence": 0.718,
+   "nn_cos": 0.902,
+   "parents": [
+    "Drone workshop simulator for learning",
+    "Looks up mortgage rates for a remortgage"
+   ]
+  },
+  {
+   "rank": 15,
+   "pct": 87.74,
+   "stability": 0.5556,
+   "coherence": 0.7213,
+   "nn_cos": 0.9224,
+   "parents": [
+    "SOP from voice notes",
+    "Differentiable cosmology perturbation theory in JAX"
+   ]
+  },
+  {
+   "rank": 16,
+   "pct": 86.77,
+   "stability": 0.0,
+   "coherence": 0.707,
+   "nn_cos": 0.8655,
+   "parents": [
+    "Replicating a PNAS immigration-rhetoric study with batch classification",
+    "Toddler bedtime routine"
+   ]
+  },
+  {
+   "rank": 17,
+   "pct": 86.77,
+   "stability": 0.3333,
+   "coherence": 0.7017,
+   "nn_cos": 0.8903,
+   "parents": [
+    "Fix a dishwasher film problem",
+    "Podcast archive distilled into a playbook"
+   ]
+  },
+  {
+   "rank": 18,
+   "pct": 86.19,
+   "stability": 0.0,
+   "coherence": 0.7134,
+   "nn_cos": 0.9013,
+   "parents": [
+    "Script a 60-second demo video",
+    "Blood pressure tracker reads photos of the monitor"
+   ]
+  },
+  {
+   "rank": 19,
+   "pct": 85.99,
+   "stability": 0.0,
+   "coherence": 0.6988,
+   "nn_cos": 0.9047,
+   "parents": [
+    "Custom Minecraft weapons plugin in an afternoon",
+    "Scores construction leads into a CRM",
+    "Audits a $195,000 hospital bill"
+   ]
+  },
+  {
+   "rank": 20,
+   "pct": 85.99,
+   "stability": 0.0,
+   "coherence": 0.702,
+   "nn_cos": 0.8504,
+   "parents": [
+    "Runs a job-search pipeline with Gmail sorting",
+    "Interpret a recurring dream"
+   ]
+  }
+ ]
+}

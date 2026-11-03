@@ -7,3 +7,6 @@ __pycache__/
 dist/
 build/
 runs/
+
+# Drift cache (third-party datasets, firmware source clones, compiled DLLs)
+.cache/drift/

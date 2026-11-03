@@ -1,0 +1,43 @@
+/* Design tokens, exactly as approved in design/TARGET.md.
+   Dark (the survey plate) is the default on bare :root. Light is the printed negative: ink on cool paper.
+   Light applies when the OS prefers light and the user has not forced dark, or when forced via data-theme="light". */
+:root {
+  color-scheme: dark;
+  --bg: #0A0F1C;
+  --panel: #10172A;
+  --ink: #E9E6DD;
+  --dim: #8C95A8;
+  --rule: #243049;
+  --void: #8FD3E8;
+  --ramp-0: #151D33;
+  --ramp-1: #F1D9A6;
+  --refuted: #D98A6A;
+}
+
+@media (prefers-color-scheme: light) {
+  :root:not([data-theme="dark"]) {
+    color-scheme: light;
+    --bg: #F5F7FA;
+    --panel: #FFFFFF;
+    --ink: #15171C;
+    --dim: #5B6372;
+    --rule: #D9DEE6;
+    --void: #17708C;
+    --ramp-0: #EEF1F6;
+    --ramp-1: #1F3A8A;
+    --refuted: #B4532F;
+  }
+}
+
+:root[data-theme="light"] {
+  color-scheme: light;
+  --bg: #F5F7FA;
+  --panel: #FFFFFF;
+  --ink: #15171C;
+  --dim: #5B6372;
+  --rule: #D9DEE6;
+  --void: #17708C;
+  --ramp-0: #EEF1F6;
+  --ramp-1: #1F3A8A;
+  --refuted: #B4532F;
+}

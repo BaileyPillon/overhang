@@ -1,0 +1,35 @@
+{
+ "status": "pending",
+ "pick": {
+  "code": "OV-15",
+  "name": "Drift",
+  "title": "Drift: firmware forensics for science",
+  "concept": "H1-c1",
+  "pitch": "Consumer wearables are used as research instruments, and vendors silently change their step, heart-rate and sleep algorithms in firmware updates, which makes cohort data from before and after an update non-comparable. Drift takes two or more firmware versions of an open-source wearable, finds the code on the metric path, runs each version's algorithm on the same recorded sensor data so the effect is a measured number, and writes a dated data-validity memo for a research team.",
+  "how_it_works": [
+   "Take two or more firmware versions of an open-source wearable (Bangle.js / Espruino, PineTime / InfiniTime), so there are no legal grey zones.",
+   "Locate the code on the metric path, from sensor input to reported metric, and show what changed.",
+   "Run differential execution: compile the metric algorithm from each version for the host and feed every version the same recorded raw sensor data.",
+   "Write a dated memo for the research team: which date ranges are not comparable, by how much, and a suggested sensitivity check."
+  ],
+  "stats": {
+   "observed_new": 0,
+   "E_new": 1.5332,
+   "E_pooled": 10.5138,
+   "q_pooled": 0.0026073638180079822,
+   "E_new_indep": 9.4585,
+   "q_pooled_indep": 1.9616493487272046e-05,
+   "official_verdict": "underpowered",
+   "stability_pooled": 0.89
+  },
+  "exception": true,
+  "repo_path": "drift/"
+ },
+ "concept_stage": {
+  "concepts": 18,
+  "searches": 36,
+  "clean": 0,
+  "ranked": 12,
+  "pick_rank": 7
+ }
+}
