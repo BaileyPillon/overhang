@@ -68,7 +68,7 @@ def main() -> int:
         return {ax: round(kappa([tags[i][ax] for i in ids], [tags[i][ax + "_alt"] for i in ids]), 3) for ax in ("move", "material", "for")}
 
     meta["kappa"] = {"r1": kap(r1), "grow": kap(new)}
-    # github.com/BaileyPillon/overhang/commit/0549f44 returned 404 when checked; flip this once the repository is pushed (public)
+    # github.com/BaileyPillon/overhang/commit/363f0e1 returned 404 when checked; flip this once the repository is pushed (public)
     meta["repo_published"] = False
     wj(OUT / "meta.json", meta)
     print("kappa", meta["kappa"])

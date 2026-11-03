@@ -21,7 +21,7 @@ failed, 2 = missing or invalid input. The script writes only into `--out`.
 {"N": int, "N_r1": int, "run": "r1"|"r2",
  "kappa": {"r1": {"move":f,"material":f,"for":f}, "grow": {...}|null},
  "models": ["BAAI/bge-base-en-v1.5","nomic-ai/nomic-embed-text-v1.5"],
- "pca": int, "k": int, "prereg_commit": "0549f44",
+ "pca": int, "k": int, "prereg_commit": "363f0e1",
  "repo_url": "https://github.com/BaileyPillon/overhang",
  "video": {"title": "31 Life-Changing Ways to Use Claude in 2027",
            "channel": "Nick Saraev", "url": "https://www.youtube.com/watch?v=KDyPHt4lW60"},

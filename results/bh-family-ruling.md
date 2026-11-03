@@ -2,7 +2,7 @@
 
 The question was raised by the numbers reviewer on 2026-11-03 and ruled on by the lead session the same day, after recomputing all three readings from `runs/r2/holes.json`.
 
-PREREG.md (commit 0549f44) says a candidate replicates if, among other conditions, "it remains a hole in the pooled sample with Benjamini–Hochberg q ≤ 0.10 **across all empty cells of its axis pair**."
+PREREG.md (commit 363f0e1) says a candidate replicates if, among other conditions, "it remains a hole in the pooled sample with Benjamini–Hochberg q ≤ 0.10 **across all empty cells of its axis pair**."
 
 `gapfind replicate` was written after registration but before any replication result was seen. It used a different family: **all cells with E ≥ 1** in the pair.
 

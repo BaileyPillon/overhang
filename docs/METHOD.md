@@ -139,7 +139,7 @@ Stability measures the wrong thing here. A blend of two particular reports is fo
 
 ## 6 Pre-registration and replication
 
-**Registered.** Before any new report existed, [`PREREG.md`](../PREREG.md) listed the 19 holes of the first pass (empty cells with $\tilde E\ge1$ in the three tables of 514 reports), each with its expected count, and the test below. Commit [`0549f44`](https://github.com/BaileyPillon/overhang/commit/0549f44) is the timestamp (the link works only once the repository is pushed under that name; until then it is a local commit whose date is self-asserted, and only a public push, a signed tag or an archive snapshot makes it independently checkable). Prior-art items found afterwards by targeted search never enter the test.
+**Registered.** Before any new report existed, [`PREREG.md`](../PREREG.md) listed the 19 holes of the first pass (empty cells with $\tilde E\ge1$ in the three tables of 514 reports), each with its expected count, and the test below. Commit [`363f0e1`](https://github.com/BaileyPillon/overhang/commit/363f0e1) is the timestamp (the link works only once the repository is pushed under that name; until then it is a local commit whose date is self-asserted, and only a public push, a signed tag or an archive snapshot makes it independently checkable). Prior-art items found afterwards by targeted search never enter the test.
 
 **For each registered cell**, on the new sample ($N_\mathrm{new}=1049$) and on the pooled sample ($N=1563$):
 
@@ -160,7 +160,7 @@ The floor of 2 on $\tilde E_\mathrm{new}$ is a power requirement: an empty cell 
 
 **Result** (`results/replication.json`): **0 replicated, 12 refuted, 7 underpowered**, from 19 registered cells. The refuted cells collected from 1 to 11 new reports each (for instance *operate a live system × a codebase*: 11 observed, 9.9 expected). The seven underpowered cells stayed empty. Four lacked power in the new sample ($\tilde E_\mathrm{new}<2$, including OV-15 at 1.53) and three had $\tilde E_\mathrm{new}\ge2$ but a pooled $q$ above 0.10.
 
-**Which Benjamini-Hochberg family?** [`PREREG.md`](../PREREG.md) (commit `0549f44`) says the pooled $q$ is corrected "across all empty cells of its axis pair". `gapfind replicate` was written after registration but before any replication result was seen, and corrects over **all cells with $\tilde E\ge1$** in the pair. The pooled $q$ under three readings (deficit $p=\Pr(X\le O\mid\mathrm{Poisson}(\tilde E))$, $m$ the family size; computed by `scripts/bh_family_readings.py`, written to `results/bh-family-readings.json`):
+**Which Benjamini-Hochberg family?** [`PREREG.md`](../PREREG.md) (commit `363f0e1`) says the pooled $q$ is corrected "across all empty cells of its axis pair". `gapfind replicate` was written after registration but before any replication result was seen, and corrects over **all cells with $\tilde E\ge1$** in the pair. The pooled $q$ under three readings (deficit $p=\Pr(X\le O\mid\mathrm{Poisson}(\tilde E))$, $m$ the family size; computed by `scripts/bh_family_readings.py`, written to `results/bh-family-readings.json`):
 
 | registered cell | $O_\mathrm{new}$ / $\tilde E_\mathrm{new}$ | literal: all empty cells | code: all cells $\tilde E\ge1$ | alternative: empty cells $\tilde E\ge1$ |
 |---|---|---|---|---|

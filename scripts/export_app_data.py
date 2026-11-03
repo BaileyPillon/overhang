@@ -31,7 +31,7 @@ PAIRS = [("move", "material"), ("move", "for"), ("material", "for")]  # code ord
 PAIR_NAME = {p: f"{p[0]}×{p[1]}" for p in PAIRS}                 # "move×material"
 KAPPA_R1 = {"move": 0.878, "material": 0.897, "for": 0.878}  # recomputed from tags.jsonl: for = 0.8785 (PREREG.md rounds it to 0.879)
 MODELS = ["BAAI/bge-base-en-v1.5", "nomic-ai/nomic-embed-text-v1.5"]
-PREREG_COMMIT = "0549f44"
+PREREG_COMMIT = "363f0e1"
 REPO_URL = "https://github.com/BaileyPillon/overhang"
 VIDEO = {"title": "31 Life-Changing Ways to Use Claude in 2027",
          "channel": "Nick Saraev", "url": "https://www.youtube.com/watch?v=KDyPHt4lW60"}

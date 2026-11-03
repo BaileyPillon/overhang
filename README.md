@@ -11,7 +11,7 @@
 <p align="center">
   <a href="LICENSE"><img alt="License: MIT" src="https://img.shields.io/badge/license-MIT-blue.svg"></a>
   <img alt="Python 3.10 to 3.13" src="https://img.shields.io/badge/python-3.10%E2%80%933.13-3776AB.svg">
-  <a href="https://github.com/BaileyPillon/overhang/commit/0549f44"><img alt="Pre-registered" src="https://img.shields.io/badge/pre--registered-0549f44-0B7285.svg"></a>
+  <a href="https://github.com/BaileyPillon/overhang/commit/363f0e1"><img alt="Pre-registered" src="https://img.shields.io/badge/pre--registered-363f0e1-0B7285.svg"></a>
 </p>
 
 <p align="center">
@@ -22,7 +22,7 @@
   <a href="#reproduce">Reproduce</a>
 </p>
 
-<p align="center"><sub>The pre-registered badge links to a commit on GitHub, so it works only once this repository is pushed under <code>github.com/BaileyPillon/overhang</code>. Until then the same commit is the one named <code>0549f44</code> in a local clone (<code>git show 0549f44</code>), and its date is only as trustworthy as that clone. A public push, a signed tag or an archive snapshot is what makes the timestamp independently checkable.</sub></p>
+<p align="center"><sub>The pre-registration is commit <code>363f0e1</code>, dated 2026-11-02 23:22 −05:00, before the replication sample was collected. Git dates are self-reported, and this repository was first pushed on 2026-11-03, so the public timestamp only proves the registration existed by then. Before that first push the history was rewritten once, to replace the author e-mail with a GitHub no-reply address. Commit dates and contents were kept, and the registration commit's hash changed from <code>0549f44</code> to <code>363f0e1</code>. <code>PREREG.md</code> is the same git blob (<code>1b09647</code>) at the registration commit and at every later commit; check with <code>git rev-parse 363f0e1:PREREG.md HEAD:PREREG.md</code>.</sub></p>
 
 ---
 
@@ -58,7 +58,7 @@ flowchart LR
     A["Video: seed use cases"] --> B["Corpus: 514 sourced reports"]
     B --> C["Facet tags: move, material, audience"]
     C --> D["Quasi-independence: how many reports should each cell hold?"]
-    D --> E["Pre-registration: 19 holes, commit 0549f44"]
+    D --> E["Pre-registration: 19 holes, commit 363f0e1"]
     E --> F["Blind replication: 1,049 new reports"]
     F --> G["Sensitivity analysis and tagging audit"]
     G --> H["Concepts: 18, two embedding models"]
@@ -91,7 +91,7 @@ reports. A **hole** is an empty cell where that number is at least 1. Plain inde
 
 ### Pre-registration
 
-Candidate holes found in a sample are hypotheses, because the choosing is where the luck gets in. Before any new report existed we committed the list of 19 holes, their expected counts, and the rule: [`0549f44`](https://github.com/BaileyPillon/overhang/commit/0549f44). A hole **replicates** if it stays empty in the new sample, the new sample alone expects at least 2 reports there, and its pooled Benjamini-Hochberg q is at most 0.10. It is **refuted** if the new sample puts any report in it. Otherwise it is **underpowered**. The thresholds and the three verdicts were not changed after the data came in. **The official result is 0 of 19 replicated, and it does not depend on which Benjamini-Hochberg family you pick, with one exception that is reported as a sensitivity.** [`PREREG.md`](PREREG.md) says q is corrected "across all empty cells of its axis pair". The code (`gapfind.facets.cell_pq`) corrects across *every* cell with expected count at least 1, empty or not (families of 161, 99 and 96 cells), and was written after registration but before any replication result was seen. The pooled q of the closest candidate, *OV-06* (extract and structure × a codebase; 0 observed, 4.86 expected in the new sample), under the three readings:
+Candidate holes found in a sample are hypotheses, because the choosing is where the luck gets in. Before any new report existed we committed the list of 19 holes, their expected counts, and the rule: [`363f0e1`](https://github.com/BaileyPillon/overhang/commit/363f0e1). A hole **replicates** if it stays empty in the new sample, the new sample alone expects at least 2 reports there, and its pooled Benjamini-Hochberg q is at most 0.10. It is **refuted** if the new sample puts any report in it. Otherwise it is **underpowered**. The thresholds and the three verdicts were not changed after the data came in. **The official result is 0 of 19 replicated, and it does not depend on which Benjamini-Hochberg family you pick, with one exception that is reported as a sensitivity.** [`PREREG.md`](PREREG.md) says q is corrected "across all empty cells of its axis pair". The code (`gapfind.facets.cell_pq`) corrects across *every* cell with expected count at least 1, empty or not (families of 161, 99 and 96 cells), and was written after registration but before any replication result was seen. The pooled q of the closest candidate, *OV-06* (extract and structure × a codebase; 0 observed, 4.86 expected in the new sample), under the three readings:
 
 | reading of the family | family size m | OV-06 pooled q | passes q &le; 0.10? | replicated, of 19 |
 |---|---|---|---|---|
