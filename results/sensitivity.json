@@ -1,0 +1,1302 @@
+{
+ "source": "sensitivity",
+ "prereg": "D:\\Projects\\overhang\\runs\\r1\\holes.json",
+ "run": "D:\\Projects\\overhang\\runs\\r2",
+ "tags": "D:\\Projects\\overhang\\corpus\\facets\\tags.jsonl",
+ "vocab": "D:\\Projects\\overhang\\corpus\\facets\\vocab.json",
+ "new_ids_file": "D:\\Projects\\overhang\\runs\\grow\\new_ids.txt",
+ "n_items": 1563,
+ "n_new_ids": 1049,
+ "min_expected": 1.0,
+ "rule": {
+  "replicated": "O_new == 0 and E_new >= 2 and q_pooled <= 0.10",
+  "refuted": "O_new > 0",
+  "underpowered": "otherwise"
+ },
+ "official_check": {
+  "replication_json": "D:\\Projects\\overhang\\runs\\r2\\replication.json",
+  "z3_matches_official": true,
+  "mismatches": []
+ },
+ "cells": [
+  {
+   "prereg_id": "hole-move-material-01",
+   "axes": [
+    "move",
+    "material"
+   ],
+   "cell": {
+    "move": "audit or diagnose",
+    "material": "a playable game"
+   },
+   "expected_prereg": 2.3756,
+   "n_prereg": 514,
+   "observed_new": 1,
+   "observed_pooled": 1,
+   "n_row_new": 86,
+   "n_col_new": 101,
+   "N_new": 1049,
+   "N_pooled": 1563,
+   "models": {
+    "indep": {
+     "label": "independence",
+     "structural_z": null,
+     "E_new": 8.2803,
+     "p_new": 0.0023522649382706914,
+     "E_pooled": 12.4146,
+     "p_pooled": 5.4449079707779636e-05,
+     "q_pooled": 0.0014057762397281287,
+     "family_size": 284,
+     "verdict": "refuted"
+    },
+    "z3": {
+     "label": "quasi z=3",
+     "structural_z": 3.0,
+     "E_new": 2.639,
+     "p_new": 0.25994971449321147,
+     "E_pooled": 4.6686,
+     "p_pooled": 0.053202712013736365,
+     "q_pooled": 0.9327337012378302,
+     "family_size": 161,
+     "verdict": "refuted"
+    },
+    "z4": {
+     "label": "quasi z=4",
+     "structural_z": 4.0,
+     "E_new": 1.8301,
+     "p_new": 0.4539276490513407,
+     "E_pooled": 4.3614,
+     "p_pooled": 0.06841284661125986,
+     "q_pooled": 0.9137330149719266,
+     "family_size": 170,
+     "verdict": "refuted"
+    },
+    "z5": {
+     "label": "quasi z=5",
+     "structural_z": 5.0,
+     "E_new": 2.0357,
+     "p_new": 0.39643202224271956,
+     "E_pooled": 3.9338,
+     "p_pooled": 0.09654757151755944,
+     "q_pooled": 0.7569868034190723,
+     "family_size": 188,
+     "verdict": "refuted"
+    }
+   }
+  },
+  {
+   "prereg_id": "hole-move-material-02",
+   "axes": [
+    "move",
+    "material"
+   ],
+   "cell": {
+    "move": "investigate a question",
+    "material": "a codebase"
+   },
+   "expected_prereg": 2.3115,
+   "n_prereg": 514,
+   "observed_new": 6,
+   "observed_pooled": 6,
+   "n_row_new": 98,
+   "n_col_new": 260,
+   "N_new": 1049,
+   "N_pooled": 1563,
+   "models": {
+    "indep": {
+     "label": "independence",
+     "structural_z": null,
+     "E_new": 24.2898,
+     "p_new": 1.0536122837991039e-05,
+     "E_pooled": 29.2054,
+     "p_pooled": 2.2244137564183684e-07,
+     "q_pooled": 2.1057783560760555e-05,
+     "family_size": 284,
+     "verdict": "refuted"
+    },
+    "z3": {
+     "label": "quasi z=3",
+     "structural_z": 3.0,
+     "E_new": 10.0827,
+     "p_new": 0.12501517059365547,
+     "E_pooled": 5.8488,
+     "p_pooled": 0.6305748985069954,
+     "q_pooled": 0.9327337012378302,
+     "family_size": 161,
+     "verdict": "refuted"
+    },
+    "z4": {
+     "label": "quasi z=4",
+     "structural_z": 4.0,
+     "E_new": 12.4989,
+     "p_new": 0.034589796474595744,
+     "E_pooled": 9.784,
+     "p_pooled": 0.14435928388851638,
+     "q_pooled": 0.9137330149719266,
+     "family_size": 170,
+     "verdict": "refuted"
+    },
+    "z5": {
+     "label": "quasi z=5",
+     "structural_z": 5.0,
+     "E_new": 14.4031,
+     "p_new": 0.011099262136095089,
+     "E_pooled": 9.7493,
+     "p_pooled": 0.14675870876927027,
+     "q_pooled": 0.7895499682552874,
+     "family_size": 188,
+     "verdict": "refuted"
+    }
+   }
+  },
+  {
+   "prereg_id": "hole-move-material-03",
+   "axes": [
+    "move",
+    "material"
+   ],
+   "cell": {
+    "move": "operate a live system",
+    "material": "a codebase"
+   },
+   "expected_prereg": 2.2613,
+   "n_prereg": 514,
+   "observed_new": 11,
+   "observed_pooled": 11,
+   "n_row_new": 71,
+   "n_col_new": 260,
+   "N_new": 1049,
+   "N_pooled": 1563,
+   "models": {
+    "indep": {
+     "label": "independence",
+     "structural_z": null,
+     "E_new": 17.5977,
+     "p_new": 0.0655552203889963,
+     "E_pooled": 17.6449,
+     "p_pooled": 0.06421743490222401,
+     "q_pooled": 0.23381732707989253,
+     "family_size": 284,
+     "verdict": "refuted"
+    },
+    "z3": {
+     "label": "quasi z=3",
+     "structural_z": 3.0,
+     "E_new": 9.8622,
+     "p_new": 0.71233761409997,
+     "E_pooled": 5.817,
+     "p_pooled": 0.9837256812402946,
+     "q_pooled": 0.9953314942630664,
+     "family_size": 161,
+     "verdict": "refuted"
+    },
+    "z4": {
+     "label": "quasi z=4",
+     "structural_z": 4.0,
+     "E_new": 11.1175,
+     "p_new": 0.5652398118229731,
+     "E_pooled": 4.6728,
+     "p_pooled": 0.9967613332217207,
+     "q_pooled": 0.9993165005815045,
+     "family_size": 170,
+     "verdict": "refuted"
+    },
+    "z5": {
+     "label": "quasi z=5",
+     "structural_z": 5.0,
+     "E_new": 15.873,
+     "p_new": 0.13341841800071252,
+     "E_pooled": 5.7869,
+     "p_pooled": 0.984296751485548,
+     "q_pooled": 0.9999439070410437,
+     "family_size": 188,
+     "verdict": "refuted"
+    }
+   }
+  },
+  {
+   "prereg_id": "hole-move-material-04",
+   "axes": [
+    "move",
+    "material"
+   ],
+   "cell": {
+    "move": "audit or diagnose",
+    "material": "body and biometric data"
+   },
+   "expected_prereg": 1.5107,
+   "n_prereg": 514,
+   "observed_new": 2,
+   "observed_pooled": 2,
+   "n_row_new": 86,
+   "n_col_new": 39,
+   "N_new": 1049,
+   "N_pooled": 1563,
+   "models": {
+    "indep": {
+     "label": "independence",
+     "structural_z": null,
+     "E_new": 3.1973,
+     "p_new": 0.3804610903444984,
+     "E_pooled": 4.476,
+     "p_pooled": 0.1762947328502717,
+     "q_pooled": 0.3935990102383451,
+     "family_size": 284,
+     "verdict": "refuted"
+    },
+    "z3": {
+     "label": "quasi z=3",
+     "structural_z": 3.0,
+     "E_new": 3.036,
+     "p_new": 0.4151789743152742,
+     "E_pooled": 2.2882,
+     "p_pooled": 0.5991636619753156,
+     "q_pooled": 0.9327337012378302,
+     "family_size": 161,
+     "verdict": "refuted"
+    },
+    "z4": {
+     "label": "quasi z=4",
+     "structural_z": 4.0,
+     "E_new": 2.6175,
+     "p_new": 0.5140373297957447,
+     "E_pooled": 5.7374,
+     "p_pooled": 0.07476423347817167,
+     "q_pooled": 0.9137330149719266,
+     "family_size": 170,
+     "verdict": "refuted"
+    },
+    "z5": {
+     "label": "quasi z=5",
+     "structural_z": 5.0,
+     "E_new": 3.8875,
+     "p_new": 0.25505996250286284,
+     "E_pooled": 5.738,
+     "p_pooled": 0.07473394580505713,
+     "q_pooled": 0.7569868034190723,
+     "family_size": 188,
+     "verdict": "refuted"
+    }
+   }
+  },
+  {
+   "prereg_id": "hole-move-material-05",
+   "axes": [
+    "move",
+    "material"
+   ],
+   "cell": {
+    "move": "audit or diagnose",
+    "material": "genome"
+   },
+   "expected_prereg": 1.3685,
+   "n_prereg": 514,
+   "observed_new": 0,
+   "observed_pooled": 0,
+   "n_row_new": 86,
+   "n_col_new": 14,
+   "N_new": 1049,
+   "N_pooled": 1563,
+   "models": {
+    "indep": {
+     "label": "independence",
+     "structural_z": null,
+     "E_new": 1.1478,
+     "p_new": 0.31734690331983234,
+     "E_pooled": 2.5336,
+     "p_pooled": 0.07937361653197998,
+     "q_pooled": 0.2713195849047086,
+     "family_size": 284,
+     "verdict": "underpowered"
+    },
+    "z3": {
+     "label": "quasi z=3",
+     "structural_z": 3.0,
+     "E_new": 0.4094,
+     "p_new": 0.6640218947385486,
+     "E_pooled": 1.5541,
+     "p_pooled": 0.2113761318215716,
+     "q_pooled": 0.9327337012378302,
+     "family_size": 161,
+     "verdict": "underpowered"
+    },
+    "z4": {
+     "label": "quasi z=4",
+     "structural_z": 4.0,
+     "E_new": 0.4008,
+     "p_new": 0.669795328127646,
+     "E_pooled": 1.4505,
+     "p_pooled": 0.23444627934559623,
+     "q_pooled": 0.9137330149719266,
+     "family_size": 170,
+     "verdict": "underpowered"
+    },
+    "z5": {
+     "label": "quasi z=5",
+     "structural_z": 5.0,
+     "E_new": 0.4657,
+     "p_new": 0.6276658992759382,
+     "E_pooled": 1.4908,
+     "p_pooled": 0.22518853269450972,
+     "q_pooled": 0.8207196951504849,
+     "family_size": 188,
+     "verdict": "underpowered"
+    }
+   }
+  },
+  {
+   "prereg_id": "hole-move-material-06",
+   "axes": [
+    "move",
+    "material"
+   ],
+   "cell": {
+    "move": "extract and structure",
+    "material": "a codebase"
+   },
+   "expected_prereg": 1.3339,
+   "n_prereg": 514,
+   "observed_new": 0,
+   "observed_pooled": 0,
+   "n_row_new": 73,
+   "n_col_new": 260,
+   "N_new": 1049,
+   "N_pooled": 1563,
+   "models": {
+    "indep": {
+     "label": "independence",
+     "structural_z": null,
+     "E_new": 18.0934,
+     "p_new": 1.387159924300449e-08,
+     "E_pooled": 18.4562,
+     "p_pooled": 9.651292195292613e-09,
+     "q_pooled": 1.370483491731551e-06,
+     "family_size": 284,
+     "verdict": "replicated"
+    },
+    "z3": {
+     "label": "quasi z=3",
+     "structural_z": 3.0,
+     "E_new": 4.8602,
+     "p_new": 0.007748886677396663,
+     "E_pooled": 6.3339,
+     "p_pooled": 0.0017750704746621088,
+     "q_pooled": 0.2857863464205995,
+     "family_size": 161,
+     "verdict": "underpowered"
+    },
+    "z4": {
+     "label": "quasi z=4",
+     "structural_z": 4.0,
+     "E_new": 7.7794,
+     "p_new": 0.0004182666186397405,
+     "E_pooled": 4.805,
+     "p_pooled": 0.008188932995072985,
+     "q_pooled": 0.6938861605042315,
+     "family_size": 170,
+     "verdict": "underpowered"
+    },
+    "z5": {
+     "label": "quasi z=5",
+     "structural_z": 5.0,
+     "E_new": 7.2944,
+     "p_new": 0.0006793308393603476,
+     "E_pooled": 3.9417,
+     "p_pooled": 0.019415720806147167,
+     "q_pooled": 0.6862009862549039,
+     "family_size": 188,
+     "verdict": "underpowered"
+    }
+   }
+  },
+  {
+   "prereg_id": "hole-move-material-07",
+   "axes": [
+    "move",
+    "material"
+   ],
+   "cell": {
+    "move": "audit or diagnose",
+    "material": "robots, vehicles and drones"
+   },
+   "expected_prereg": 1.1911,
+   "n_prereg": 514,
+   "observed_new": 3,
+   "observed_pooled": 3,
+   "n_row_new": 86,
+   "n_col_new": 61,
+   "N_new": 1049,
+   "N_pooled": 1563,
+   "models": {
+    "indep": {
+     "label": "independence",
+     "structural_z": null,
+     "E_new": 5.001,
+     "p_new": 0.26489212394055367,
+     "E_pooled": 6.2495,
+     "p_pooled": 0.1302880515515478,
+     "q_pooled": 0.3415020722768221,
+     "family_size": 284,
+     "verdict": "refuted"
+    },
+    "z3": {
+     "label": "quasi z=3",
+     "structural_z": 3.0,
+     "E_new": 1.7859,
+     "p_new": 0.8935505154626596,
+     "E_pooled": 1.4864,
+     "p_pooled": 0.9360537277418537,
+     "q_pooled": 0.9953314942630664,
+     "family_size": 161,
+     "verdict": "refuted"
+    },
+    "z4": {
+     "label": "quasi z=4",
+     "structural_z": 4.0,
+     "E_new": 4.8693,
+     "p_new": 0.28386112113462325,
+     "E_pooled": 6.042,
+     "p_pooled": 0.14749359222194458,
+     "q_pooled": 0.9137330149719266,
+     "family_size": 170,
+     "verdict": "refuted"
+    },
+    "z5": {
+     "label": "quasi z=5",
+     "structural_z": 5.0,
+     "E_new": 6.5342,
+     "p_new": 0.10951516590040174,
+     "E_pooled": 7.5582,
+     "p_pooled": 0.056922420718979704,
+     "q_pooled": 0.7358259018050073,
+     "family_size": 188,
+     "verdict": "refuted"
+    }
+   }
+  },
+  {
+   "prereg_id": "hole-move-material-08",
+   "axes": [
+    "move",
+    "material"
+   ],
+   "cell": {
+    "move": "coordinate many agents",
+    "material": "financial and legal paperwork"
+   },
+   "expected_prereg": 1.1359,
+   "n_prereg": 514,
+   "observed_new": 0,
+   "observed_pooled": 0,
+   "n_row_new": 59,
+   "n_col_new": 69,
+   "N_new": 1049,
+   "N_pooled": 1563,
+   "models": {
+    "indep": {
+     "label": "independence",
+     "structural_z": null,
+     "E_new": 3.8808,
+     "p_new": 0.020633508588963474,
+     "E_pooled": 5.0186,
+     "p_pooled": 0.006614083348318442,
+     "q_pooled": 0.05217776863673438,
+     "family_size": 284,
+     "verdict": "replicated"
+    },
+    "z3": {
+     "label": "quasi z=3",
+     "structural_z": 3.0,
+     "E_new": 0.6038,
+     "p_new": 0.5467340448999495,
+     "E_pooled": 1.6625,
+     "p_pooled": 0.18966332326875787,
+     "q_pooled": 0.9327337012378302,
+     "family_size": 161,
+     "verdict": "underpowered"
+    },
+    "z4": {
+     "label": "quasi z=4",
+     "structural_z": 4.0,
+     "E_new": 0.756,
+     "p_new": 0.46954736265587455,
+     "E_pooled": 1.2551,
+     "p_pooled": 0.28503773344234967,
+     "q_pooled": 0.9137330149719266,
+     "family_size": 170,
+     "verdict": "underpowered"
+    },
+    "z5": {
+     "label": "quasi z=5",
+     "structural_z": 5.0,
+     "E_new": 1.3205,
+     "p_new": 0.26700613231605824,
+     "E_pooled": 2.8352,
+     "p_pooled": 0.05870951344188888,
+     "q_pooled": 0.7358259018050073,
+     "family_size": 188,
+     "verdict": "underpowered"
+    }
+   }
+  },
+  {
+   "prereg_id": "hole-move-for-01",
+   "axes": [
+    "move",
+    "for"
+   ],
+   "cell": {
+    "move": "reverse-engineer or unlock",
+    "for": "a business or its customers"
+   },
+   "expected_prereg": 3.2281,
+   "n_prereg": 514,
+   "observed_new": 0,
+   "observed_pooled": 0,
+   "n_row_new": 99,
+   "n_col_new": 156,
+   "N_new": 1049,
+   "N_pooled": 1563,
+   "models": {
+    "indep": {
+     "label": "independence",
+     "structural_z": null,
+     "E_new": 14.7226,
+     "p_new": 4.037003485648151e-07,
+     "E_pooled": 20.0998,
+     "p_pooled": 1.8653669234223383e-09,
+     "q_pooled": 2.145171961935689e-07,
+     "family_size": 115,
+     "verdict": "replicated"
+    },
+    "z3": {
+     "label": "quasi z=3",
+     "structural_z": 3.0,
+     "E_new": 12.295,
+     "p_new": 4.574389927320813e-06,
+     "E_pooled": 2.6559,
+     "p_pooled": 0.07023839813352045,
+     "q_pooled": 0.9631991487029545,
+     "family_size": 99,
+     "verdict": "underpowered"
+    },
+    "z4": {
+     "label": "quasi z=4",
+     "structural_z": 4.0,
+     "E_new": 3.7756,
+     "p_new": 0.022922998571144493,
+     "E_pooled": 18.2412,
+     "p_pooled": 1.19664055678014e-08,
+     "q_pooled": 1.1727077456445373e-06,
+     "family_size": 98,
+     "verdict": "replicated"
+    },
+    "z5": {
+     "label": "quasi z=5",
+     "structural_z": 5.0,
+     "E_new": 10.2199,
+     "p_new": 3.643711676731497e-05,
+     "E_pooled": 2.4698,
+     "p_pooled": 0.08459772143524556,
+     "q_pooled": 0.7893473858169716,
+     "family_size": 105,
+     "verdict": "underpowered"
+    }
+   }
+  },
+  {
+   "prereg_id": "hole-move-for-02",
+   "axes": [
+    "move",
+    "for"
+   ],
+   "cell": {
+    "move": "reverse-engineer or unlock",
+    "for": "family or household"
+   },
+   "expected_prereg": 1.9981,
+   "n_prereg": 514,
+   "observed_new": 1,
+   "observed_pooled": 1,
+   "n_row_new": 99,
+   "n_col_new": 36,
+   "N_new": 1049,
+   "N_pooled": 1563,
+   "models": {
+    "indep": {
+     "label": "independence",
+     "structural_z": null,
+     "E_new": 3.3975,
+     "p_new": 0.14712387296269575,
+     "E_pooled": 5.5688,
+     "p_pooled": 0.025060805825997585,
+     "q_pooled": 0.1657680118265841,
+     "family_size": 115,
+     "verdict": "refuted"
+    },
+    "z3": {
+     "label": "quasi z=3",
+     "structural_z": 3.0,
+     "E_new": 1.9377,
+     "p_new": 0.4231180071477816,
+     "E_pooled": 1.0839,
+     "p_pooled": 0.7049123990039846,
+     "q_pooled": 0.9829060211464011,
+     "family_size": 99,
+     "verdict": "refuted"
+    },
+    "z4": {
+     "label": "quasi z=4",
+     "structural_z": 4.0,
+     "E_new": 1.4688,
+     "p_new": 0.56833571583249,
+     "E_pooled": 6.514,
+     "p_pooled": 0.01114000090104966,
+     "q_pooled": 0.3639066961009556,
+     "family_size": 98,
+     "verdict": "refuted"
+    },
+    "z5": {
+     "label": "quasi z=5",
+     "structural_z": 5.0,
+     "E_new": 4.0186,
+     "p_new": 0.09022805052113149,
+     "E_pooled": 0.9676,
+     "p_pooled": null,
+     "q_pooled": null,
+     "family_size": 105,
+     "verdict": "refuted"
+    }
+   }
+  },
+  {
+   "prereg_id": "hole-move-for-03",
+   "axes": [
+    "move",
+    "for"
+   ],
+   "cell": {
+    "move": "design a physical thing",
+    "for": "a business or its customers"
+   },
+   "expected_prereg": 1.5944,
+   "n_prereg": 514,
+   "observed_new": 2,
+   "observed_pooled": 2,
+   "n_row_new": 87,
+   "n_col_new": 156,
+   "N_new": 1049,
+   "N_pooled": 1563,
+   "models": {
+    "indep": {
+     "label": "independence",
+     "structural_z": null,
+     "E_new": 12.938,
+     "p_new": 0.00023479305258983474,
+     "E_pooled": 15.9616,
+     "p_pooled": 1.6879946734574826e-05,
+     "q_pooled": 0.0007736914910539796,
+     "family_size": 115,
+     "verdict": "refuted"
+    },
+    "z3": {
+     "label": "quasi z=3",
+     "structural_z": 3.0,
+     "E_new": 2.0542,
+     "p_new": 0.662018698584772,
+     "E_pooled": 5.1657,
+     "p_pooled": 0.1113688750127696,
+     "q_pooled": 0.9631991487029545,
+     "family_size": 99,
+     "verdict": "refuted"
+    },
+    "z4": {
+     "label": "quasi z=4",
+     "structural_z": 4.0,
+     "E_new": 9.8049,
+     "p_new": 0.0032486547794854945,
+     "E_pooled": 5.2472,
+     "p_pooled": 0.10531795380729886,
+     "q_pooled": 0.8600966227596074,
+     "family_size": 98,
+     "verdict": "refuted"
+    },
+    "z5": {
+     "label": "quasi z=5",
+     "structural_z": 5.0,
+     "E_new": 8.9811,
+     "p_new": 0.006327132983997338,
+     "E_pooled": 14.6353,
+     "p_pooled": 5.406604800541195e-05,
+     "q_pooled": 0.005676935040568255,
+     "family_size": 105,
+     "verdict": "refuted"
+    }
+   }
+  },
+  {
+   "prereg_id": "hole-move-for-04",
+   "axes": [
+    "move",
+    "for"
+   ],
+   "cell": {
+    "move": "reverse-engineer or unlock",
+    "for": "a child"
+   },
+   "expected_prereg": 1.0474,
+   "n_prereg": 514,
+   "observed_new": 1,
+   "observed_pooled": 1,
+   "n_row_new": 99,
+   "n_col_new": 36,
+   "N_new": 1049,
+   "N_pooled": 1563,
+   "models": {
+    "indep": {
+     "label": "independence",
+     "structural_z": null,
+     "E_new": 3.3975,
+     "p_new": 0.14712387296269575,
+     "E_pooled": 5.3948,
+     "p_pooled": 0.029034347238065233,
+     "q_pooled": 0.1657680118265841,
+     "family_size": 115,
+     "verdict": "refuted"
+    },
+    "z3": {
+     "label": "quasi z=3",
+     "structural_z": 3.0,
+     "E_new": 0.201,
+     "p_new": 0.982313765591082,
+     "E_pooled": 0.2385,
+     "p_pooled": null,
+     "q_pooled": null,
+     "family_size": 99,
+     "verdict": "refuted"
+    },
+    "z4": {
+     "label": "quasi z=4",
+     "structural_z": 4.0,
+     "E_new": 1.3567,
+     "p_new": 0.6068741227054448,
+     "E_pooled": 1.3384,
+     "p_pooled": 0.6132914005514569,
+     "q_pooled": 0.96637208684917,
+     "family_size": 98,
+     "verdict": "refuted"
+    },
+    "z5": {
+     "label": "quasi z=5",
+     "structural_z": 5.0,
+     "E_new": 4.0186,
+     "p_new": 0.09022805052113149,
+     "E_pooled": 0.3848,
+     "p_pooled": null,
+     "q_pooled": null,
+     "family_size": 105,
+     "verdict": "refuted"
+    }
+   }
+  },
+  {
+   "prereg_id": "hole-material-for-01",
+   "axes": [
+    "material",
+    "for"
+   ],
+   "cell": {
+    "material": "consumer-device firmware or hardware",
+    "for": "family or household"
+   },
+   "expected_prereg": 1.6805,
+   "n_prereg": 514,
+   "observed_new": 2,
+   "observed_pooled": 2,
+   "n_row_new": 82,
+   "n_col_new": 36,
+   "N_new": 1049,
+   "N_pooled": 1563,
+   "models": {
+    "indep": {
+     "label": "independence",
+     "structural_z": null,
+     "E_new": 2.8141,
+     "p_new": 0.4660973195384258,
+     "E_pooled": 4.7498,
+     "p_pooled": 0.1473647959652048,
+     "q_pooled": 0.34902188518074817,
+     "family_size": 135,
+     "verdict": "refuted"
+    },
+    "z3": {
+     "label": "quasi z=3",
+     "structural_z": 3.0,
+     "E_new": 0.7007,
+     "p_new": 0.9657750461329668,
+     "E_pooled": 4.7581,
+     "p_pooled": 0.14656113210515181,
+     "q_pooled": 0.9677233088160547,
+     "family_size": 96,
+     "verdict": "refuted"
+    },
+    "z4": {
+     "label": "quasi z=4",
+     "structural_z": 4.0,
+     "E_new": 0.908,
+     "p_new": 0.9358194742042703,
+     "E_pooled": 4.6199,
+     "p_pooled": 0.16053448191592626,
+     "q_pooled": 0.8677835660383926,
+     "family_size": 96,
+     "verdict": "refuted"
+    },
+    "z5": {
+     "label": "quasi z=5",
+     "structural_z": 5.0,
+     "E_new": 3.317,
+     "p_new": 0.3560191313281724,
+     "E_pooled": 1.7128,
+     "p_pooled": 0.7538474713054111,
+     "q_pooled": 0.9995818433710302,
+     "family_size": 104,
+     "verdict": "refuted"
+    }
+   }
+  },
+  {
+   "prereg_id": "hole-material-for-02",
+   "axes": [
+    "material",
+    "for"
+   ],
+   "cell": {
+    "material": "circuits and printable parts",
+    "for": "family or household"
+   },
+   "expected_prereg": 1.3345,
+   "n_prereg": 514,
+   "observed_new": 4,
+   "observed_pooled": 4,
+   "n_row_new": 111,
+   "n_col_new": 36,
+   "N_new": 1049,
+   "N_pooled": 1563,
+   "models": {
+    "indep": {
+     "label": "independence",
+     "structural_z": null,
+     "E_new": 3.8093,
+     "p_new": 0.6660274170221367,
+     "E_pooled": 5.6507,
+     "p_pooled": 0.33452756940524964,
+     "q_pooled": 0.5716610363254265,
+     "family_size": 135,
+     "verdict": "refuted"
+    },
+    "z3": {
+     "label": "quasi z=3",
+     "structural_z": 3.0,
+     "E_new": 1.2612,
+     "p_new": 0.9905442866373281,
+     "E_pooled": 1.8312,
+     "p_pooled": 0.9612933382763541,
+     "q_pooled": 0.9919763507675823,
+     "family_size": 96,
+     "verdict": "refuted"
+    },
+    "z4": {
+     "label": "quasi z=4",
+     "structural_z": 4.0,
+     "E_new": 1.2122,
+     "p_new": 0.9919316621347978,
+     "E_pooled": 1.5161,
+     "p_pooled": 0.980658470424986,
+     "q_pooled": 0.9993313706328543,
+     "family_size": 96,
+     "verdict": "refuted"
+    },
+    "z5": {
+     "label": "quasi z=5",
+     "structural_z": 5.0,
+     "E_new": 4.4901,
+     "p_new": 0.5339804444169878,
+     "E_pooled": 1.8441,
+     "p_pooled": 0.960320605865639,
+     "q_pooled": 0.9995818433710302,
+     "family_size": 104,
+     "verdict": "refuted"
+    }
+   }
+  },
+  {
+   "prereg_id": "hole-material-for-03",
+   "axes": [
+    "material",
+    "for"
+   ],
+   "cell": {
+    "material": "consumer-device firmware or hardware",
+    "for": "researchers or science"
+   },
+   "expected_prereg": 1.3217,
+   "n_prereg": 514,
+   "observed_new": 0,
+   "observed_pooled": 0,
+   "n_row_new": 82,
+   "n_col_new": 121,
+   "N_new": 1049,
+   "N_pooled": 1563,
+   "models": {
+    "indep": {
+     "label": "independence",
+     "structural_z": null,
+     "E_new": 9.4585,
+     "p_new": 7.802104693473204e-05,
+     "E_pooled": 13.9527,
+     "p_pooled": 8.718441549898687e-07,
+     "q_pooled": 1.9616493487272046e-05,
+     "family_size": 135,
+     "verdict": "replicated"
+    },
+    "z3": {
+     "label": "quasi z=3",
+     "structural_z": 3.0,
+     "E_new": 1.5332,
+     "p_new": 0.21585196103273988,
+     "E_pooled": 10.5138,
+     "p_pooled": 2.7160039770916484e-05,
+     "q_pooled": 0.0026073638180079822,
+     "family_size": 96,
+     "verdict": "underpowered"
+    },
+    "z4": {
+     "label": "quasi z=4",
+     "structural_z": 4.0,
+     "E_new": 1.9855,
+     "p_new": 0.13730849676472767,
+     "E_pooled": 9.4085,
+     "p_pooled": 8.202707375343448e-05,
+     "q_pooled": 0.00787459908032971,
+     "family_size": 96,
+     "verdict": "underpowered"
+    },
+    "z5": {
+     "label": "quasi z=5",
+     "structural_z": 5.0,
+     "E_new": 6.642,
+     "p_new": 0.0013044751407434289,
+     "E_pooled": 2.647,
+     "p_pooled": 0.07086211192951893,
+     "q_pooled": 0.6272556021332502,
+     "family_size": 104,
+     "verdict": "underpowered"
+    }
+   }
+  },
+  {
+   "prereg_id": "hole-material-for-04",
+   "axes": [
+    "material",
+    "for"
+   ],
+   "cell": {
+    "material": "circuits and printable parts",
+    "for": "the public or a community"
+   },
+   "expected_prereg": 1.2634,
+   "n_prereg": 514,
+   "observed_new": 2,
+   "observed_pooled": 2,
+   "n_row_new": 111,
+   "n_col_new": 129,
+   "N_new": 1049,
+   "N_pooled": 1563,
+   "models": {
+    "indep": {
+     "label": "independence",
+     "structural_z": null,
+     "E_new": 13.6501,
+     "p_new": 0.00012720106305703558,
+     "E_pooled": 14.5681,
+     "p_pooled": 5.7328361895190916e-05,
+     "q_pooled": 0.0007035753505318885,
+     "family_size": 135,
+     "verdict": "refuted"
+    },
+    "z3": {
+     "label": "quasi z=3",
+     "structural_z": 3.0,
+     "E_new": 4.4013,
+     "p_new": 0.1849929984850156,
+     "E_pooled": 3.1392,
+     "p_pooled": 0.39274456375802835,
+     "q_pooled": 0.9677233088160547,
+     "family_size": 96,
+     "verdict": "refuted"
+    },
+    "z4": {
+     "label": "quasi z=4",
+     "structural_z": 4.0,
+     "E_new": 4.2008,
+     "p_new": 0.2101357823138758,
+     "E_pooled": 4.4904,
+     "p_pooled": 0.1746588719211381,
+     "q_pooled": 0.8677835660383926,
+     "family_size": 96,
+     "verdict": "refuted"
+    },
+    "z5": {
+     "label": "quasi z=5",
+     "structural_z": 5.0,
+     "E_new": 14.0428,
+     "p_new": 9.053840737005482e-05,
+     "E_pooled": 4.4321,
+     "p_pooled": 0.18136206578477432,
+     "q_pooled": 0.8081585177412155,
+     "family_size": 104,
+     "verdict": "refuted"
+    }
+   }
+  },
+  {
+   "prereg_id": "hole-material-for-05",
+   "axes": [
+    "material",
+    "for"
+   ],
+   "cell": {
+    "material": "consumer-device firmware or hardware",
+    "for": "a business or its customers"
+   },
+   "expected_prereg": 1.1435,
+   "n_prereg": 514,
+   "observed_new": 0,
+   "observed_pooled": 0,
+   "n_row_new": 82,
+   "n_col_new": 156,
+   "N_new": 1049,
+   "N_pooled": 1563,
+   "models": {
+    "indep": {
+     "label": "independence",
+     "structural_z": null,
+     "E_new": 12.1945,
+     "p_new": 5.058346409124907e-06,
+     "E_pooled": 17.144,
+     "p_pooled": 3.5848864833454945e-08,
+     "q_pooled": 1.2098991881291044e-06,
+     "family_size": 135,
+     "verdict": "replicated"
+    },
+    "z3": {
+     "label": "quasi z=3",
+     "structural_z": 3.0,
+     "E_new": 0.321,
+     "p_new": 0.7254158756557175,
+     "E_pooled": 1.9038,
+     "p_pooled": 0.14899898612718077,
+     "q_pooled": 0.9677233088160547,
+     "family_size": 96,
+     "verdict": "underpowered"
+    },
+    "z4": {
+     "label": "quasi z=4",
+     "structural_z": 4.0,
+     "E_new": 0.67,
+     "p_new": 0.5116935356078104,
+     "E_pooled": 2.1783,
+     "p_pooled": 0.11323445082142937,
+     "q_pooled": 0.8677835660383926,
+     "family_size": 96,
+     "verdict": "underpowered"
+    },
+    "z5": {
+     "label": "quasi z=5",
+     "structural_z": 5.0,
+     "E_new": 1.1501,
+     "p_new": 0.3166119978847159,
+     "E_pooled": 0.6464,
+     "p_pooled": null,
+     "q_pooled": null,
+     "family_size": 104,
+     "verdict": "underpowered"
+    }
+   }
+  },
+  {
+   "prereg_id": "hole-material-for-06",
+   "axes": [
+    "material",
+    "for"
+   ],
+   "cell": {
+    "material": "circuits and printable parts",
+    "for": "researchers or science"
+   },
+   "expected_prereg": 1.0496,
+   "n_prereg": 514,
+   "observed_new": 1,
+   "observed_pooled": 1,
+   "n_row_new": 111,
+   "n_col_new": 121,
+   "N_new": 1049,
+   "N_pooled": 1563,
+   "models": {
+    "indep": {
+     "label": "independence",
+     "structural_z": null,
+     "E_new": 12.8036,
+     "p_new": 3.797086358610449e-05,
+     "E_pooled": 16.5988,
+     "p_pooled": 1.088168116935135e-06,
+     "q_pooled": 2.0986099398034744e-05,
+     "family_size": 135,
+     "verdict": "refuted"
+    },
+    "z3": {
+     "label": "quasi z=3",
+     "structural_z": 3.0,
+     "E_new": 2.7597,
+     "p_new": 0.23803077887344548,
+     "E_pooled": 4.0464,
+     "p_pooled": 0.08824020485279462,
+     "q_pooled": 0.9677233088160547,
+     "family_size": 96,
+     "verdict": "refuted"
+    },
+    "z4": {
+     "label": "quasi z=4",
+     "structural_z": 4.0,
+     "E_new": 2.6508,
+     "p_new": 0.25773375560675477,
+     "E_pooled": 3.0875,
+     "p_pooled": 0.18646176782913684,
+     "q_pooled": 0.8677835660383926,
+     "family_size": 96,
+     "verdict": "refuted"
+    },
+    "z5": {
+     "label": "quasi z=5",
+     "structural_z": 5.0,
+     "E_new": 8.9909,
+     "p_new": 0.001244203269848227,
+     "E_pooled": 2.8499,
+     "p_pooled": 0.22271072465078676,
+     "q_pooled": 0.8889581185179564,
+     "family_size": 104,
+     "verdict": "refuted"
+    }
+   }
+  },
+  {
+   "prereg_id": "hole-material-for-07",
+   "axes": [
+    "material",
+    "for"
+   ],
+   "cell": {
+    "material": "financial and legal paperwork",
+    "for": "the public or a community"
+   },
+   "expected_prereg": 1.0206,
+   "n_prereg": 514,
+   "observed_new": 0,
+   "observed_pooled": 0,
+   "n_row_new": 69,
+   "n_col_new": 129,
+   "N_new": 1049,
+   "N_pooled": 1563,
+   "models": {
+    "indep": {
+     "label": "independence",
+     "structural_z": null,
+     "E_new": 8.4852,
+     "p_new": 0.00020649713435418214,
+     "E_pooled": 11.19,
+     "p_pooled": 1.3811358925077102e-05,
+     "q_pooled": 0.00020717038387615654,
+     "family_size": 135,
+     "verdict": "replicated"
+    },
+    "z3": {
+     "label": "quasi z=3",
+     "structural_z": 3.0,
+     "E_new": 6.3814,
+     "p_new": 0.001692685894703016,
+     "E_pooled": 4.0284,
+     "p_pooled": 0.01780320041194991,
+     "q_pooled": 0.8545536197735957,
+     "family_size": 96,
+     "verdict": "underpowered"
+    },
+    "z4": {
+     "label": "quasi z=4",
+     "structural_z": 4.0,
+     "E_new": 6.147,
+     "p_new": 0.0021398332429649,
+     "E_pooled": 6.7666,
+     "p_pooled": 0.0011516274944189146,
+     "q_pooled": 0.0552781197321079,
+     "family_size": 96,
+     "verdict": "replicated"
+    },
+    "z5": {
+     "label": "quasi z=5",
+     "structural_z": 5.0,
+     "E_new": 4.8758,
+     "p_new": 0.007628765123439604,
+     "E_pooled": 8.7963,
+     "p_pooled": 0.00015129309177865942,
+     "q_pooled": 0.01573448154498058,
+     "family_size": 104,
+     "verdict": "replicated"
+    }
+   }
+  }
+ ],
+ "summary": {
+  "indep": {
+   "replicated": 6,
+   "refuted": 12,
+   "underpowered": 1
+  },
+  "z3": {
+   "replicated": 0,
+   "refuted": 12,
+   "underpowered": 7
+  },
+  "z4": {
+   "replicated": 2,
+   "refuted": 12,
+   "underpowered": 5
+  },
+  "z5": {
+   "replicated": 1,
+   "refuted": 12,
+   "underpowered": 6
+  }
+ },
+ "models": [
+  {
+   "key": "indep",
+   "label": "independence",
+   "structural_z": null
+  },
+  {
+   "key": "z3",
+   "label": "quasi z=3",
+   "structural_z": 3.0
+  },
+  {
+   "key": "z4",
+   "label": "quasi z=4",
+   "structural_z": 4.0
+  },
+  {
+   "key": "z5",
+   "label": "quasi z=5",
+   "structural_z": 5.0
+  }
+ ]
+}

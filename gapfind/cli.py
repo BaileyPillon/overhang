@@ -1,4 +1,4 @@
-"""Command line: python -m gapfind {embed,find,facets,show,stability,check,map}."""
+"""Command line: python -m gapfind {embed,find,facets,replicate,show,stability,check,map}."""
 
 from __future__ import annotations
 
@@ -15,7 +15,8 @@ from .core import (Space, center, check_concepts, find_gaps, loo_knn_distance, n
 from .crossmodel import novelty_by_model
 from .embed import DEFAULT_CACHE_DIR, DEFAULT_MODEL, embed_texts
 from .facets import Tags, facet_holes, load_vocab, resolve_axes
-from .io import InputError, expand_inputs, load_records, write_json, write_jsonl
+from .io import InputError, expand_inputs, load_records, read_json, read_jsonl, write_json, write_jsonl
+from .replicate import format_replication, replicate_cells
 from .run import DERIVED, Run
 from .stability import run_stability
 
@@ -197,7 +198,7 @@ def format_holes(doc: dict, per_pair: int = 10, n_thin: int = 5) -> str:
             ind = (f" (indep {g.get('expected_indep', g['expected']):.1f})"
                    if g.get("expected_quasi") is not None else "")
             L.append(f"  {hid}  {g['cell'][a]} x {g['cell'][b]}  E={g['expected']:.1f}{ind} "
-                     f"p={g['p']:.1e}  stability {g['stability']:.2f}{alt}")
+                     f"p={g['p']:.1e} q={g.get('q', float('nan')):.3f}  stability {g['stability']:.2f}{alt}")
             L.append(f"      embedding: emptier than {g['percentile']:.1f}% of items "
                      f"(k-NN score {g['score']:.3f}, 1-NN {g['g1']:.3f})")
             for ax in g["axes"]:
@@ -213,13 +214,13 @@ def format_holes(doc: dict, per_pair: int = 10, n_thin: int = 5) -> str:
 
 
 def format_hole_table(doc: dict) -> str:
-    L = ["| hole | cell | E | p | stab | 2nd tagger | emb pct | E indep |",
-         "|---|---|---|---|---|---|---|---|"]
+    L = ["| hole | cell | E | p | q | stab | 2nd tagger | emb pct | E indep |",
+         "|---|---|---|---|---|---|---|---|---|"]
     for g in doc["gaps"]:
         a, b = g["axes"]
         alt = "-" if g["alt"] is None else ("kept" if g["alt"]["survives"] else "gone")
         L.append(f"| {g['id']} | {g['cell'][a]} x {g['cell'][b]} | {g['expected']:.1f} | "
-                 f"{g['p']:.1e} | {g['stability']:.2f} | {alt} | {g['percentile']:.1f} | "
+                 f"{g['p']:.1e} | {g.get('q', float('nan')):.3f} | {g['stability']:.2f} | {alt} | {g['percentile']:.1f} | "
                  f"{g.get('expected_indep', g['expected']):.1f} |")
     return "\n".join(L)
 
@@ -290,6 +291,68 @@ def cmd_facets(a) -> int:
               f"values outside the vocabulary: {tg['unknown_values'] or 'none'}")
     print(f"\nwrote {run.path / 'holes.json'} ({len(doc['gaps'])} holes; use it as "
           f"`--gaps holes` in check, map and show)")
+    return 0
+
+
+# -------------------------------------------------------------- replicate
+
+def _load_items(run_dir) -> list[dict]:
+    """Items of a run directory; replication needs ids and titles, not embeddings."""
+    d = Path(run_dir)
+    if (d / "meta.json").is_file():
+        items_path = d / read_json(d / "meta.json").get("items_path", "items.jsonl")
+    else:
+        items_path = d / "items.jsonl"
+    if not items_path.is_file():
+        raise InputError(f"{items_path} not found; run `embed` on the pooled corpus first")
+    items = read_jsonl(items_path)
+    for it in items:
+        it.pop("__src__", None)
+    return items
+
+
+def cmd_replicate(a) -> int:
+    if a.boot < 0:
+        raise InputError("--boot must be non-negative")
+    prereg = read_json(a.prereg)
+    vocab, _ = load_vocab(a.vocab)
+    items = _load_items(a.run)
+    ids = {it["id"] for it in items}
+    new_ids = {ln.strip() for ln in Path(a.new_ids).read_text(encoding="utf-8").splitlines()
+               if ln.strip() and not ln.lstrip().startswith("#")}
+    if not new_ids:
+        raise InputError(f"{a.new_ids} lists no ids")
+    cands_axes = sorted({ax for g in prereg.get("gaps", []) for ax in g.get("axes", [])})
+    unknown = [ax for ax in cands_axes if ax not in vocab]
+    if unknown:
+        raise InputError(f"--prereg uses axes {unknown} that are not in the vocabulary")
+    tags = Tags(items, cands_axes, vocab, a.tags)
+    res = replicate_cells(prereg, items, tags, vocab, new_ids, min_expected=a.min_expected,
+                          boot=a.boot, seed=a.seed, z=a.structural_z)
+    missing = sorted(new_ids - ids)
+    doc = {
+        "source": "replication",
+        "prereg": str(a.prereg), "tags": str(a.tags), "vocab": str(a.vocab),
+        "new_ids_file": str(a.new_ids),
+        "n_items": len(items), "n_new_ids": len(new_ids),
+        "n_new_in_run": len(new_ids & ids),
+        "new_ids_not_in_run": missing,
+        "tagging": tags.summary(len(items)),
+        **res,
+    }
+    out = Path(a.run)
+    out.mkdir(parents=True, exist_ok=True)
+    write_json(out / "replication.json", doc)
+    print(f"{len(items):,} pooled items, {len(new_ids & ids):,} new "
+          f"(tagged: " + ", ".join(f"{ax} {n}" for ax, n in doc["tagging"]["tagged"].items()) + ")")
+    print(format_replication(doc))
+    if missing:
+        print(f"\nwarning: {len(missing)} id(s) in --new-ids are not in the run, e.g. {missing[:3]}")
+    tg = doc["tagging"]
+    if tg["untagged_items"] or tg["unknown_values"]:
+        print(f"warning: {tg['untagged_items']} run item(s) have no tag row, "
+              f"values outside the vocabulary: {tg['unknown_values'] or 'none'}")
+    print(f"\nwrote {out / 'replication.json'}")
     return 0
 
 
@@ -549,6 +612,23 @@ def build_parser() -> argparse.ArgumentParser:
     fa.add_argument("--group-field", default="domain",
                     help="item field used for the neighbor mix (default %(default)s)")
     fa.set_defaults(fn=cmd_facets)
+
+    rp = sub.add_parser("replicate", help="test pre-registered facet holes on a new sample "
+                                          "and on the pooled sample (verdict per cell)")
+    rp.add_argument("--prereg", required=True, help="the pre-registered holes.json")
+    rp.add_argument("--run", required=True, help="run directory of the pooled corpus (items.jsonl); "
+                                                 "replication.json is written here")
+    rp.add_argument("--tags", required=True, help="tags.jsonl covering the pooled items")
+    rp.add_argument("--vocab", required=True)
+    rp.add_argument("--new-ids", required=True, help="text file, one id per line: the new sample")
+    rp.add_argument("--min-expected", type=float, default=1.0,
+                    help="registered cells need expected >= this; also the pooled BH family "
+                         "(default %(default)s)")
+    rp.add_argument("--boot", type=int, default=1000, help="bootstrap resamples (pooled data)")
+    rp.add_argument("--seed", type=int, default=42)
+    rp.add_argument("--structural-z", type=float, default=None,
+                    help="quasi-independence z; default: the one in the prereg file, else 3.0")
+    rp.set_defaults(fn=cmd_replicate)
 
     sh = sub.add_parser("show", help="print gaps.json (or holes.json) again, or as a table")
     sh.add_argument("--run", required=True)

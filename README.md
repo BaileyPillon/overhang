@@ -49,6 +49,9 @@ python -m gapfind stability --run runs/X --pca 16 32 64 --seeds 1 2 3
 python -m gapfind check --run runs/X concepts.jsonl [--gaps holes] [--models BAAI/bge-base-en-v1.5,nomic-ai/nomic-embed-text-v1.5]
 python -m gapfind map   --run runs/X [--gaps holes] --concepts concepts.jsonl
 python -m gapfind show  --run runs/X [--gaps holes] [--table]
+
+# pre-registered replication of facet holes (see "Pre-registration and replication")
+python -m gapfind replicate --prereg runs/r1/holes.json --run runs/r2 --tags corpus/facets/tags.jsonl --vocab corpus/facets/vocab.json --new-ids runs/grow/new_ids.txt
 ```
 
 Input is JSONL with at least `id` and `text`; every other field (`title`, `domain`,
@@ -70,6 +73,7 @@ Flags (defaults in brackets):
 | `stability` | `--pca` [16 32 64], `--seeds` [1 2 3], `--match` [0.8], `--topk` [the primary `--top`], `--samples` [the primary's] |
 | `check` | `--gaps` [`gaps.json`], `--models` (comma list), `--min-percentile` [90], `--neighbors` [5], plus the embedding flags |
 | `map` | `--gaps` [`gaps.json`], `--concepts`, `--n-neighbors` [15], `--min-dist` [0.1], `--seed` [42], `--group-field` [`domain`], `--min-percentile` [90] |
+| `replicate` | `--prereg`, `--run`, `--tags`, `--vocab`, `--new-ids` (all required), `--min-expected` [1], `--boot` [1000], `--seed` [42], `--structural-z` [the prereg file's, else 3.0] |
 | `show` | `--gaps`, `--table`, `--neighbors` [3] |
 
 `--gaps holes` is short for `--gaps holes.json`; any path to a gaps document works. With a
@@ -169,6 +173,45 @@ embeddings. The 3 items of each value nearest their own centroid are listed as e
 percentile under each model, `map --gaps holes` draws holes as teal diamonds, and
 `show --gaps holes` prints them.
 
+**False discovery rate.** With dozens of cells per axis pair, some cells are empty by chance.
+For each pair the test family is every cell (empty or not) with expected count `E >= --min-expected`
+(1). Each cell gets the deficit p-value `P(X <= O | Poisson(E))` (for a hole, `exp(-E)`), and
+`q` is the Benjamini-Hochberg adjustment over the family. Every hole and `thin` cell carries
+`q`; each pair has `family_size` and the cell tables `p_cell` and `q` (null outside the
+family). Reading a hole with `q <= 0.10` as real keeps the expected share of false holes among
+those called at about 10%. This is the same family used by `replicate` below.
+
+### Pre-registration and replication
+
+Holes found on the data that suggested them are hypotheses. To test them, freeze the list
+before collecting more data: `PREREG.md` states the rule, and the `holes.json` of the first
+run (`runs/r1/holes.json`) is the registered list of candidates. Then collect a new sample
+without showing collectors the cells, tag it with the same vocabulary, embed the pooled corpus
+into a new run, and run
+
+```
+python -m gapfind replicate --prereg runs/r1/holes.json --run runs/r2 --tags corpus/facets/tags.jsonl --vocab corpus/facets/vocab.json --new-ids runs/grow/new_ids.txt [--min-expected 1.0] [--boot 1000] [--seed 42]
+```
+
+`--run` is the pooled corpus (only `items.jsonl` is read, no embeddings), `--tags` must cover
+all of its items, and `--new-ids` is a text file with one id per line naming the new sample.
+Every registered gap with `expected >= --min-expected` is matched by axes and cell values (not
+by hole id) and gets one verdict by the pre-registered rule:
+
+| verdict | rule |
+|---|---|
+| `replicated` | no new item in the cell, **and** `E_new >= 2`, **and** `q_pooled <= 0.10` |
+| `refuted` | at least one new item in the cell (the items' ids and titles are listed) |
+| `underpowered` | no new item, but `E_new < 2` or `q_pooled > 0.10` (or the cell is outside the pooled family) |
+
+`E_new` is the quasi-independence expected count (same `z` as the prereg run) fitted on the new
+sample's table alone, `p_new = P(X <= observed_new | E_new)`; the pooled numbers
+(`observed_pooled`, `E_pooled`, `p_pooled`, `q_pooled` by Benjamini-Hochberg within the pair's
+family, and the bootstrap `stability` on the pooled table) use all tagged items. Output:
+`runs/r2/replication.json` (`cells[]`, `summary`, `pairs[]` with family sizes, `params`) and a
+table on stdout. Items found later by targeted search are not part of the new sample and must
+stay out of `--new-ids`. Do not change the rule after seeing the data.
+
 ### The shared machinery
 
 1. **Center.** Sentence embeddings are anisotropic: every pair of texts looks 0.5 to 0.8
@@ -242,6 +285,7 @@ Everything is seeded: the same inputs and flags give the same output.
 | `gaps.json` | `find`: `{params, pca, novelty, sampling, gaps[]}`, plus `stability_run` after `stability` |
 | `stability.json` | per-rerun detail: best matching cosine for every gap, matches, chance level |
 | `holes.json` | `facets`: `{source: "facet", params, pca, novelty, tagging, pairs[], gaps[]}` (see below) |
+| `replication.json` | `replicate`: `{prereg, n_new_in_run, cells[], summary, pairs[], params}` |
 | `holes_pca.npz`, `holes_novelty.npy` | the working space `facets` used (a copy, so a later `find` cannot change it) |
 | `checks.json`, `checks_holes.json` | `check`: `{params, concepts[]}` |
 | `map.json`, `map.png`, `map_holes.*` | UMAP coordinates and a quick scatter (corpus colored by `domain`, blend gaps as hollow black circles, facet holes as hollow teal diamonds, concepts as stars) |

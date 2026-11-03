@@ -135,6 +135,46 @@ def poisson_cdf(k: int, mu: float) -> float:
     return min(total, 1.0)
 
 
+def bh_qvalues(p) -> np.ndarray:
+    """Benjamini-Hochberg q-values (adjusted p-values) for a family of p-values.
+
+    With the p-values sorted ascending p_(1) <= ... <= p_(m), q_(i) = min over
+    j >= i of min(1, p_(j) * m / j); the result is returned in the input order.
+    Rejecting every hypothesis with q <= alpha controls the false discovery rate at alpha."""
+    p = np.asarray(p, float).ravel()
+    m = len(p)
+    if m == 0:
+        return p.copy()
+    order = np.argsort(p, kind="stable")
+    raw = p[order] * m / np.arange(1, m + 1)
+    q_sorted = np.minimum(np.minimum.accumulate(raw[::-1])[::-1], 1.0)
+    q = np.empty(m)
+    q[order] = q_sorted
+    return q
+
+
+def cell_pq(O: np.ndarray, E: np.ndarray, min_expected: float):
+    """The deficit test of every cell of a table and its false-discovery control.
+
+    The family is every cell with expected count E >= `min_expected` (empty or not).
+    For each, p = P(X <= O | Poisson(E)); q is the Benjamini-Hochberg adjustment over
+    the family. Returns (family mask, p, q); p and q are NaN outside the family."""
+    fam = E >= min_expected
+    p = np.full(O.shape, np.nan)
+    q = np.full(O.shape, np.nan)
+    idx = np.argwhere(fam)
+    if len(idx):
+        pv = np.array([poisson_cdf(int(O[i, j]), float(E[i, j])) for i, j in idx])
+        qv = bh_qvalues(pv)
+        for (i, j), a, b in zip(idx, pv, qv):
+            p[i, j], q[i, j] = a, b
+    return fam, p, q
+
+
+def _nan_none(M: np.ndarray) -> list:
+    return [[None if np.isnan(x) else float(x) for x in row] for row in M]
+
+
 def codes(labels: list, values: list[str]) -> np.ndarray:
     index = {v: i for i, v in enumerate(values)}
     return np.array([index.get(v, -1) if v is not None else -1 for v in labels], np.int64)
@@ -310,6 +350,8 @@ def facet_holes(items: list[dict], Y: np.ndarray, d_nn: np.ndarray, tags: Tags,
         listed = [(i, j) for (i, j) in empty if E[i, j] >= min_expected]
         # most-expected-but-absent first; the Poisson p (= exp(-E) for an empty cell) breaks ties
         listed.sort(key=lambda c: (-E[c], poisson_cdf(0, E[c])))
+        fam, P_cell, Q_cell = cell_pq(O, E, min_expected)
+        family_size = int(fam.sum())
         thin = [(i, j) for i in range(len(va)) for j in range(len(vb))
                 if 1 <= O[i, j] <= E[i, j] * thin_frac]
         thin.sort(key=lambda c: (poisson_cdf(int(O[c]), E[c]), -E[c]))
@@ -334,6 +376,7 @@ def facet_holes(items: list[dict], Y: np.ndarray, d_nn: np.ndarray, tags: Tags,
                 "expected_quasi": None if E_quasi is None else round(float(E_quasi[i, j]), 4),
                 "structural": None if struct is None else bool(struct[i, j]),
                 "p": float(poisson_cdf(0, E[i, j])),
+                "q": float(Q_cell[i, j]), "family_size": family_size,
                 "n_row": int(O[i].sum()), "n_col": int(O[:, j].sum()), "N": N,
                 "stability": round(float(stab[i, j]), 4),
                 "alt": None, "tag_robust": None,
@@ -366,12 +409,15 @@ def facet_holes(items: list[dict], Y: np.ndarray, d_nn: np.ndarray, tags: Tags,
             "expected_quasi": None if E_quasi is None else np.round(E_quasi, 3).tolist(),
             "structural": None if struct is None else struct.tolist(),
             "n_structural": None if struct is None else int(struct.sum()),
+            "family_size": family_size, "min_expected": min_expected,
+            "p_cell": _nan_none(P_cell), "q": _nan_none(Q_cell),
             "n_cells": int(O.size), "n_empty": len(empty),
             "n_empty_below_min_expected": len(empty) - len(listed),
             "holes": ids,
             "thin": [{"cell": {a: va[i], b: vb[j]}, "observed": int(O[i, j]),
                       "expected": round(float(E[i, j]), 3),
                       "p": float(poisson_cdf(int(O[i, j]), E[i, j])),
+                      "q": None if np.isnan(Q_cell[i, j]) else float(Q_cell[i, j]),
                       "stability_empty": round(float(stab[i, j]), 4)}
                      for (i, j) in thin[:top]],
             "n_thin": len(thin),

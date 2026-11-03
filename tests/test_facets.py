@@ -318,7 +318,7 @@ def test_show_prints_holes(env, holes, capsys):
     out = capsys.readouterr().out
     assert "hole-move-material-01" in out and "A x B" in out and "stability" in out
     assert cli.main(["show", "--run", str(env["run"]), "--gaps", "holes", "--table"]) == 0
-    assert capsys.readouterr().out.startswith("| hole | cell | E | p | stab |")
+    assert capsys.readouterr().out.startswith("| hole | cell | E | p | q | stab |")
 
 
 def test_map_draws_holes_as_their_own_marker(env, holes, tmp_path):

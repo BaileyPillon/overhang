@@ -1,0 +1,1958 @@
+{
+ "sensitivity": "Sensitivity table (O_new, then E_new / verdict / pooled q under each model):\n\n| cell | O_new | indep E_new | indep verdict | indep q | z=3 E_new | z=3 verdict | z=3 q | z=4 E_new | z=4 verdict | z=4 q | z=5 E_new | z=5 verdict | z=5 q |\n|---|---|---|---|---|---|---|---|---|---|---|---|---|---|\n| move-material-01: audit or diagnose x a playable game | 1 | 8.28 | refuted | 0.001 | 2.64 | refuted | 0.933 | 1.83 | refuted | 0.914 | 2.04 | refuted | 0.757 |\n| move-material-02: investigate a question x a codebase | 6 | 24.29 | refuted | 0.000 | 10.08 | refuted | 0.933 | 12.50 | refuted | 0.914 | 14.40 | refuted | 0.790 |\n| move-material-03: operate a live system x a codebase | 11 | 17.60 | refuted | 0.234 | 9.86 | refuted | 0.995 | 11.12 | refuted | 0.999 | 15.87 | refuted | 1.000 |\n| move-material-04: audit or diagnose x body and biometric data | 2 | 3.20 | refuted | 0.394 | 3.04 | refuted | 0.933 | 2.62 | refuted | 0.914 | 3.89 | refuted | 0.757 |\n| move-material-05: audit or diagnose x genome | 0 | 1.15 | underpowered | 0.271 | 0.41 | underpowered | 0.933 | 0.40 | underpowered | 0.914 | 0.47 | underpowered | 0.821 |\n| move-material-06: extract and structure x a codebase | 0 | 18.09 | replicated | 0.000 | 4.86 | underpowered | 0.286 | 7.78 | underpowered | 0.694 | 7.29 | underpowered | 0.686 |\n| move-material-07: audit or diagnose x robots, vehicles and drones | 3 | 5.00 | refuted | 0.342 | 1.79 | refuted | 0.995 | 4.87 | refuted | 0.914 | 6.53 | refuted | 0.736 |\n| move-material-08: coordinate many agents x financial and legal paperwork | 0 | 3.88 | replicated | 0.052 | 0.60 | underpowered | 0.933 | 0.76 | underpowered | 0.914 | 1.32 | underpowered | 0.736 |\n| move-for-01: reverse-engineer or unlock x a business or its customers | 0 | 14.72 | replicated | 0.000 | 12.29 | underpowered | 0.963 | 3.78 | replicated | 0.000 | 10.22 | underpowered | 0.789 |\n| move-for-02: reverse-engineer or unlock x family or household | 1 | 3.40 | refuted | 0.166 | 1.94 | refuted | 0.983 | 1.47 | refuted | 0.364 | 4.02 | refuted | - |\n| move-for-03: design a physical thing x a business or its customers | 2 | 12.94 | refuted | 0.001 | 2.05 | refuted | 0.963 | 9.80 | refuted | 0.860 | 8.98 | refuted | 0.006 |\n| move-for-04: reverse-engineer or unlock x a child | 1 | 3.40 | refuted | 0.166 | 0.20 | refuted | - | 1.36 | refuted | 0.966 | 4.02 | refuted | - |\n| material-for-01: consumer-device firmware or hardware x family or household | 2 | 2.81 | refuted | 0.349 | 0.70 | refuted | 0.968 | 0.91 | refuted | 0.868 | 3.32 | refuted | 1.000 |\n| material-for-02: circuits and printable parts x family or household | 4 | 3.81 | refuted | 0.572 | 1.26 | refuted | 0.992 | 1.21 | refuted | 0.999 | 4.49 | refuted | 1.000 |\n| material-for-03: consumer-device firmware or hardware x researchers or science | 0 | 9.46 | replicated | 0.000 | 1.53 | underpowered | 0.003 | 1.99 | underpowered | 0.008 | 6.64 | underpowered | 0.627 |\n| material-for-04: circuits and printable parts x the public or a community | 2 | 13.65 | refuted | 0.001 | 4.40 | refuted | 0.968 | 4.20 | refuted | 0.868 | 14.04 | refuted | 0.808 |\n| material-for-05: consumer-device firmware or hardware x a business or its customers | 0 | 12.19 | replicated | 0.000 | 0.32 | underpowered | 0.968 | 0.67 | underpowered | 0.868 | 1.15 | underpowered | - |\n| material-for-06: circuits and printable parts x researchers or science | 1 | 12.80 | refuted | 0.000 | 2.76 | refuted | 0.968 | 2.65 | refuted | 0.868 | 8.99 | refuted |",
+ "audits": [
+  {
+   "verdict": "hole_weakened",
+   "belongs": [
+    {
+     "id": "g-revenge-046",
+     "title": "Imaging station camera capture",
+     "current": "move = reverse-engineer or unlock; material = molecules and lab experiments; for = researchers or science",
+     "why_it_belongs": "Captures USB packets from a proprietary camera, works out its 16-bit image format and replaces the vendor software with custom code. That is protocol, driver and companion-software work on an existing off-the-shelf product, which matches the material definition. The camera is industrial and sits on a scientific imaging station, so the rule's 'retail device' wording and the 'instrument ... data' wording of molecules and lab experiments both pull the other way. The researcher beneficiary is clear, so this is the strongest candidate but only arguable.",
+     "strength": "arguable"
+    },
+    {
+     "id": "g-revenge-007",
+     "title": "Lab instrument raw data format",
+     "current": "move = reverse-engineer or unlock; material = molecules and lab experiments; for = researchers or science",
+     "why_it_belongs": "Decompiles a commercial lab instrument's vendor executable to recover its raw data format, so it acts on the vendor software of an off-the-shelf product. This is weaker than g-revenge-046. The object is a data format from a professional instrument, not firmware, a wireless protocol or a retail device, and 'instrument or experimental data' is named explicitly under molecules and lab experiments. The researcher beneficiary is clear, but under strict reading the current material tag is probably correct.",
+     "strength": "arguable"
+    }
+   ],
+   "reasoning": "I read all 188 items tagged for = researchers or science, all 116 tagged consumer-device firmware or hardware, and about 260 other items matched by hardware, instrument, sensor, device, phone, camera, microscope, protocol, firmware and research keywords.\n\nThe 116 consumer-device items are all tagged self, a child, family or household, or the public. None is tagged researchers or science, so the cell is empty as claimed. Many of them are close to research (USB microscope, endoscopes, water-flow monitor, Neural Engine gradients, 'expensive hardware device' protocol), but each is a hobby or personal project with no research-field beneficiary. Under the 'self' default rule they stay self.\n\nAmong the 188 researcher items I checked every one that touches a physical device:\n- **Rejected on the rules.**\n  - Mars rover items (g-operate-013, g-robots-005), drone items (g-operate-057, g-robots-008, -009, -010) and robot-arm items (g-robots-016, -038, -040, -041, devices-041, -043, -044) belong to robots, vehicles and drones. The material rule sends moving machines there.\n  - g-physical-035 is a custom PCB, so circuits and printable parts.\n  - g-operate-014, -039 and -046 operate a Mac or desktop through its GUI. That is not firmware, protocol, companion-app or driver work.\n  - g-science-052 (microscope settings) and science-078 (Opentrons, Hamilton and Biomek lab-robot protocols) are lab-instrument planning, not consumer hardware.\n  - devices-066 (kernel and firmware vulnerability discovery, 'firmware flaws that root phones') is mainly OS kernels and network stacks. Its research framing is security research. I judged it a codebase item and did not list it.\n  - devices-079 and -081 are binaries or an exploit in a stripped-down shell. g-rand-hn-061 is browser and OS exploit chains.\n- **Kept as arguable.** Only g-revenge-046 and g-revenge-007 involve reverse-engineering an instrument's vendor software or protocol with a research beneficiary. Both fail the 'retail device' wording because they are professional or industrial lab equipment, and both tags already fit under molecules and lab experiments.\n\nUnder the strict vocabulary there is no clear member: nothing is both a retail or off-the-shelf consumer device acted on and for researchers or science. Because two items are arguable, the claim 'nobody reports using Claude on off-the-shelf device hardware for research' holds only for consumer-grade hardware. Reverse-engineering of scientific-grade instrument hardware for researchers does exist, and the vocabulary tags it under molecules and lab experiments."
+  },
+  {
+   "verdict": "hole_refuted",
+   "reasoning": "The claim only holds for the literal tag pair. The vocabulary rule \"Use when a retail device is acted on\" for the hardware material, plus the fact that lab instruments, lab robots and microscopes have no material value of their own, steered every hardware-for-research item into other cells. Of the 188 items tagged for = researchers or science, none carry the hardware material. All 116 hardware-tagged items are for self, family, child or public. I read all 188 research items and all 116 hardware items, and 276 other items that hit a hardware or research keyword.\n\nA lenient outside reader would put at least four items in the cell. Two reverse-engineer commercial lab hardware: a proprietary industrial camera on a scientific imaging station (g-revenge-046) and a lab instrument's vendor software (g-revenge-007). Two have Claude set up commercial lab equipment for research: microscope settings (g-science-052) and liquid-handling robots from Opentrons, Hamilton and Biomek (g-science-078). Two clear members is enough to refute the claim.\n\nArguable members are research-tagged robots, drones and cars. They count only if a robot or drone is read as an off-the-shelf gadget, and the vocabulary sends them to \"robots, vehicles and drones\". Others are phone-firmware exploitation, wearable data, microscopy guidance, a home nanopore sequencer, instrument output data and oscilloscopes. In the last three the purpose is personal or commercial, not research.\n\nItems I rejected: hobby gadget work such as the USB microscope, endoscopes and the hairdryer sensor diagnostic (for self, no research purpose), simulated-only robot items, and custom-board science builds such as the muon detector and balloon tracker.",
+   "belongs": [
+    {
+     "id": "g-revenge-046",
+     "title": "Imaging station camera capture",
+     "current": "reverse-engineer or unlock | molecules and lab experiments | researchers or science",
+     "why_it_belongs": "Sniffs USB packets from a proprietary industrial camera on a scientific imaging station, decodes its 16-bit image format and replaces the vendor software. Commercial hardware, modified for research.",
+     "strength": "clear"
+    },
+    {
+     "id": "g-revenge-007",
+     "title": "Lab instrument raw data format",
+     "current": "reverse-engineer or unlock | molecules and lab experiments | researchers or science",
+     "why_it_belongs": "Decompiles a commercial lab instrument's vendor executable to recover the raw data format and builds an analysis suite. This is reverse engineering of off-the-shelf lab hardware's software for research.",
+     "strength": "clear"
+    },
+    {
+     "id": "g-science-052",
+     "title": "Microscope settings from a research goal",
+     "current": "plan or schedule | molecules and lab experiments | researchers or science",
+     "why_it_belongs": "Claude turns a research goal into settings for a commercial microscope and checks them against what the instrument can physically do before running it. A scientist would call this Claude on off-the-shelf instrument hardware for research.",
+     "strength": "clear"
+    },
+    {
+     "id": "g-science-078",
+     "title": "Lab robot protocols planned in plain English",
+     "current": "plan or schedule | molecules and lab experiments | researchers or science",
+     "why_it_belongs": "Writes protocol files that drive commercial Opentrons, Hamilton and Biomek liquid-handling instruments through fixed tools after human approval. These are off-the-shelf lab instruments used for research.",
+     "strength": "clear"
+    },
+    {
+     "id": "devices-043",
+     "title": "Robot dog fetch study with novices",
+     "current": "investigate a question | robots, vehicles and drones | researchers or science",
+     "why_it_belongs": "A research study of novices programming a commercial quadruped robot dog. A scientist might call this research on off-the-shelf hardware, but the vocabulary treats robots as a separate material.",
+     "strength": "arguable"
+    },
+    {
+     "id": "devices-044",
+     "title": "Controlling humanoid, dog and arm robots",
+     "current": "operate a live system | robots, vehicles and drones | researchers or science",
+     "why_it_belongs": "Evaluates control of simulated and physical commercial robots as a research test. Counts only if robots are read as off-the-shelf devices.",
+     "strength": "arguable"
+    },
+    {
+     "id": "g-robots-016",
+     "title": "Pick and place via MCP loop",
+     "current": "investigate a question | robots, vehicles and drones | researchers or science",
+     "why_it_belongs": "Compares three vendors' systems driving a low-cost commercial robot arm. This is research on cheap off-the-shelf hardware.",
+     "strength": "arguable"
+    },
+    {
+     "id": "g-robots-040",
+     "title": "Two assistants paint with a robot arm",
+     "current": "investigate a question | robots, vehicles and drones | researchers or science",
+     "why_it_belongs": "A comparison experiment with models controlling a physical robot arm. Hardware is the apparatus, but it is a robot arm and not a consumer gadget.",
+     "strength": "arguable"
+    },
+    {
+     "id": "g-robots-041",
+     "title": "Robot arm safety refusal test",
+     "current": "audit or diagnose | robots, vehicles and drones | researchers or science",
+     "why_it_belongs": "A safety experiment with models controlling physical robot arms. Same reading as the other robot-arm studies.",
+     "strength": "arguable"
+    },
+    {
+     "id": "g-operate-057",
+     "title": "Drone commanded over MAVLink",
+     "current": "operate a live system | robots, vehicles and drones | researchers or science",
+     "why_it_belongs": "Research prototype flying a real drone over a standard protocol. Counts only if a commercial drone is read as an off-the-shelf device.",
+     "strength": "arguable"
+    },
+    {
+     "id": "devices-041",
+     "title": "Language-driven control of a real car",
+     "current": "operate a live system | robots, vehicles and drones | researchers or science",
+     "why_it_belongs": "A research experiment on a production Toyota Corolla. It is an off-the-shelf machine, but a car is more a vehicle than a consumer gadget.",
+     "strength": "arguable"
+    },
+    {
+     "id": "devices-066",
+     "title": "Kernel and firmware vulnerability discovery and exploitation",
+     "current": "reverse-engineer or unlock | a codebase | researchers or science",
+     "why_it_belongs": "Security research that includes firmware flaws that root phones. Phone firmware is the hardware angle, but most of the item is OS kernels and network stacks.",
+     "strength": "arguable"
+    },
+    {
+     "id": "g-science-001",
+     "title": "Wearable data analysis in 35 minutes",
+     "current": "investigate a question | body and biometric data | researchers or science",
+     "why_it_belongs": "Research analysis of 450 files of consumer wearable data from 30 people. It uses consumer devices' output for science, not the device itself.",
+     "strength": "arguable"
+    },
+    {
+     "id": "g-science-058",
+     "title": "Dual-channel live microscopy analysis",
+     "current": "tutor or explain | molecules and lab experiments | researchers or science",
+     "why_it_belongs": "Guides researchers through calibrated live-cell microscopy. Microscope use for research, but the item is guidance, not hardware work.",
+     "strength": "arguable"
+    },
+    {
+     "id": "g-science-029",
+     "title": "Sequencing own DNA at home",
+     "current": "tutor or explain | genome | self",
+     "why_it_belongs": "A lab novice runs a commercial nanopore sequencer to get a personal genome. It is a real science instrument, but the purpose is personal.",
+     "strength": "arguable"
+    },
+    {
+     "id": "g-science-046",
+     "title": "Raw NMR and LC-MS files analyzed in minutes",
+     "current": "extract and structure | molecules and lab experiments | a business or its customers",
+     "why_it_belongs": "Processes raw output of commercial analytical instruments without vendor software. Instrument data, but the beneficiary is a business.",
+     "strength": "arguable"
+    },
+    {
+     "id": "g-circuits-062",
+     "title": "LeCroy scope with SPICE demo",
+     "current": "investigate a question | circuits and printable parts | self",
+     "why_it_belongs": "Claude reads a commercial networked oscilloscope and compares measured and simulated behaviour. Lab-instrument use, but engineering for self, not research.",
+     "strength": "arguable"
+    },
+    {
+     "id": "g-circuits-035",
+     "title": "Oscilloscope check of synth audio",
+     "current": "investigate a question | circuits and printable parts | self",
+     "why_it_belongs": "Claude analyzes live output through a networked oscilloscope. Same reading as the LeCroy item.",
+     "strength": "arguable"
+    }
+   ]
+  },
+  {
+   "verdict": "hole_weakened",
+   "reasoning": "Setup check: the cell is empty as tagged. I read all 188 items tagged for = \"researchers or science\" and all 116 tagged \"consumer-device firmware or hardware\". I also read about 410 other items that matched hardware, instrument or research keywords, including every unseen item in the five lens materials. The intersection of the two tags is 0, so the claim is literally true. The 116 device items are almost all for=self, with a few child, family or public. None frames its goal as research. The 188 research items are almost all software, data, math, wet-lab or AI-capability work, and the device-like ones sit in robots, drones or lab-instrument materials.\n\nUnder the adversarial lens the hole is weakened, not refuted. Only one item is a clear member: g-revenge-046 (reverse-engineers an off-the-shelf camera's USB protocol and image format for a scientific imaging station, and replaces the vendor software). It is tagged reverse-engineer or unlock | molecules and lab experiments | researchers or science. It matches the material definition (protocol, drivers, vendor software of an existing product) and the beneficiary. The only gap is that the camera is industrial, not consumer, so a strict reader could call it arguable. Because I list one clear member, the verdict is weakened; if it were downgraded, the verdict would be the same, since all the rest are arguable.\n\nThe arguable members fall into three groups.\n- **Lab instruments or instrument software, not consumer.** g-revenge-007, g-science-052, g-science-058, g-science-046 (beneficiary is a business, so it only counts as a near-miss).\n- **Retail or hobby hardware used for science, but not framed as research.** The USB microscope (g-firmware-005), the home nanopore sequencer (g-science-029), the muon detector (science-058), the balloon tracker (g-physical-050), the home fusor (g-rand-hn-002) and the backyard telescope (personal-040).\n- **Experiments run on off-the-shelf hardware, or on firmware or consumer devices (e.g. phones, wearables).** The robot-dog, robot-arm and Corolla studies, the MAVLink drone item, the phone-rooting firmware flaws in devices-066, the wearable data in g-science-001, and the laptop Neural Engine in g-revenge-013. I did not list the other robot-arm and drone tests tagged for researchers (g-robots-008, 009, 010, 038, 040, 041), because the vocabulary sends moving machines to \"robots, vehicles and drones\", so they are not misfiled.\n\nThe consumer-device tag's own rules push the in-scope cases elsewhere: moving machines go to robots, vehicles and drones, and custom parts go to circuits and printable parts. Most of the other hits therefore come from tag-boundary rules, not from missing use cases. The corpus has no item where a researcher explicitly works on a retail consumer device for research.",
+   "belongs": [
+    {
+     "id": "g-revenge-046",
+     "title": "Imaging station camera capture",
+     "current": "reverse-engineer or unlock | molecules and lab experiments | researchers or science",
+     "why_it_belongs": "Captures USB packets from a proprietary off-the-shelf camera on a scientific imaging station, decodes the 16-bit image format and replaces the vendor software. This is protocol and driver work on an existing product, done for science.",
+     "strength": "clear"
+    },
+    {
+     "id": "g-revenge-007",
+     "title": "Lab instrument raw data format",
+     "current": "reverse-engineer or unlock | molecules and lab experiments | researchers or science",
+     "why_it_belongs": "Decompiles a lab instrument's vendor executable to recover its closed raw data format. It is device-vendor reverse engineering for research, but it targets software and data, not device internals, and the instrument is not consumer-grade.",
+     "strength": "arguable"
+    },
+    {
+     "id": "devices-066",
+     "title": "Kernel and firmware vulnerability discovery and exploitation",
+     "current": "reverse-engineer or unlock | a codebase | researchers or science",
+     "why_it_belongs": "Includes firmware flaws that root phones, which is consumer-device firmware. It is tagged for researchers because it is an AI-capability evaluation. The phone-firmware part is only a fragment of a mostly kernel and network-stack item.",
+     "strength": "arguable"
+    },
+    {
+     "id": "g-firmware-005",
+     "title": "New desktop app for a USB microscope",
+     "current": "reverse-engineer or unlock | consumer-device firmware or hardware | self",
+     "why_it_belongs": "A cheap USB microscope is both a retail device and a science tool, and the item reverse-engineers its app and protocol. No research purpose is stated, so beneficiary 'self' is defensible.",
+     "strength": "arguable"
+    },
+    {
+     "id": "g-science-029",
+     "title": "Sequencing own DNA at home",
+     "current": "tutor or explain | genome | self",
+     "why_it_belongs": "A lab novice sequences a personal genome on a handheld nanopore sequencer. It is science done on a commercially available device, but it is a personal project, not research, and the device is a lab instrument.",
+     "strength": "arguable"
+    },
+    {
+     "id": "g-science-052",
+     "title": "Microscope settings from a research goal",
+     "current": "plan or schedule | molecules and lab experiments | researchers or science",
+     "why_it_belongs": "Claude turns a research goal into settings for a physical microscope and checks them against the instrument's limits. This is device control for research, but the hardware is a lab instrument, not a consumer product.",
+     "strength": "arguable"
+    },
+    {
+     "id": "g-science-058",
+     "title": "Dual-channel live microscopy analysis",
+     "current": "tutor or explain | molecules and lab experiments | researchers or science",
+     "why_it_belongs": "Guides researchers through calibrated live-cell microscopy. It is instrument use for research, with no firmware or hardware-internals work.",
+     "strength": "arguable"
+    },
+    {
+     "id": "g-science-001",
+     "title": "Wearable data analysis in 35 minutes",
+     "current": "investigate a question | body and biometric data | researchers or science",
+     "why_it_belongs": "Research analysis of more than 450 files from consumer wearable devices on 30 people. It uses consumer devices for science, but the object is the data and not the device.",
+     "strength": "arguable"
+    },
+    {
+     "id": "devices-043",
+     "title": "Robot dog fetch study with novices",
+     "current": "investigate a question | robots, vehicles and drones | researchers or science",
+     "why_it_belongs": "A controlled study of Claude helping novices program an off-the-shelf quadruped robot dog. The device is retail, but the vocabulary sends moving machines to robots, vehicles and drones.",
+     "strength": "arguable"
+    },
+    {
+     "id": "devices-044",
+     "title": "Controlling humanoid, dog and arm robots",
+     "current": "operate a live system | robots, vehicles and drones | researchers or science",
+     "why_it_belongs": "A research evaluation of Claude controlling physical off-the-shelf robots (dog, arm, humanoid). It is a research use of retail hardware, but it is routed to the robots material by rule.",
+     "strength": "arguable"
+    },
+    {
+     "id": "g-robots-016",
+     "title": "Pick and place via MCP loop",
+     "current": "investigate a question | robots, vehicles and drones | researchers or science",
+     "why_it_belongs": "Compares three vendors' systems driving a low-cost off-the-shelf robot arm. It is a research comparison on commodity hardware, routed to robots by the vocabulary rules.",
+     "strength": "arguable"
+    },
+    {
+     "id": "g-operate-057",
+     "title": "Drone commanded over MAVLink",
+     "current": "operate a live system | robots, vehicles and drones | researchers or science",
+     "why_it_belongs": "A research-paper test that flies a real drone over its MAVLink protocol. It uses a commodity flight-controller protocol for research, but the drone is a moving machine, so the vocabulary files it under robots.",
+     "strength": "arguable"
+    },
+    {
+     "id": "devices-041",
+     "title": "Language-driven control of a real car",
+     "current": "operate a live system | robots, vehicles and drones | researchers or science",
+     "why_it_belongs": "A research test handing a retail Toyota Corolla's steering, throttle and brake to coding tools. It is a consumer product used for research, but the vocabulary routes vehicles to the robots material.",
+     "strength": "arguable"
+    },
+    {
+     "id": "science-058",
+     "title": "Breadboard cosmic-ray muon detector for a desk oracle",
+     "current": "design a physical thing | circuits and printable parts | self",
+     "why_it_belongs": "Builds a particle detector, a science instrument, with Claude's help. It is hobbyist and custom hardware, not a retail device, and the use is a novelty object, not research.",
+     "strength": "arguable"
+    },
+    {
+     "id": "g-physical-050",
+     "title": "Balloon tracker four-layer board",
+     "current": "design a physical thing | circuits and printable parts | self",
+     "why_it_belongs": "Designs a high-altitude balloon tracker with GPS and sensors; its source domain is science-research. It is custom hardware with an implied science use, not stated research.",
+     "strength": "arguable"
+    },
+    {
+     "id": "g-rand-hn-002",
+     "title": "Home fusor built in 36 hours",
+     "current": "design a physical thing | circuits and printable parts | self",
+     "why_it_belongs": "A home neutron-producing fusor is a physics apparatus built with Claude's help. It is custom apparatus for a personal project, not off-the-shelf hardware or research.",
+     "strength": "arguable"
+    },
+    {
+     "id": "personal-040",
+     "title": "Overnight telescope imaging and processing pipeline",
+     "current": "operate a live system | creative works | self",
+     "why_it_belongs": "Drives a backyard commercial telescope overnight and processes the exposures. It is amateur astronomy on retail instrument hardware, with a hobby motive and not a research one.",
+     "strength": "arguable"
+    },
+    {
+     "id": "g-revenge-013",
+     "title": "Neural Engine training gradients",
+     "current": "reverse-engineer or unlock | consumer-device firmware or hardware | self",
+     "why_it_belongs": "Probes the undocumented limits of a consumer laptop chip's neural engine, which is research-like hardware discovery. It is already in the consumer-device cell but tagged beneficiary self, and no research beneficiary is stated.",
+     "strength": "arguable"
+    }
+   ]
+  }
+ ],
+ "dossier": [
+  {
+   "id": "H1-c1",
+   "hole": "H1",
+   "cell": "consumer-device firmware or hardware x researchers or science",
+   "title": "Detect silent wearable firmware changes that threaten studies",
+   "text": "Diffs successive firmware images and companion-app packages of a fitness wearable, flags changed step, sleep and heart-rate algorithms, and writes a dated data-validity memo for research teams whose cohort data spans those versions.",
+   "pitch": "For research groups and graduate students who collect activity data on consumer wearables and cannot tell when a vendor update quietly changed the metric. It unpacks two or more versions of a device's firmware and companion app, locates the signal-processing code that changed, and reports which date ranges in a dataset are not comparable. Nobody does this because scientists treat the device as a black box and hackers have no research customer.",
+   "demo_60s": "Drop three public releases of one open wearable's firmware (for example InfiniTime) and a vendor companion APK into a folder. The tool unpacks them and shows a side-by-side diff with the step-counter and sleep functions highlighted. A timeline of a sample dataset then shades the period around version 2 as 'algorithm changed, not comparable'. The one-page memo with the affected dates and a suggested sensitivity check opens last.",
+   "needs": [
+    "Windows 11 PC with Python and Node",
+    "Two or more public firmware releases or companion APKs of one wearable (the open-source InfiniTime or Bangle.js releases work for the demo)",
+    "Free decompilation tools (jadx, Ghidra headless or radare2)",
+    "A sample wearable CSV export or a synthetic one with version dates"
+   ],
+   "software_only": true,
+   "est_hours": 8,
+   "land": {
+    "id": "H1-c1",
+    "target_hole_id": "hole-material-for-01",
+    "lands_in_gap": false,
+    "pct_bge": 80.36,
+    "pct_nomic": 15.99,
+    "cos_to_target": 0.2271,
+    "nearest_cos": 0.6328,
+    "nearest_title": "Six years of Oura data cross-referenced"
+   },
+   "prior_art_ai": {
+    "verdict": "partial",
+    "closest": [
+     {
+      "url": "https://napier-repository.worktribe.com/OutputFile/694629",
+      "what": "Paper 'Not all steps are equal: Changing algorithms in wearable trackers changes outcomes'. Documents the problem: vendors change tracker algorithms mid-study, and the paper warns researchers to watch for it. It gives no tool that diffs firmware or apps, and no memo.",
+      "how_close": 0.35,
+      "uses_ai": false
+     },
+     {
+      "url": "https://web.fibion.com/articles/consumer-wearables-research-mistakes/",
+      "what": "Vendor advocacy article from Fibion on unannounced changes to heart rate, sleep and stress algorithms making before/after data incomparable. It recommends raw data and fixed workflows rather than detecting changes.",
+      "how_close": 0.2,
+      "uses_ai": false
+     },
+     {
+      "url": "https://pmc.ncbi.nlm.nih.gov/articles/PMC11985377/",
+      "what": "2024 commentary on research-grade devices. Notes that firmware can change how sensor output becomes counts, cites the 2021 Apple HRV change, and says Oura lets researchers freeze firmware. It names the problem and mitigations, but no diffing method.",
+      "how_close": 0.25,
+      "uses_ai": false
+     }
+    ]
+   },
+   "prior_art_product": {
+    "verdict": "partial",
+    "closest": [
+     {
+      "url": "https://pmc.ncbi.nlm.nih.gov/articles/PMC6480461",
+      "what": "Collins et al. 2019 Sensors, 'Version Reporting and Assessment Approaches for New and Updated Activity and Heart Rate Monitors'. It documents the exact problem: firmware and software updates change device performance, same-model devices on different versions are distinct, and Garmin Vivosmart HR had 14 versions in ~30 months. Its remedy is an empirical bench and treadmill re-validation protocol plus version reporting. It does no firmware diffing and has no tooling.",
+      "how_close": 0.45,
+      "uses_ai": false
+     },
+     {
+      "url": "https://imore.com/apple-watch-data-deemed-unreliable-researchers-due-sudden-algorithm-changes",
+      "what": "News coverage of Apple Watch HRV exports differing between 2020 and 2021 because OS updates changed the algorithms, with Beiwe's developer (Harvard) concerned. It shows the pain point and that researchers detect it by re-exporting data and comparing. No detection tool is mentioned.",
+      "how_close": 0.25,
+      "uses_ai": false
+     },
+     {
+      "url": "https://github.com/Alosh-ui/Firmware-Diffing",
+      "what": "Generic firmware-image diffing script using SHA256 and ssdeep, file-level only, not wearable-specific. Binary-diff tools (BinDiff, Diaphora, firmdiff) cover the diffing mechanics but not metric semantics or a research memo.",
+      "how_close": 0.15,
+      "uses_ai": false
+     }
+    ]
+   }
+  },
+  {
+   "id": "H1-c2",
+   "hole": "H1",
+   "cell": "consumer-device firmware or hardware x researchers or science",
+   "title": "Bluetooth kitchen scale becomes a beehive weight logger",
+   "text": "Reverse-engineers the Bluetooth protocol of a retail kitchen scale from captured notifications, then builds a calibrated logger that streams weight and battery level to CSV with drift correction for bee-research field trials.",
+   "pitch": "For beekeepers, ecology students and small labs that need continuous mass data for hives, nests or soil trays but cannot afford a $300 research logger. A $12 retail scale is enumerated over Bluetooth, its weight packets are decoded, and the output is calibrated against reference masses with a drift curve and a protocol note others can reuse. Nobody has done it because the people who crack gadget protocols build apps for themselves and scientists don't open the case.",
+   "demo_60s": "A laptop scans, finds the scale and prints its raw notification bytes while a known 500 g mass is placed and removed. Within seconds the decoded weight appears as a live plot. A calibration run against three reference masses fits a correction curve and shows the error shrinking. An overnight sample CSV with a hive-style daily mass cycle ends the demo.",
+   "needs": [
+    "Windows 11 laptop or PC with Bluetooth LE and Python (bleak)",
+    "One cheap Bluetooth kitchen or luggage scale (about $12)",
+    "Two or three known reference masses (coins or water bottles)",
+    "Free tools: Wireshark or the phone's HCI snoop log if the vendor app is needed"
+   ],
+   "software_only": false,
+   "est_hours": 10,
+   "land": {
+    "id": "H1-c2",
+    "target_hole_id": "hole-material-for-01",
+    "lands_in_gap": false,
+    "pct_bge": 14.65,
+    "pct_nomic": 51.95,
+    "cos_to_target": 0.5394,
+    "nearest_cos": 0.7612,
+    "nearest_title": "Custom apps for cheap smart glasses"
+   },
+   "prior_art_ai": {
+    "verdict": "partial",
+    "closest": [
+     {
+      "url": "https://hn.svelte.dev/item/49550436",
+      "what": "HN thread on connecting a Withings scale to Home Assistant via ESP32. One commenter says AI helped reverse engineer undocumented Bluetooth protocols, and another used an LLM on decompiled app code for an RV controller. Generic AI-assisted BLE reverse engineering, no beehive and no logger.",
+      "how_close": 0.25,
+      "uses_ai": true
+     },
+     {
+      "url": "https://github.com/the-bug/honigraumwaage-ble",
+      "what": "Beehive honey-super weighing over BLE. It uses a bathroom scale's load cell with an HX711, an Arduino and an HM-10 module, read from a browser. Bee use and BLE are present, but there is no reverse-engineered retail scale protocol, no CSV, no calibration or drift work, and no AI.",
+      "how_close": 0.3,
+      "uses_ai": false
+     },
+     {
+      "url": "https://dev.to/hertzg/hacking-ble-kitchen-scale-55io",
+      "what": "Reverse engineering of the Etekcity ESN00 BLE kitchen scale protocol by sniffing app traffic with Wireshark and adb. Documents the packet structure. No bees and no AI.",
+      "how_close": 0.35,
+      "uses_ai": false
+     }
+    ]
+   },
+   "prior_art_product": {
+    "verdict": "partial",
+    "closest": [
+     {
+      "url": "https://hackaday.io/project/164123-raspberry-pi-smart-scale",
+      "what": "Wii Balance Board read over Bluetooth by a Raspberry Pi. A comment (Graham Toal) reports using one as a beehive scale, with a relay pressing the sync button, plus temperature, humidity, pressure and sound sensors. Consumer Bluetooth scale reused as a hive scale, but no kitchen scale, no new protocol reverse-engineering, no CSV or drift curve.",
+      "how_close": 0.5,
+      "uses_ai": false
+     },
+     {
+      "url": "https://community.home-assistant.io/t/esphome-bluetooth-tracker-for-nutridays-kt630lb-kitchen-scale/989234",
+      "what": "A Bluetooth kitchen scale (Nutridays KT630LB) decoded over GATT with an ESP32-C3 and ESPHome. This is the same technique, but it feeds Home Assistant and is not a calibrated logger or aimed at hives. Page seen only as a search result, not opened.",
+      "how_close": 0.45,
+      "uses_ai": false
+     },
+     {
+      "url": "https://github.com/MarMed/SmartScale-Companion",
+      "what": "Reverse-engineered Web Bluetooth parser for Perfect Company kitchen scales (24-bit counts to grams) with disassembly notes. The README has a history log with timestamps but no CSV export, no user calibration procedure, no drift correction and no hive use. Opened and checked.",
+      "how_close": 0.4,
+      "uses_ai": false
+     }
+    ]
+   }
+  },
+  {
+   "id": "H1-c3",
+   "hole": "H1",
+   "cell": "consumer-device firmware or hardware x researchers or science",
+   "title": "Score agents on reverse-engineering real retail firmware",
+   "text": "Builds a benchmark from open-source smart-plug and e-reader firmware, stripped and rebuilt with planted quirks, then scores how far an autonomous agent recovers the protocol, file formats and hidden behavior in emulation.",
+   "pitch": "For AI-capability and safety researchers who need hard, realistic, gradable autonomy tests that aren't synthetic puzzles. Open-source consumer firmware (Tasmota and ESPHome plugs, open e-reader and wearable images) is rebuilt with planted, documented quirks so ground truth is known, then handed to an agent in a sandbox with an emulator and tools. Nobody has built it because retail firmware work lives in hobbyist forums, far from eval labs, and real devices make grading impossible.",
+   "demo_60s": "A stripped plug firmware is built with a planted undocumented command and a changed file checksum. The agent harness runs on it in an emulator with logs scrolling. A scoreboard then shows milestones checked off (found the network protocol, decoded the config format, located the planted behavior), and a leaderboard compares two agent configurations on twelve tasks.",
+   "needs": [
+    "Windows 11 PC with Python, Node, WSL2 or Docker",
+    "QEMU or other firmware emulation",
+    "Open-source firmware source trees (Tasmota, ESPHome, InfiniTime) and toolchains to rebuild them with planted quirks",
+    "API access to the agent under test, with a budget for run costs",
+    "Sandbox only, no live devices and no network access to others' hardware"
+   ],
+   "software_only": true,
+   "est_hours": 24,
+   "land": {
+    "id": "H1-c3",
+    "target_hole_id": "hole-material-for-01",
+    "lands_in_gap": false,
+    "pct_bge": 75.75,
+    "pct_nomic": 95.52,
+    "cos_to_target": 0.6137,
+    "nearest_cos": 0.61,
+    "nearest_title": "Electric motorcycle app and firmware"
+   },
+   "prior_art_ai": {
+    "verdict": "partial",
+    "closest": [
+     {
+      "url": "https://arxiv.org/abs/2608.11469",
+      "what": "SRE-Bench (Spence et al.): contamination-free agentic reverse-engineering benchmark, 19 private expert-built programs, 262 binary instances, 1,572 deterministically graded tasks, tested on GPT and Claude models. Built from scratch with planted known ground truth and anti-analysis mechanisms. Targets general binaries (mentions firmware only as motivation). No retail firmware, no emulation, no smart-plug or e-reader.",
+      "how_close": 0.5,
+      "uses_ai": true
+     },
+     {
+      "url": "https://www.agentre-bench.ai/",
+      "what": "AgentRE-Bench (v3.1, Oct 2026): scores AI agents on recovering behavior and hidden details of unknown Linux ELF and Windows PE binaries, with deterministic versioned ground truth, tool-call budgets, and Claude, GPT, Grok and Gemini on the leaderboard. Binaries, not consumer firmware; static analysis only, no emulation.",
+      "how_close": 0.45,
+      "uses_ai": true
+     },
+     {
+      "url": "https://arxiv.org/abs/2605.10597",
+      "what": "CrackMeBench: agents reverse-engineer symbol-poor binaries generated from seeded C, Rust and Go templates, with executable oracles in a Docker sandbox, evaluated on GPT-5.5, Claude Opus 4.7 and Kimi K2. Synthetic crackmes, not firmware.",
+      "how_close": 0.3,
+      "uses_ai": true
+     }
+    ]
+   },
+   "prior_art_product": {
+    "verdict": "partial",
+    "closest": [
+     {
+      "url": "https://vals.ai/benchmarks/reverse_eng",
+      "what": "SRE-Bench (vals.ai, arXiv 2608.11469): 19 private from-scratch programs, 262 instances, 1,572 deterministically graded tasks. Covers network protocols, firmware (RevFirmware domain, 6 instances), file-format recovery, malware, with symbol-stripping variants. Differs from the concept: synthetic from-scratch code, not open-source retail firmware rebuilt with planted quirks, and no emulator-in-sandbox focus.",
+      "how_close": 0.6,
+      "uses_ai": true
+     },
+     {
+      "url": "https://www.agentre-bench.ai/",
+      "what": "AgentRE-Bench: source-free binaries, static-analysis tools, versioned ground truth, deterministic scoring and transcripts. Linux ELF and Windows PE only, synthetic challenges, no firmware or emulation.",
+      "how_close": 0.4,
+      "uses_ai": true
+     },
+     {
+      "url": "https://malwarebench.com",
+      "what": "MalwareBench: obfuscated real malware, two graded deliverables (behavior analysis and extractor tested on held-out variants), across Windows, Linux, macOS and Android. Realistic and gradable, but malware rather than consumer firmware.",
+      "how_close": 0.3,
+      "uses_ai": true
+     }
+    ]
+   }
+  },
+  {
+   "id": "H2-c1",
+   "hole": "H2",
+   "cell": "extract and structure x a codebase",
+   "title": "Tabulate every environment variable a repository reads",
+   "text": "Scans a repository's source, Dockerfiles and CI files for every environment variable and setting it reads, then writes a table of name, default, type, required status, readers and file locations, plus an example config.",
+   "pitch": "For developers inheriting or open-sourcing a service with no config documentation, and for the person who must deploy it on a Friday. One pass across languages and deploy files produces a deduplicated census, flags variables read with conflicting defaults, and drafts the example env file. People ask for a README; nobody asks for the underlying table, which is the thing that actually gets used.",
+   "demo_60s": "Point the tool at an unfamiliar open-source web app cloned on the laptop. In about 40 seconds a progress bar sweeps through Python, JS and Dockerfile hits. A sortable table opens showing 63 variables, with 7 highlighted red as 'read with two different defaults' and 11 as 'required, no default'. Click a row to jump to every file:line that reads it. Export a ready .env.example and a CSV.",
+   "needs": [
+    "Windows 11 PC with Python and Node",
+    "A cloned git repository to scan (any public one)",
+    "Model API access for classifying type/required status (or a local fallback with regex-only mode)",
+    "No special hardware or accounts beyond that"
+   ],
+   "software_only": true,
+   "est_hours": 6,
+   "land": {
+    "id": "H2-c1",
+    "target_hole_id": "hole-move-material-01",
+    "lands_in_gap": false,
+    "pct_bge": 78.18,
+    "pct_nomic": 84.64,
+    "cos_to_target": 0.4586,
+    "nearest_cos": 0.6391,
+    "nearest_title": "Document a command-line tool"
+   },
+   "prior_art_ai": {
+    "verdict": "partial",
+    "closest": [
+     {
+      "url": "https://github.com/bobfromarcher/envdoc",
+      "what": "envdoc: deterministic CLI that finds every env var read in JS/TS, Python, Go and Ruby. It writes .env.example, prints a Markdown table and fails CI on undocumented vars. Misses Dockerfile and CI readers, defaults, required status and conflicting-default flags. README says 'no AI'.",
+      "how_close": 0.6,
+      "uses_ai": false
+     },
+     {
+      "url": "https://github.com/hackcode-packages/env-example-generator",
+      "what": "CLI script that lists env vars used in a project and generates .env.example. Only a repo description was seen; the README was not retrievable.",
+      "how_close": 0.4,
+      "uses_ai": false
+     },
+     {
+      "url": "https://claudecode-lab.com/en/blog/claude-code-env-management/",
+      "what": "Blog (seen only in search results, not opened). Reportedly suggests asking Claude Code to scan process.env / os.environ and produce a documented .env.example, and to find every direct process.env read before consolidating config. This is ad-hoc prompting, with no census table, conflicting-default flags or Docker/CI coverage.",
+      "how_close": 0.35,
+      "uses_ai": true
+     }
+    ]
+   },
+   "prior_art_product": {
+    "verdict": "done",
+    "closest": [
+     {
+      "url": "https://pypi.org/project/indiekit-env-audit/",
+      "what": "env-audit: multi-language scan (Python, Node, Go, Rust, Ruby, Shell, Docker) producing a documented .env.example with defaults, required/optional, sensitive flags, file locations, JSON output and a CI --check mode. Lacks CI-file scanning and conflicting-default flagging as far as seen.",
+      "how_close": 0.8,
+      "uses_ai": false
+     },
+     {
+      "url": "https://pypi.org/project/envsniff/",
+      "what": "envsniff (github.com/envsniff/envsniff): scans source for os.getenv/process.env/os.Getenv across languages, detects undocumented vars, generates .env.example, table/JSON/Markdown output, pre-commit and GitHub Action, optional AI-written descriptions.",
+      "how_close": 0.8,
+      "uses_ai": true
+     },
+     {
+      "url": "https://pkg.go.dev/github.com/g4s8/envdoc",
+      "what": "envdoc: Go-only generator of Markdown/HTML/dotenv/JSON env var docs from config struct tags and comments (not a cross-language scan).",
+      "how_close": 0.4,
+      "uses_ai": false
+     }
+    ]
+   }
+  },
+  {
+   "id": "H2-c2",
+   "hole": "H2",
+   "cell": "extract and structure x a codebase",
+   "title": "Lift hardcoded game balance numbers into editable spreadsheets",
+   "text": "Pulls every hardcoded enemy stat, item price, drop rate and spawn rule out of a game mod's scripts into a spreadsheet with source locations, so designers can tune balance in one place.",
+   "pitch": "For modders and small game teams whose balance lives as magic numbers scattered across hundreds of script files, so designers can't see or compare it. The tool turns the code into a flat table (entity, field, value, unit guess, file:line) and can write edits back to the exact locations. Designers have spreadsheets and the data is in code, and nobody has done the one-off lift because it is too tedious by hand.",
+   "demo_60s": "Open a small open-source game or mod folder, say a roguelike with stats embedded in scripts. Run the extractor, and a spreadsheet appears with sheets for Enemies, Items, Loot and Spawns, 400+ rows each with a source file:line. Change a goblin's HP from 12 to 20 and a potion price in the sheet, press 'apply', and show the diff of just those two lines in the scripts, then launch the game to show the goblin is tougher.",
+   "needs": [
+    "Windows 11 PC with Python",
+    "An open-source game or mod repository with hardcoded stats (e.g. a Lua, JS or Python game from GitHub)",
+    "Model API access",
+    "Excel or any spreadsheet app, optionally"
+   ],
+   "software_only": true,
+   "est_hours": 9,
+   "land": {
+    "id": "H2-c2",
+    "target_hole_id": "hole-move-material-01",
+    "lands_in_gap": false,
+    "pct_bge": 99.42,
+    "pct_nomic": 98.34,
+    "cos_to_target": 0.2265,
+    "nearest_cos": 0.5426,
+    "nearest_title": "Agency AI inventories merged into one dataset"
+   },
+   "prior_art_ai": {
+    "verdict": "partial",
+    "closest": [
+     {
+      "url": "https://github.com/Gorilliath/CMW-balance-parser",
+      "what": "Non-AI tool (2021) that parses balance values from Chivalry: Medieval Warfare vanilla/mod source files into a spreadsheet; only dumps a weapon stamina-drain matrix, no write-back, no file:line table.",
+      "how_close": 0.35,
+      "uses_ai": false
+     },
+     {
+      "url": "https://glama.ai/mcp/servers/ztvnq3q0fl",
+      "what": "'gamenumerics' MCP server (seen in WebSearch results, page not opened) letting a coding agent import xlsx game config tables, audit growth curves and run simulations; works on existing tables, does not lift hardcoded numbers out of code.",
+      "how_close": 0.25,
+      "uses_ai": true
+     },
+     {
+      "url": "https://github.com/linuxgurugamer/KSP_DataDump",
+      "what": "KSP mod that dumps part and module values to CSV for balancing; export only, reads runtime data rather than scripts, no write-back, no AI.",
+      "how_close": 0.25,
+      "uses_ai": false
+     }
+    ]
+   },
+   "prior_art_product": {
+    "verdict": "partial",
+    "closest": [
+     {
+      "url": "https://github.com/Gorilliath/CMW-balance-parser",
+      "what": "Node CLI that parses balance values out of Chivalry: Medieval Warfare vanilla/mod source files into a spreadsheet. It only dumps one weapon stamina-drain matrix, is game-specific, and has no write-back. Last pushed 2021, 0 stars.",
+      "how_close": 0.35,
+      "uses_ai": false
+     },
+     {
+      "url": "https://github.com/linuxgurugamer/KSP_DataDump",
+      "what": "KSP mod that dumps part and module values to CSV for spreadsheet editing. Export only, reads game data rather than script source, and has no file:line and no write-back.",
+      "how_close": 0.2,
+      "uses_ai": false
+     },
+     {
+      "url": "https://mod.pub/falloutnv/69-weight-rebalance-framework",
+      "what": "Fallout New Vegas: an xEdit script exports weights from plugins to a CSV, and the edited CSV is read by the mod at runtime. This is a spreadsheet round trip, but through a runtime config rather than editing the original locations, and for one field only.",
+      "how_close": 0.25,
+      "uses_ai": false
+     }
+    ]
+   }
+  },
+  {
+   "id": "H2-c3",
+   "hole": "H2",
+   "cell": "extract and structure x a codebase",
+   "title": "Extract a cited fact database from a monorepo",
+   "text": "Reads a polyglot monorepo's code, infrastructure and pipeline files to extract services, endpoints, tables, queues, jobs and their relations into a queryable database, each row citing file and line, then re-checks every citation.",
+   "pitch": "For platform and architecture teams who need to answer 'what reads this table?' or 'what breaks if this queue goes down?' across a system nobody holds in their head. A fact base with verifiable evidence per row replaces stale architecture diagrams. Summaries of codebases exist, but a database where every row is independently re-verified against its cited lines, and diffable between two commits, has not been built.",
+   "demo_60s": "On a mid-size open-source microservice repo, run extract and watch counts tick up: 14 services, 120 endpoints, 38 tables, 9 queues. Type a SQL query in the browser UI: 'which services write to table orders but are not listed as owners?' and get 3 rows, each with a clickable file:line citation that opens the exact snippet. Show the verification score, 97 percent of citations confirmed, plus a two-commit diff listing a newly added queue consumer.",
+   "needs": [
+    "Windows 11 PC with Python and Node",
+    "SQLite (bundled with Python)",
+    "One or more cloned multi-service open-source repositories for the demo",
+    "Model API access with budget for parallel extraction and verification passes"
+   ],
+   "software_only": true,
+   "est_hours": 16,
+   "land": {
+    "id": "H2-c3",
+    "target_hole_id": "hole-move-material-01",
+    "lands_in_gap": false,
+    "pct_bge": 71.91,
+    "pct_nomic": 87.14,
+    "cos_to_target": 0.5701,
+    "nearest_cos": 0.6693,
+    "nearest_title": "Reference tree planning for protein queries"
+   },
+   "prior_art_ai": {
+    "verdict": "partial",
+    "closest": [
+     {
+      "url": "https://github.com/coderadius-ai/coderadius",
+      "what": "CodeRadius (HN Show HN 48830828, coderadius.ai): open-source tool that builds a queryable architecture graph (services, APIs, queues, databases, across repos and monorepos) from tree-sitter AST plus LLM extraction (Ollama or BYO key). Every node and edge carries grounding (source, evidence, 5-tier quality), it exposes the graph over MCP to Claude Code, Cursor and other agents, and 'cr blast' diffs a change against the graph. Now in maintenance mode, 23 stars. Missing: no stated step that independently re-verifies each row against its cited file and line, and evidence is extractor/LLM-call metadata rather than file:line quotes as far as I could see. Its diff is a PR blast radius against the graph, not a diff of two full fact bases.",
+      "how_close": 0.7,
+      "uses_ai": true
+     },
+     {
+      "url": "https://www.omnispex.dev",
+      "what": "omnispex (Show HN 44636440): tree-sitter dependency extraction into a graph, with AI used only for semantic links on top of statically verified structure. It answers 'what breaks if I change X' across repos. Marketing page only, early access, with no per-row citations and no re-verification step.",
+      "how_close": 0.45,
+      "uses_ai": true
+     },
+     {
+      "url": "https://deepwiki.com",
+      "what": "DeepWiki (Devin/Cognition): LLM-generated repo wikis and architecture diagrams with links to source files. It is prose and diagrams, not a queryable fact table, and does no re-verification or commit-to-commit diff.",
+      "how_close": 0.3,
+      "uses_ai": true
+     }
+    ]
+   },
+   "prior_art_product": {
+    "verdict": "partial",
+    "closest": [
+     {
+      "url": "https://glama.ai/mcp/servers/osadan/code-graph",
+      "what": "code-graph MCP: static scan of a polyglot (Laravel/React/NestJS/Go/Python) codebase into a Kuzu graph of files, HTTP routes, DB tables, queues. Edges store source_file, line and raw snippet, with a read/write/unknown mode and a confidence score. Answers 'what code touches table X'. Does not independently re-verify citations and has no commit diff; it is snapshot-only and needs a re-scan. Extraction is tree-sitter and regex, with AI only on the query side.",
+      "how_close": 0.72,
+      "uses_ai": false
+     },
+     {
+      "url": "https://dev.to/ryantsuji/building-one-knowledge-graph-across-46-repositories-with-static-analysis-part-1-egm",
+      "what": "Production write-up of a 46-repo knowledge graph in BigQuery. tree-sitter extraction plus Gemini for dynamic field access. Boundary edges for API endpoints, events, and DB tables (READS_FROM/WRITES_TO). Verification is a daily connection-rate metric, not per-row citation checks. No file/line evidence described and no commit diff.",
+      "how_close": 0.6,
+      "uses_ai": true
+     },
+     {
+      "url": "https://github.com/ducduyn31/codegraph",
+      "what": "CodeGraph: graph of service dependencies (direct API calls and message-queue relationships) for on-call debugging, queryable with Cypher. README mentions mapping specific functions and lines and versioned snapshots over time. Does not list tables as node types and does not mention citation re-verification.",
+      "how_close": 0.5,
+      "uses_ai": true
+     }
+    ]
+   }
+  },
+  {
+   "id": "H3-c1",
+   "hole": "H3",
+   "cell": "financial and legal paperwork x the public or a community",
+   "title": "Open-books page for a hobby club",
+   "text": "Turns a hobby club treasurer's bank export and receipt photos into a plain-language open-books page for members, reconciling every line, flagging unmatched spending, and publishing a one-page yearly report.",
+   "pitch": "For volunteer treasurers of clubs, leagues, game guilds and open-source projects who collect dues from dozens of members and answer 'where did the money go?' by hand. The treasurer drops in the bank CSV and a folder of receipt photos, and gets a reconciled ledger plus a members' page with categories, totals and a short list of items needing explanation. Nobody does it because community money sits in a gap between personal bookkeeping tools and formal nonprofit accounting software.",
+   "demo_60s": "Drag a messy 12-month bank CSV and 40 phone photos of receipts into a browser window. Watch lines match to receipts on screen, three unmatched items turn red, and the treasurer types one-line explanations. Click Publish and a clean members page appears with a dues-in versus spend-out bar chart, a category breakdown, and a downloadable PDF annual report.",
+   "needs": [
+    "Windows PC with Python and Node",
+    "Synthetic or consenting-club bank CSV and receipt photos",
+    "Vision-capable LLM API key for reading receipts",
+    "Free static hosting account or local web server for publishing"
+   ],
+   "software_only": true,
+   "est_hours": 10,
+   "land": {
+    "id": "H3-c1",
+    "target_hole_id": "hole-material-for-02",
+    "lands_in_gap": false,
+    "pct_bge": 7.17,
+    "pct_nomic": 30.84,
+    "cos_to_target": 0.6761,
+    "nearest_cos": 0.7727,
+    "nearest_title": "Japanese household scans renamed"
+   },
+   "prior_art_ai": {
+    "verdict": "partial",
+    "closest": [
+     {
+      "url": "https://github.com/machulav/accountant24",
+      "what": "Local-first AI agent (built with Claude Code and hledger): extracts transactions from PDF bank statements and receipt photos into a plain-text ledger and gives category reports. Single-user personal finance. No reconciliation feature, no member-facing page, no club focus.",
+      "how_close": 0.35,
+      "uses_ai": true
+     },
+     {
+      "url": "https://github.com/wingertandrew/Expensing",
+      "what": "Self-hosted-style AI receipt reading plus bank CSV import (as described by a web search summary of TaxHacker-like tools, with CompteQC using Claude Vision for receipts and bank CSV/OFX dedupe). Aimed at freelancers and small businesses. No members' page, no unmatched-spending flags for a group. This URL was seen in search results but not opened.",
+      "how_close": 0.3,
+      "uses_ai": true
+     },
+     {
+      "url": "https://dev.to/afzaal_a/ai-finance-agent-for-nonprofits-a-90-day-playbook-nd6",
+      "what": "Article on AI agents that match bank transactions to the ledger and flag mismatches for nonprofits. Mentions donor receipts but no members' or public transparency page, no receipt-photo matching.",
+      "how_close": 0.25,
+      "uses_ai": true
+     }
+    ]
+   },
+   "prior_art_product": {
+    "verdict": "partial",
+    "closest": [
+     {
+      "url": "https://classic.ptotoday.com/finance-manager",
+      "what": "PTO Today Finance Manager: phone receipt photo upload, click-to-match bank reconciliation, board/audit reports, $139/yr. Lacks a members' public page and AI; made for school PTOs, not hobby clubs.",
+      "how_close": 0.6,
+      "uses_ai": false
+     },
+     {
+      "url": "https://moneyminder.com/groups-clubs/",
+      "what": "MoneyMinder: club/booster accounting with bank import (12,000+ banks), reconciliation, receipt storage, member statements, reports, $299/yr. Member-facing open-books page and receipt-to-line matching not confirmed.",
+      "how_close": 0.55,
+      "uses_ai": false
+     },
+     {
+      "url": "https://docs.opencollective.com/help/collectives/budget",
+      "what": "Open Collective: public transparent budget and ledger with receipts required per expense, used by open-source projects. Public by default, but it is a platform that holds the money, not a bank-CSV reconciler, and receipts are private.",
+      "how_close": 0.45,
+      "uses_ai": false
+     }
+    ]
+   }
+  },
+  {
+   "id": "H3-c2",
+   "hole": "H3",
+   "cell": "financial and legal paperwork x the public or a community",
+   "title": "Neighbors' lease clauses compared side by side",
+   "text": "Compares redacted leases that tenants of one landlord voluntarily upload, aligns clauses across copies, and publishes a shared map showing which fees and terms differ between neighbors for the same unit type.",
+   "pitch": "For tenant associations and building groups where each renter signed a nominally identical lease and none can tell whether they got the same terms. Members upload their own redacted lease, the system aligns clause by clause, and the group sees a diff map: this late fee is 5 percent for most units and 10 percent for yours, this renewal clause appears in only seven leases. Individuals only ever see their own copy, so the comparison, which needs many contracts at once, has been out of reach.",
+   "demo_60s": "Upload six synthetic leases for the same building. A clause-by-clause grid appears, highlighting a late-fee rate, a parking charge and an auto-renewal clause that differ between units. Click one cell to see the exact wording in every lease, then export a one-page summary the tenant association can bring to a meeting with the landlord.",
+   "needs": [
+    "Windows PC with Python and Node",
+    "Six to ten synthetic or volunteer-donated redacted leases (PDF or text)",
+    "LLM API key for clause extraction and alignment",
+    "Local web server; no hardware"
+   ],
+   "software_only": true,
+   "est_hours": 14,
+   "land": {
+    "id": "H3-c2",
+    "target_hole_id": "hole-material-for-02",
+    "lands_in_gap": false,
+    "pct_bge": 73.96,
+    "pct_nomic": 80.87,
+    "cos_to_target": 0.561,
+    "nearest_cos": 0.639,
+    "nearest_title": "Clause-by-clause contract risk scoring"
+   },
+   "prior_art_ai": {
+    "verdict": "partial",
+    "closest": [
+     {
+      "url": "https://law-journals-books.vlex.com/vid/leases-forms-1049451032",
+      "what": "Leases as Forms (academic): analysis of ~170,000 Philadelphia eviction-court leases; finds leases vary more between landlords than within them and flags unlawful terms. Court-record data, not tenant-contributed, no per-group diff map, not shown to use an AI assistant. Seen in search results only (publisher page redirected on fetch).",
+      "how_close": 0.35,
+      "uses_ai": false
+     },
+     {
+      "url": "https://chromewebstore.google.com/detail/lmpdooiklheoifbeipdepajjonidajfl",
+      "what": "Tenant Lease AI Chrome extension: uses the user's own OpenAI key to flag unfair clauses in a single lease and lists 'compare multiple leases side-by-side', but that is for weighing rental options, not pooling neighbors' leases.",
+      "how_close": 0.25,
+      "uses_ai": true
+     },
+     {
+      "url": "https://dev.to/2pomberito/i-analyzed-100-rental-leases-using-ai-heres-what-i-found-4coh",
+      "what": "Blog post: author ran about 100 leases from different US states through an NLP tool (GoLeazly) and reported recurring patterns. Not one landlord, not tenant-contributed, no clause alignment or diff map.",
+      "how_close": 0.2,
+      "uses_ai": true
+     }
+    ]
+   },
+   "prior_art_product": {
+    "verdict": "partial",
+    "closest": [
+     {
+      "url": "https://leasecheck.carrd.co/",
+      "what": "LeaseCheck: renters anonymously report rent, fees, landlords and safety; compiled into transparency reports. Crowdsourced and tenant-side, but structured reports, not clause-aligned lease uploads. Landing page only, scale unverified.",
+      "how_close": 0.35,
+      "uses_ai": false
+     },
+     {
+      "url": "https://www.harvey.ai/en-US/blog/harvey-in-practice-analyze-multiple-lease-agreements",
+      "what": "Harvey: upload many leases and summarize or compare key terms across the set. Same cross-lease clause alignment, but built for legal teams and portfolios, not pooled tenant uploads.",
+      "how_close": 0.4,
+      "uses_ai": true
+     },
+     {
+      "url": "https://denser.ai/solutions/real-estate/property-management/",
+      "what": "DenserAI: landlord and property-manager tool that compares lease terms across properties. Mechanism matches; audience is the landlord.",
+      "how_close": 0.3,
+      "uses_ai": true
+     }
+    ]
+   }
+  },
+  {
+   "id": "H3-c3",
+   "hole": "H3",
+   "cell": "financial and legal paperwork x the public or a community",
+   "title": "County form guide built from neighbors' filings",
+   "text": "Turns neighbors' redacted, completed permit and benefit forms plus their outcomes into a shared field-by-field guide for one county, walking newcomers through each form and updating when the agency revises it.",
+   "pitch": "For immigrant networks, mutual-aid groups and neighborhood associations that already pass 'how I filled it in' knowledge by word of mouth. Volunteers contribute redacted completed forms with notes on what was accepted or bounced, and the system builds a living guide per form: what each box really wants, common rejection causes, and where to get help, with a clear 'this is information, not legal advice' referral. A watcher detects when the agency publishes a new form version and flags the guide as stale. No one has done it because each filing is private and one-off, so the community's collective experience was never turned into a shared reference.",
+   "demo_60s": "Show three redacted completed copies of a city permit application, each with an accepted or rejected note. The system produces a field-by-field guide page, highlighting box 14 as the one that caused two rejections. Then swap in a revised blank form PDF, and the guide flags four changed fields as needing review and notifies the maintainer.",
+   "needs": [
+    "Windows PC with Python and Node",
+    "Blank public form PDFs from one agency, plus volunteer-redacted completed examples with outcomes",
+    "LLM API key with PDF or vision input",
+    "Web hosting or local server; scheduled task to check the agency site for new form versions",
+    "A volunteer reviewer for accuracy and legal-information disclaimers"
+   ],
+   "software_only": true,
+   "est_hours": 40,
+   "land": {
+    "id": "H3-c3",
+    "target_hole_id": "hole-material-for-02",
+    "lands_in_gap": false,
+    "pct_bge": 73.38,
+    "pct_nomic": 85.6,
+    "cos_to_target": 0.485,
+    "nearest_cos": 0.6279,
+    "nearest_title": "Parallel research report pipeline"
+   },
+   "prior_art_ai": {
+    "verdict": "partial",
+    "closest": [
+     {
+      "url": "https://www.navapbc.com/news/pilot-ai-chatbot-benefits",
+      "what": "Nava Labs and Imagine LA pilot of an LLM chatbot for benefit navigators (Benefit Navigator tool with application tips). Staff-facing Q&A over program rules, not a crowdsourced field-by-field guide built from neighbors' redacted filings.",
+      "how_close": 0.25,
+      "uses_ai": true
+     },
+     {
+      "url": "https://www.nextgov.com/artificial-intelligence/2026/05/anthropic-and-nonprofit-partner-streamline-benefits-administration-ai/413455",
+      "what": "Code for America with Anthropic (Claude): SNAP Policy Navigator for caseworkers. Agency-side policy tool, no community-contributed completed forms or outcomes.",
+      "how_close": 0.15,
+      "uses_ai": true
+     },
+     {
+      "url": "https://instafill.ai/category/immigration-forms",
+      "what": "Commercial AI form-filling for immigration forms (extracts data from source documents into fields). Fills forms for one user; no shared per-form guide, no outcome data, no staleness watcher.",
+      "how_close": 0.15,
+      "uses_ai": true
+     }
+    ]
+   },
+   "prior_art_product": {
+    "verdict": "partial",
+    "closest": [
+     {
+      "url": "https://whyy.org/articles/local-men-create-method-to-help-make-immigration-easier",
+      "what": "Borderwise: guided questionnaire that picks and fills immigration forms, with attorney review. Single-vendor, not crowdsourced from neighbors' filings, no outcome-based per-field guide or version-staleness watcher.",
+      "how_close": 0.3,
+      "uses_ai": false
+     },
+     {
+      "url": "https://www.propel.app/insights/can-ai-agents-help-people-apply-for-snap-part-1/",
+      "what": "Propel's testing of AI agents filling SNAP applications, plus Propel/mRelief/Nava assistants. These help individuals or caseworkers fill forms; none builds a shared guide from redacted peer filings and outcomes.",
+      "how_close": 0.25,
+      "uses_ai": true
+     },
+     {
+      "url": "https://assets.bouldercounty.gov/wp-content/uploads/2017/06/presentation-information-for-immigrants-project-2017-06-27.pdf",
+      "what": "Boulder County volunteer forums with trained volunteers explaining packets (established practice), with a planned simplified user-friendly packet. Manual, workshop-based, no living guide from filings.",
+      "how_close": 0.2,
+      "uses_ai": false
+     }
+    ]
+   }
+  },
+  {
+   "id": "H4-c1",
+   "hole": "H4",
+   "cell": "reverse-engineer or unlock x a business or its customers",
+   "title": "Rescue data from abandoned accounting software",
+   "text": "Decodes an abandoned accounting program's proprietary data files by comparing byte patterns against on-screen records, then exports customers, invoices and balances to CSV and SQLite with a documented parser a small business can keep.",
+   "pitch": "For a small business whose bookkeeping software vendor has vanished, leaving years of records in an unreadable file format and no export button. The user supplies the data folder and a few screenshots of known records. The structure is inferred, checked against those records, and turned into a reusable parser. Nobody has done this because each such job is too small for a reverse-engineering consultant to take on.",
+   "demo_60s": "Drop an unreadable .dat file and three screenshots of the old program's customer screen into the tool. It shows its guessed record layout and highlights the byte ranges it matched to names and amounts. It reports that 412 of 412 invoices reconcile to the on-screen totals. It then opens a clean SQLite table and a customers.csv, and the generated parser script is shown on screen.",
+   "needs": [
+    "Python 3.11+",
+    "a sample proprietary data file (a synthetic stand-in built for the demo)",
+    "a few screenshots of known records",
+    "no accounts or special hardware"
+   ],
+   "software_only": true,
+   "est_hours": 8,
+   "land": {
+    "id": "H4-c1",
+    "target_hole_id": "hole-move-for-04",
+    "lands_in_gap": false,
+    "pct_bge": 50.48,
+    "pct_nomic": 20.28,
+    "cos_to_target": 0.4989,
+    "nearest_cos": 0.6831,
+    "nearest_title": "Turns receipt photos into expense reports"
+   },
+   "prior_art_ai": {
+    "verdict": "partial",
+    "closest": [
+     {
+      "url": "https://blog.kiney.de/en/blog/binaerdateiformate-reverse-engineering",
+      "what": "Blog post: Claude Opus 4.5 in Zed (after ChatGPT deep research) reverse-engineered the proprietary .TC OBD-II diagnostic log format and built a CSV converter in about 2 hours for roughly $6. Validated by plausibility checks, not against on-screen records. Not accounting.",
+      "how_close": 0.45,
+      "uses_ai": true
+     },
+     {
+      "url": "https://tex0l.github.io/en/blog/ctrk-exporter",
+      "what": "Blog post: Claude helped reverse-engineer Yamaha Y-Trac .CTRK binary telemetry files (no export in the official app), with a Python parser validated against the original library's output, plus a TypeScript port. Not accounting or business data.",
+      "how_close": 0.4,
+      "uses_ai": true
+     },
+     {
+      "url": "https://news.ycombinator.com/item?id=50065233",
+      "what": "HN comment: Claude Code decompiled an .exe for a lab instrument that only gave PDF reports, reverse-engineered the raw data format, and wrote an analysis suite. Anecdote; not accounting.",
+      "how_close": 0.3,
+      "uses_ai": true
+     }
+    ]
+   },
+   "prior_art_product": {
+    "verdict": "partial",
+    "closest": [
+     {
+      "url": "https://blog.kiney.de/en/blog/binaerdateiformate-reverse-engineering",
+      "what": "Blog post (fetched): Claude Opus 4.5 agent reverse engineers an undocumented binary .TC OBD-II recording format, found the structure in about 15 minutes, built an Apache-2 CSV converter (thinkcar-tc-reader) in about 2 hours for roughly $6. Same method (AI infers a proprietary format, plausibility-checks against known facts, ships a reusable converter), but a different domain (car data), and the check was informal rather than against on-screen records.",
+      "how_close": 0.45,
+      "uses_ai": true
+     },
+     {
+      "url": "https://www.cimaware.com/about-us",
+      "what": "Cimaware, a data recovery software maker, says it reverse engineers each new file format at binary level to build recovery tools (seen in search result snippet only). Human-driven and format-by-format, not a general tool for abandoned accounting packages.",
+      "how_close": 0.3,
+      "uses_ai": false
+     },
+     {
+      "url": "https://propersoft.net",
+      "what": "ProperConvert and similar converters (seen in search results) turn accounting and bank formats such as QuickBooks files and Quicken QDF into CSV or OFX. They cover only supported mainstream formats, not abandoned or unknown proprietary ones.",
+      "how_close": 0.2,
+      "uses_ai": false
+     }
+    ]
+   }
+  },
+  {
+   "id": "H4-c2",
+   "hole": "H4",
+   "cell": "reverse-engineer or unlock x a business or its customers",
+   "title": "Label printer driver from a phone Bluetooth log",
+   "text": "Decodes a Bluetooth log captured from a vendor's phone app to reconstruct a shop label printer's undocumented protocol, then writes a laptop driver that prints inventory labels directly from a spreadsheet.",
+   "pitch": "For a shop owner locked into a cheap label printer whose phone app can only print one label at a time. The owner turns on the phone's built-in Bluetooth snoop log, prints a few test labels, and hands over the file. The protocol is worked out from the packets, and a PC tool prints in bulk. Nobody does it because the wins are tiny per device, yet there are thousands of such devices.",
+   "demo_60s": "Show a raw Bluetooth HCI log of a phone app printing a label. The tool highlights the header, the bitmap rows and the checksum, and labels each field. A spreadsheet of 20 products then turns into 20 labels. They print through the laptop's Bluetooth, or into an on-screen simulator that replays the decoded packets, with no vendor app involved.",
+   "needs": [
+    "Android phone with developer options (HCI snoop log)",
+    "laptop with Bluetooth",
+    "Python with bleak",
+    "a cheap BLE label printer (a bundled simulator replays the demo without one)"
+   ],
+   "software_only": false,
+   "est_hours": 10,
+   "land": {
+    "id": "H4-c2",
+    "target_hole_id": "hole-move-for-04",
+    "lands_in_gap": false,
+    "pct_bge": 38.9,
+    "pct_nomic": 77.99,
+    "cos_to_target": 0.5577,
+    "nearest_cos": 0.7125,
+    "nearest_title": "Obfuscated Bluetooth OBD reader protocol via Frida"
+   },
+   "prior_art_ai": {
+    "verdict": "partial",
+    "closest": [
+     {
+      "url": "https://mertol.substack.com/p/reverse-engineering-a-cat-printer",
+      "what": "Non-expert used ChatGPT/an LLM to reverse engineer a BLE cat printer from phone-side captured traffic (Apple PacketLogger, not Android snoop log) and build an image print pipeline. Partial driver; no bulk or spreadsheet printing, no shop use case.",
+      "how_close": 0.6,
+      "uses_ai": true
+     },
+     {
+      "url": "https://github.com/mkuhlmann/pyphomemo",
+      "what": "Python library, CLI and server for the Phomemo M110 label printer, written largely by Claude Code. Protocol came from earlier human reverse-engineering projects, not a fresh capture. Loops labels over one BLE connection (the README's example prints A-1, A-2, A-3).",
+      "how_close": 0.5,
+      "uses_ai": true
+     },
+     {
+      "url": "https://gist.github.com/vsigler/98eafaf8cdf2374669e590328164f5fc",
+      "what": "Brother PT-P300BT: Android Bluetooth snoop log captured, then a Python driver written. The search summary did not mention AI. I did not open the page.",
+      "how_close": 0.5,
+      "uses_ai": false
+     }
+    ]
+   },
+   "prior_art_product": {
+    "verdict": "done",
+    "closest": [
+     {
+      "url": "https://github.com/transcriptionstream/phomymo",
+      "what": "Browser-based design and print tool for Phomemo label printers with no vendor app. README lists CSV import, variable templates, preview grid and batch printing. This is the PC bulk-from-spreadsheet outcome, delivered as a finished tool.",
+      "how_close": 0.8,
+      "uses_ai": false
+     },
+     {
+      "url": "https://github.com/vivier/phomemo-tools",
+      "what": "CUPS driver for Phomemo label and receipt printers. README says the protocol was reverse-engineered by sniffing the vendor app's traffic, and an issue thread covers further reverse engineering of newer models. HN discussion exists at news.ycombinator.com/item?id=45729340.",
+      "how_close": 0.75,
+      "uses_ai": false
+     },
+     {
+      "url": "https://github.com/labbots/NiimPrintX",
+      "what": "Python library with CLI and GUI for NIIMBOT label printers over Bluetooth. Gives a PC print path with quantity and density settings and replaces the phone app. Related NIIMBOT projects: MultiMote/niimblue (820 stars), niimbluelib, niimprint, hass-niimbot.",
+      "how_close": 0.6,
+      "uses_ai": false
+     }
+    ]
+   }
+  },
+  {
+   "id": "H4-c3",
+   "hole": "H4",
+   "cell": "reverse-engineer or unlock x a business or its customers",
+   "title": "Resurrect an orphaned booking app's dead server",
+   "text": "Captures traffic between a salon's orphaned booking client and its dead vendor server, infers the message formats, and reimplements a drop-in server so the paid software keeps syncing appointments on current Windows.",
+   "pitch": "For businesses that bought a licensed desktop and phone booking system, then watched the vendor shut down its cloud, leaving the software unusable. The owner's own client runs against a local replacement server, rebuilt from recorded traffic, local certificates and the client's binary. It restores something the owner already paid for. It has not been done because the work is unglamorous and the vendors are gone, so there is no one to ask.",
+   "demo_60s": "A booking app shows 'cannot reach server' and refuses to open. The tool replays the captured conversation, lists the inferred message types and fields, and starts a local server. The app reconnects, loads last month's appointments, saves a new booking, and a second client on the same network sees it appear.",
+   "needs": [
+    "Windows 11 PC",
+    "Python and Node",
+    "Wireshark or mitmproxy",
+    "a client binary plus recorded traffic (a purpose-built mock 'dead vendor' app and server pair is supplied for the demo)"
+   ],
+   "software_only": true,
+   "est_hours": 30,
+   "land": {
+    "id": "H4-c3",
+    "target_hole_id": "hole-move-for-04",
+    "lands_in_gap": false,
+    "pct_bge": 78.89,
+    "pct_nomic": 84.96,
+    "cos_to_target": 0.5197,
+    "nearest_cos": 0.6194,
+    "nearest_title": "Invoices sent from chat"
+   },
+   "prior_art_ai": {
+    "verdict": "none_found",
+    "closest": [
+     {
+      "url": "https://github.com/allan-simon/figma-kiwi-protocol",
+      "what": "Show HN: protocol reverse-engineered with Claude (Figma binary WebSocket). It targets a live vendor, not a dead one, and builds no replacement server.",
+      "how_close": 0.2,
+      "uses_ai": true
+     },
+     {
+      "url": "https://github.com/cernodile/reegg",
+      "what": "Python server emulator for a mobile game, built by reverse engineering the client API for preservation. No AI mentioned, and it is a game rather than business software.",
+      "how_close": 0.3,
+      "uses_ai": false
+     },
+     {
+      "url": "https://davidschilling.de/2026/01/11/reviving-bettertyping-org-with-ai-coding-agents.html",
+      "what": "Reviving an old site with Claude Opus. It was the author's own codebase, with no protocol reverse engineering and no dead vendor server.",
+      "how_close": 0.1,
+      "uses_ai": true
+     }
+    ]
+   },
+   "prior_art_product": {
+    "verdict": "partial",
+    "closest": [
+     {
+      "url": "https://github.com/kercre123/wire-pod",
+      "what": "wire-pod: community-built replacement server for the Anki/DDL Vector robot after the vendor's cloud went down; lets owners' existing devices keep working against a local server. Same method and outcome, consumer robot not business software, hand-built.",
+      "how_close": 0.6,
+      "uses_ai": false
+     },
+     {
+      "url": "https://github.com/toniebox-reverse-engineering/teddycloud",
+      "what": "TeddyCloud: open-source server replacement for the Boxine cloud used by the Toniebox, built by reverse engineering the device protocol.",
+      "how_close": 0.55,
+      "uses_ai": false
+     },
+     {
+      "url": "https://news.ycombinator.com/item?id=22172706",
+      "what": "HN comment: author reverse engineered the OUYA API after its servers shut down in 2019 and built a documented re-implementation so consoles work again.",
+      "how_close": 0.55,
+      "uses_ai": false
+     }
+    ]
+   }
+  },
+  {
+   "id": "H5-c1",
+   "hole": "H5",
+   "cell": "coordinate many agents x family or household",
+   "title": "Per-member agents negotiate the household's weekly schedule",
+   "text": "Assigns one scheduling agent to each household member, who negotiate the week's school runs, dinners, chores and appointments from imported calendars and stated limits, then output a shared plan with flagged conflicts.",
+   "pitch": "For busy households where one parent is the unpaid scheduler. Each member imports a calendar and fills a short form of must-haves and nice-to-haves, and their agent bargains with the others, so the plan shows who gave ground and which clashes only humans can resolve. Nobody has tried it because multi-agent work targets developers and family tools use one assistant that treats the household as one blob.",
+   "demo_60s": "Four demo family members appear as four colored lanes, each with an ICS file and a three-line limits form. Hit Negotiate and the screen shows agents trading offers in a live log, such as 'Mia takes Tuesday pickup if Dad covers Thursday dinner'. It ends on a printable one-page weekly plan with two red items marked 'needs a human', and a click on any slot shows who conceded what.",
+   "needs": [
+    "Windows PC with Python and Node",
+    "ICS calendar exports (or the sample files), no special hardware",
+    "Anthropic API key",
+    "Optional: Google Calendar read access"
+   ],
+   "software_only": true,
+   "est_hours": 10,
+   "land": {
+    "id": "H5-c1",
+    "target_hole_id": "hole-move-for-01",
+    "lands_in_gap": false,
+    "pct_bge": 52.53,
+    "pct_nomic": 87.65,
+    "cos_to_target": 0.7827,
+    "nearest_cos": 0.6993,
+    "nearest_title": "Reviews grant proposals for go or no-go"
+   },
+   "prior_art_ai": {
+    "verdict": "partial",
+    "closest": [
+     {
+      "url": "https://arxiv.org/abs/2604.10475",
+      "what": "PEMAND: persona-enriched LLM multi-agent negotiation for household decision-making (one agent per member plus a moderator, per search snippets). Simulates household travel and mobility decisions for research. It has no calendar import, no weekly plan, and no conflict flagging for parents.",
+      "how_close": 0.4,
+      "uses_ai": true
+     },
+     {
+      "url": "https://arxiv.org/abs/2503.12757",
+      "what": "MAP (CHI EA 2025): multi-agent LLM system that resolves conflicts between several users' preferences and schedules in a shared setting. The abstract fetch only confirmed multi-user conflict resolution with user feedback. The household and schedule framing comes from a search snippet. No per-member agents and no weekly family plan.",
+      "how_close": 0.35,
+      "uses_ai": true
+     },
+     {
+      "url": "https://arxiv.org/html/2605.09823",
+      "what": "CalBench: benchmark for multi-agent calendar scheduling where each agent manages a private calendar. It measures displacement cost, burden fairness and privacy leakage. I saw it only in search results and did not open it. Research benchmark, not for households and not a product.",
+      "how_close": 0.35,
+      "uses_ai": true
+     }
+    ]
+   },
+   "prior_art_product": {
+    "verdict": "partial",
+    "closest": [
+     {
+      "url": "https://sri.com/?p=7974",
+      "what": "PTIME/CALO (SRI): personal calendar agents negotiate conflicts with other users' agents via distributed constraint optimization; no family or household framing, no shared plan output",
+      "how_close": 0.5,
+      "uses_ai": true
+     },
+     {
+      "url": "https://arxiv.org/abs/2604.10475",
+      "what": "PEMAND: LLM persona agents negotiate a household decision in a multi-agent conversation; simulates trip planning and mobility, not weekly scheduling from imported calendars",
+      "how_close": 0.4,
+      "uses_ai": true
+     },
+     {
+      "url": "https://htekdev.github.io/home-os-site/",
+      "what": "Home OS (open source): agents per domain incl. Family Coordinator for carpool, activities and drive times; function-based agents, no negotiation described",
+      "how_close": 0.35,
+      "uses_ai": true
+     }
+    ]
+   }
+  },
+  {
+   "id": "H5-c2",
+   "hole": "H5",
+   "cell": "coordinate many agents x family or household",
+   "title": "Reconcile relatives' conflicting memories into one family recipe",
+   "text": "Interviews each relative separately about a grandmother's signature dish, then has a mediator agent reconcile their conflicting memories into one recipe card that marks disputed steps and lists a cook-off test plan.",
+   "pitch": "For families trying to save a dish nobody wrote down. Each relative talks to their own interviewer agent by phone voice note or text, and a mediator compares the versions, finds where they agree, and turns the disagreements (lard or butter, how long to rest the dough) into a small cook-off test. Nobody has done it because it needs one agent per witness plus a reconciler, and the people who cook for family don't usually think of multi-agent setups.",
+   "demo_60s": "Three relatives' voice-note transcripts appear side by side, each with its own interviewer agent. A mediator highlights the three disagreements in red. The screen then produces a recipe card with 'Aunt Rosa: rests dough overnight, Uncle Tom: two hours' footnotes and a Saturday cook-off sheet to test the two versions, ending on a share link to send to the cousins.",
+   "needs": [
+    "Phone voice recorder or the laptop mic",
+    "Speech-to-text (local Whisper or API)",
+    "Anthropic API key",
+    "Consent of the relatives interviewed"
+   ],
+   "software_only": true,
+   "est_hours": 9,
+   "land": {
+    "id": "H5-c2",
+    "target_hole_id": "hole-move-for-01",
+    "lands_in_gap": false,
+    "pct_bge": 85.99,
+    "pct_nomic": 82.66,
+    "cos_to_target": 0.429,
+    "nearest_cos": 0.608,
+    "nearest_title": "Talk through headache worry"
+   },
+   "prior_art_ai": {
+    "verdict": "partial",
+    "closest": [
+     {
+      "url": "https://dev.to/guo_x_36a154b5e3620014fc8/heirloom-ai-preserve-family-memory-46m3",
+      "what": "Heirloom AI (open source, Gemini): turns recipe cards, voice recordings and cooking videos into structured recipe entries with confidence levels and 'speculative gaps' for family to verify. No multi-relative interviews, no reconciliation of conflicting versions, no cook-off plan.",
+      "how_close": 0.35,
+      "uses_ai": true
+     },
+     {
+      "url": "https://registry.npmjs.org/achiote",
+      "what": "Achiote (npm / KyaniteLabs MCP server, for Claude Code and Codex): reconstructs a family food memory into structured clues, a research plan and a minimum-viable nostalgia cue, and suggests follow-up questions for relatives. Works from one person's memory; no per-relative interviewer agents, no reconciling of conflicting accounts, no test plan.",
+      "how_close": 0.3,
+      "uses_ai": true
+     },
+     {
+      "url": "https://abu-dhabi.aitinkerers.org/hackathons/h_5JdYgPp2uXc/entries/ht_3z0cqRR7G64",
+      "what": "Cody (AI Tinkerers hackathon entry): an AI agent that runs voice interviews with family members to preserve stories and memories. Seen in search results only; the page returned 403. Not recipe-specific and no reconciliation as far as the snippet shows.",
+      "how_close": 0.2,
+      "uses_ai": true
+     }
+    ]
+   },
+   "prior_art_product": {
+    "verdict": "partial",
+    "closest": [
+     {
+      "url": "https://github.com/lizardkingLK/the-nostalgia-cookbook",
+      "what": "Voice-recording AI archiver that transcribes relatives' recipe stories into structured recipe cards (opened README). Single-narrator capture; no multi-witness comparison, dispute marking or cook-off plan.",
+      "how_close": 0.4,
+      "uses_ai": true
+     },
+     {
+      "url": "https://www.nextavenue.org/how-create-lost-family-recipe/",
+      "what": "Human practice guide for reconstructing a lost family recipe: oral histories from several relatives, ranges, repeated test attempts, reaching agreement on a version. Same outcome done manually, no AI or tool (seen in search snippet, not opened).",
+      "how_close": 0.5,
+      "uses_ai": false
+     },
+     {
+      "url": "https://lablab.ai/submissions/h4rulvuwnisq0vddw32tct30",
+      "what": "EchoMind hackathon project: AI life-story interviews that preserve memories. Seen only in search results, not opened. No evidence of recipe reconciliation.",
+      "how_close": 0.2,
+      "uses_ai": true
+     }
+    ]
+   }
+  },
+  {
+   "id": "H5-c3",
+   "hole": "H5",
+   "cell": "coordinate many agents x family or household",
+   "title": "Sibling agents negotiate a fair eldercare rota across households",
+   "text": "Runs a standing agent for each sibling and one for a parent's written wishes, negotiating a fair monthly visit, errand and appointment rota across households, tracking a fairness ledger and escalating deadlocks to humans.",
+   "pitch": "For siblings splitting a parent's care from different cities, where resentment about who does more is often the real problem. Each sibling's agent holds their stated availability and limits, a parent agent holds the parent's own written preferences and has first say on what they accept, and a shared ledger tracks visits, drives and money over months, so fairness is visible instead of argued. Nobody has built it because it needs persistent multi-party agents with real calendar access and consent from everyone, which neither developer tools nor consumer family apps provide.",
+   "demo_60s": "A demo family of three siblings and a parent shows a month grid. A new event, 'Mom's cardiology appointment Thursday 2pm', arrives and the agents trade proposals in a side feed. The ledger shifts 'Dana +1 drive, Marcus +1 phone call', the parent's agent vetoes a Sunday slot citing her written note, and a deadlock the agents can't resolve is pushed to a group chat message for the siblings to settle.",
+   "needs": [
+    "Calendar access (Google or ICS) for each sibling",
+    "Group messaging channel such as Telegram or email",
+    "Anthropic API key",
+    "Written consent and input from every family member including the parent"
+   ],
+   "software_only": true,
+   "est_hours": 32,
+   "land": {
+    "id": "H5-c3",
+    "target_hole_id": "hole-move-for-01",
+    "lands_in_gap": false,
+    "pct_bge": 56.05,
+    "pct_nomic": 85.03,
+    "cos_to_target": 0.7726,
+    "nearest_cos": 0.6931,
+    "nearest_title": "Reviews grant proposals for go or no-go"
+   },
+   "prior_art_ai": {
+    "verdict": "partial",
+    "closest": [
+     {
+      "url": "https://devpost.com/software/shoulder",
+      "what": "Shoulder, a Devpost hackathon project. Each family member gets an agent on Claude Sonnet 4.5 (Bedrock, Strands Agents SDK) that negotiates caregiving duties, weighing tasks, capacities and fairness. It is open source (MIT). I could not open the page directly (403 or JS shell), so this comes from search-result summaries. I could not confirm a separate parent-wishes agent, a months-long fairness ledger, real calendar access or escalation to humans. A builder note says the arithmetic was kept outside the model to stop allocations drifting.",
+      "how_close": 0.7,
+      "uses_ai": true
+     },
+     {
+      "url": "https://www.ncbi.nlm.nih.gov/pmc/articles/PMC10738213/",
+      "what": "NegotiAge: an AI negotiation trainer where caregivers practise with avatar agents (sibling, older adult, physician). It is a coaching tool, not a rota-allocating agent system.",
+      "how_close": 0.25,
+      "uses_ai": true
+     },
+     {
+      "url": "https://arxiv.org/pdf/2512.12510",
+      "what": "Qualitative interview study of AI for care coordination in cognitive decline. It asks whether agents could help coordinate, but no multi-agent sibling rota is built.",
+      "how_close": 0.2,
+      "uses_ai": true
+     }
+    ]
+   },
+   "prior_art_product": {
+    "verdict": "partial",
+    "closest": [
+     {
+      "url": "https://apps.apple.com/au/app/carecommons/id6772265055",
+      "what": "CareCommons: free iPhone app for siblings sharing parent care; shared task board, care log, schedules; nudges to redistribute when tasks pile on one person. No negotiation, no parent agent, no ledger of drives/money, AI not mentioned.",
+      "how_close": 0.35,
+      "uses_ai": false
+     },
+     {
+      "url": "https://apps.apple.com/us/app/caring-village/id1093814557",
+      "what": "Caring Village: established care-circle app (siblings coordinate care, shared calendar, tasks); human-driven, no fairness ledger or agents. Seen in search results only.",
+      "how_close": 0.3,
+      "uses_ai": false
+     },
+     {
+      "url": "https://builder.aws.com/content/3JDRwUYHIIqyFxDdCzvkmYCucRY/agents-for-humans-building-kinship-a-care-agent-that-keeps-its-promises",
+      "what": "Kinship: multi-agent eldercare system (agent for older adult, agent for daughter caregiver) with human-approved proposals. Opened; no siblings, fairness or negotiation.",
+      "how_close": 0.25,
+      "uses_ai": true
+     }
+    ]
+   }
+  },
+  {
+   "id": "H6-c1",
+   "hole": "H6",
+   "cell": "investigate a question x consumer-device firmware or hardware",
+   "title": "Overnight battery drain traced by controlled experiments",
+   "text": "Runs controlled overnight experiments on an Android phone over adb, toggling radios, sync and app standby buckets while logging battery stats, then ranks which setting explains the unexplained drain.",
+   "pitch": "For anyone whose phone loses 15 percent overnight and who is tired of forum folklore. An experiment loop plans a test matrix, runs one night per condition, and reports effect sizes with confidence. Nobody does this because a single night is noisy and the bookkeeping across nights is tedious, and the loop does the bookkeeping.",
+   "demo_60s": "Time-lapse of a phone on a USB cable, then a screen with a table of eight overnight conditions and measured percent drain per hour for each. The final slide is a ranked bar chart with intervals showing that one sync setting and background location explain most of the drain, followed by a one-paragraph written finding and the exact adb commands to reproduce it.",
+   "needs": [
+    "Android phone with USB debugging enabled",
+    "USB cable and a Windows 11 PC with Python and adb",
+    "a few nights of runtime",
+    "optional: USB power meter"
+   ],
+   "software_only": true,
+   "est_hours": 8,
+   "land": {
+    "id": "H6-c1",
+    "target_hole_id": "hole-move-material-05",
+    "lands_in_gap": false,
+    "pct_bge": 80.29,
+    "pct_nomic": 79.14,
+    "cos_to_target": 0.6214,
+    "nearest_cos": 0.6726,
+    "nearest_title": "Wearable data links late coding to poor sleep"
+   },
+   "prior_art_ai": {
+    "verdict": "partial",
+    "closest": [
+     {
+      "url": "https://nothing.community/d/46335",
+      "what": "Nothing Community thread 'Investigating Nothing OS CPU Idle Behavior - Wake Locks & Background Services'. Search snippet says a user used GPT-5 to investigate why the CPU does not reach deep idle and why the phone drains overnight. I could not read the body, so I don't know whether adb experiments or multi-night runs were involved. Likely an anecdote, not a controlled loop.",
+      "how_close": 0.3,
+      "uses_ai": true
+     },
+     {
+      "url": "https://github.com/S2-group/android-runner",
+      "what": "Android Runner (the search result listed the fork Bla/android-runner). A non-AI framework that automates repeated Android battery experiments from JSON configs, with a batterystats plugin and run hooks. It covers the experiment-loop and bookkeeping half of the concept, but has no overnight scope, no setting-toggle ranking and no AI.",
+      "how_close": 0.35,
+      "uses_ai": false
+     },
+     {
+      "url": "https://github.com/OutrageousStorm/android-wakelock-analyzer",
+      "what": "Python tool that parses an adb bugreport into top wakelock holders, per-app CPU and network, and alarm wakeups. The repo lists a battery_drain_test.sh, but the README does not describe it. It only attributes drain from a single capture, has no controlled toggling, and the page does not mention AI.",
+      "how_close": 0.2,
+      "uses_ai": false
+     }
+    ]
+   },
+   "prior_art_product": {
+    "verdict": "partial",
+    "closest": [
+     {
+      "url": "https://github.com/S2-group/android-runner",
+      "what": "Android Runner: automates repeated measurement experiments on Android devices over adb with profiler plugins. Closest on experiment orchestration and bookkeeping. The page I opened does not confirm settings toggling or statistics, and it targets app energy research rather than a user's unexplained overnight drain.",
+      "how_close": 0.45,
+      "uses_ai": false
+     },
+     {
+      "url": "https://arxiv.org/pdf/2510.01754",
+      "what": "ARENA: Android Studio plugin that resets battery stats per iteration and runs R statistics (Kruskal-Wallis, ANOVA). Covers repeated runs plus analysis. Hardware-measurement oriented, and I did not confirm automatic settings toggling. Seen in search results only, not opened.",
+      "how_close": 0.4,
+      "uses_ai": false
+     },
+     {
+      "url": "https://github.com/google/battery-historian",
+      "what": "Battery Historian: analyzes bugreports (wakelocks, timelines) and offers A/B comparison of two bugreports. Archived Dec 2022. It does not run experiments, so the human does the bookkeeping across nights.",
+      "how_close": 0.35,
+      "uses_ai": false
+     }
+    ]
+   }
+  },
+  {
+   "id": "H6-c2",
+   "hole": "H6",
+   "cell": "investigate a question x consumer-device firmware or hardware",
+   "title": "Release notes versus firmware binaries across five years",
+   "text": "Downloads every public firmware release of a consumer gadget line, unpacks and diffs them, and tabulates what silently changed in endpoints, permissions, ciphers and features against what the release notes claimed.",
+   "pitch": "For privacy researchers, consumer journalists and owners deciding whether to update. It treats a product's update history as a dataset and asks what the vendor changed that it never said. Nobody does this at scale because unpacking, diffing and reading dozens of images per product is weeks of grind.",
+   "demo_60s": "Pick an e-reader or camera line from a list. Progress shows 40 firmware files fetched and unpacked, then a timeline with release notes on top and measured changes below. Red markers show an added telemetry hostname in 2022, a removed local-API feature, and a weakened TLS setting, each clickable to the diff evidence.",
+   "needs": [
+    "public firmware download URLs for one product line",
+    "7-Zip or Python archive libraries",
+    "Windows 11 PC with Python and Node",
+    "disk space of a few GB",
+    "internet"
+   ],
+   "software_only": true,
+   "est_hours": 12,
+   "land": {
+    "id": "H6-c2",
+    "target_hole_id": "hole-move-material-05",
+    "lands_in_gap": false,
+    "pct_bge": 56.17,
+    "pct_nomic": 55.53,
+    "cos_to_target": 0.4471,
+    "nearest_cos": 0.6967,
+    "nearest_title": "Audio interface firmware and SSH"
+   },
+   "prior_art_ai": {
+    "verdict": "partial",
+    "closest": [
+     {
+      "url": "https://github.com/gmh5225/diffalayze",
+      "what": "Fetches old and new binaries, runs Ghidriff diffs, then an LLM pipeline (OpenAI, Claude or Ollama) writes severity-rated reports. This is AI-assisted binary diffing, but for security patch diffing. It has no release-notes comparison, no multi-year corpus and no consumer-gadget focus.",
+      "how_close": 0.3,
+      "uses_ai": true
+     },
+     {
+      "url": "https://gh.r-mj.com/Kyworn/slopwise",
+      "what": "Pre-alpha multi-agent LLM pipeline. Ghidra decompiles two binaries, an analyzer classes each change as bugfix, feature, refactor or security tweak, and a critic and clusterer follow. The only example is a cJSON library version pair, and it does not check release notes.",
+      "how_close": 0.25,
+      "uses_ai": true
+     },
+     {
+      "url": "https://arxiv.org/html/2509.23970v1",
+      "what": "2025 paper on LLM binary diff summarization. It adds natural-language summaries to binary diffs, with no release-notes comparison and no product-history dataset.",
+      "how_close": 0.2,
+      "uses_ai": true
+     }
+    ]
+   },
+   "prior_art_product": {
+    "verdict": "partial",
+    "closest": [
+     {
+      "url": "https://github.com/blacktop/ipsw-diffs",
+      "what": "Public, continuously updated Apple IPSW firmware diffs across many iOS/iPadOS/macOS releases (via the ipsw tool). It is the same method (unpack and diff every release) but is aimed at security researchers, covers Apple only, and does no comparison against release notes or any privacy tabulation.",
+      "how_close": 0.45,
+      "uses_ai": false
+     },
+     {
+      "url": "https://github.com/SpiwalObsessed/iOS-AI-PoC-Collection",
+      "what": "AI-written reports built on ipsw diffing of iOS releases. It uses AI to describe what changed between firmware builds, but is vulnerability-oriented, covers a single platform, and does not compare against release-note claims.",
+      "how_close": 0.4,
+      "uses_ai": true
+     },
+     {
+      "url": "https://arxiv.org/pdf/2406.12947",
+      "what": "AutoFirm (seen in search results, not opened): large-scale analysis of 6,901 IoT firmware images that tracks reused and outdated libraries across versions. It is a longitudinal firmware dataset study but does not check release-note fidelity.",
+      "how_close": 0.25,
+      "uses_ai": false
+     }
+    ]
+   }
+  },
+  {
+   "id": "H6-c3",
+   "hole": "H6",
+   "cell": "investigate a question x consumer-device firmware or hardware",
+   "title": "Cloud shutdown drill for every gadget at home",
+   "text": "Sinkholes each household gadget's vendor domains one at a time from a laptop hotspot, tests which features survive, and produces a ranked map of what bricks if the cloud disappears.",
+   "pitch": "For smart-home owners and repair advocates who worry about the next vendor shutdown. A drill harness plans which domains to block, drives each device's features through its app or local interface, and records what keeps working offline. Nobody has made this systematic because testing one device takes an afternoon and finding the critical domain is guesswork.",
+   "demo_60s": "A laptop hotspot runs with three devices attached, a smart plug, a TV and an e-reader. The harness blocks one domain at a time while a live grid fills in with green for works, amber for degraded, red for bricked. It ends with a one-page cloud-dependence report showing that the plug dies when one domain goes, while the TV only loses ads and voice search.",
+   "needs": [
+    "Windows 11 PC with Wi-Fi that supports mobile hotspot",
+    "a DNS sinkhole such as dnsmasq or a Python resolver",
+    "two to ten owned consumer devices",
+    "their companion apps on a phone",
+    "packet capture tool"
+   ],
+   "software_only": false,
+   "est_hours": 24,
+   "land": {
+    "id": "H6-c3",
+    "target_hole_id": "hole-move-material-05",
+    "lands_in_gap": false,
+    "pct_bge": 86.69,
+    "pct_nomic": 93.86,
+    "cos_to_target": 0.4246,
+    "nearest_cos": 0.6199,
+    "nearest_title": "Denial-of-service bug library"
+   },
+   "prior_art_ai": {
+    "verdict": "partial",
+    "closest": [
+     {
+      "url": "https://community.homey.app/t/homeys-offline-capabilities-tested-v2-0-0-rc-x/5775",
+      "what": "Manual test of a hub's offline capabilities per device/feature. Human-run, one platform, no domain sinkholing, no ranking, no AI.",
+      "how_close": 0.3,
+      "uses_ai": false
+     },
+     {
+      "url": "https://okdiario.com/techy/en/he-blocked-the-internet-on-all-his-smart-devices-and-discovered-something-he-didnt-expect/2339/",
+      "what": "Anecdotal article: a person blocked internet on all smart devices and reported what still worked. Blanket block, manual, no per-domain drill, no AI.",
+      "how_close": 0.3,
+      "uses_ai": false
+     },
+     {
+      "url": "https://www.matteralpha.com/explainer/do-matter-devices-work-without-internet",
+      "what": "Tester cut internet and checked which Matter devices worked offline via Apple Home. Manual, per-device observations, no AI.",
+      "how_close": 0.25,
+      "uses_ai": false
+     }
+    ]
+   },
+   "prior_art_product": {
+    "verdict": "partial",
+    "closest": [
+     {
+      "url": "https://arxiv.org/abs/2003.07133",
+      "what": "IoTrimmer (Mandalari, Kolcun, Haddadi, Dubois, Choffnes): research framework that tests which destinations a consumer IoT device contacts and blocks those not needed for functionality. Same mechanism (per-destination blocking, check function survives) but aimed at privacy, not a ranked 'what bricks' map; no public code found.",
+      "how_close": 0.55,
+      "uses_ai": false
+     },
+     {
+      "url": "https://www.home-assistant.io/blog/2016/02/12/classifying-the-internet-of-things/",
+      "what": "Home Assistant IoT classes (cloud polling/push vs local polling/push): established practice that classifies each integration by cloud dependency. A declared label per integration, not an empirically tested drill.",
+      "how_close": 0.35,
+      "uses_ai": false
+     },
+     {
+      "url": "https://www.smarthomeperfected.com/smart-home-devices-work-without-internet/",
+      "what": "DIY practice guide: block device internet at router/firewall, log contacted servers, check what still works. Manual, per device, no harness.",
+      "how_close": 0.3,
+      "uses_ai": false
+     }
+    ]
+   }
+  }
+ ],
+ "judges": [
+  {
+   "scores": [
+    {
+     "id": "H1-c1",
+     "score": 6,
+     "why": "Sits in the strongest hole (q=0.003), but two of three auditors weakened or refuted it. Both prior-art lenses say partial: the problem is documented, no diffing tool exists. It lands far from the target (cos 0.23)."
+    },
+    {
+     "id": "H1-c2",
+     "score": 4,
+     "why": "H1 hole is weakened by the audit. Partial prior art is close: BLE scale reverse engineering is published, and Wii board and HX711 hive scales exist."
+    },
+    {
+     "id": "H1-c3",
+     "score": 4,
+     "why": "Novelty percentiles are high (95 nomic), but SRE-Bench has a RevFirmware domain and is the closest match at 0.6. H1 audit weakened."
+    },
+    {
+     "id": "H2-c1",
+     "score": 1,
+     "why": "Product prior art is done: env-audit and envsniff already do this, and the lens verdict caps the score at 3. H2 is only an exploratory hole."
+    },
+    {
+     "id": "H2-c2",
+     "score": 6,
+     "why": "Prior art is weak at 0.35 (a game-specific parser with no write-back), and both percentiles are very high (99 and 98). The hole itself is only exploratory."
+    },
+    {
+     "id": "H2-c3",
+     "score": 3,
+     "why": "CodeRadius and code-graph MCP are close at 0.7. Per-row re-verification and commit diff are the only differences, and the hole is weak."
+    },
+    {
+     "id": "H3-c1",
+     "score": 3,
+     "why": "PTO Today and MoneyMinder cover reconciliation and receipts at 0.6. Landing percentiles are low (7 bge, 31 nomic)."
+    },
+    {
+     "id": "H3-c2",
+     "score": 5,
+     "why": "Partial prior art is moderate: Harvey does cross-lease comparison, but not pooled tenant uploads. Percentiles are decent (74 and 81). The hole is weak."
+    },
+    {
+     "id": "H3-c3",
+     "score": 6,
+     "why": "Prior art is distant (0.3 or below), and percentiles are good (73 and 86). The hole is weak, and 40 hours is a large build."
+    },
+    {
+     "id": "H4-c1",
+     "score": 4,
+     "why": "AI-assisted reverse engineering of proprietary formats is already published (0.45). Percentiles are middling (50 and 20)."
+    },
+    {
+     "id": "H4-c2",
+     "score": 2,
+     "why": "Product prior art is done: phomymo, NiimPrintX and phomemo-tools already give bulk CSV printing without the vendor app. Capped at 3."
+    },
+    {
+     "id": "H4-c3",
+     "score": 7,
+     "why": "Only candidate with AI prior art of none_found. Product art (wire-pod, TeddyCloud) is partial, with none aimed at business software. Percentiles are strong (79 and 85)."
+    },
+    {
+     "id": "H5-c1",
+     "score": 5,
+     "why": "Partial from both lenses (PEMAND, PTIME at 0.4 to 0.5). Landing is mixed (52 and 88), with high cosine to target (0.78)."
+    },
+    {
+     "id": "H5-c2",
+     "score": 6,
+     "why": "No multi-witness reconciliation tool found, so partial prior art at 0.3 to 0.5 is a manual practice only. Percentiles are high (86 and 83)."
+    },
+    {
+     "id": "H5-c3",
+     "score": 3,
+     "why": "The Shoulder hackathon project, with per-family-member negotiation agents, is at 0.7 and is nearly the same idea."
+    },
+    {
+     "id": "H6-c1",
+     "score": 5,
+     "why": "Android Runner and ARENA cover the experiment-loop half (0.45). Percentiles are good (80 and 79). The hole is exploratory."
+    },
+    {
+     "id": "H6-c2",
+     "score": 5,
+     "why": "Partial prior art at 0.45 (ipsw-diffs, Apple only, no release-note comparison). Percentiles are middling (56 and 56)."
+    },
+    {
+     "id": "H6-c3",
+     "score": 5,
+     "why": "IoTrimmer is the same mechanism at 0.55, with no public code. Percentiles are high (87 and 94)."
+    }
+   ],
+   "top3": [
+    "H4-c3",
+    "H1-c1",
+    "H2-c2"
+   ]
+  },
+  {
+   "scores": [
+    {
+     "id": "H1-c1",
+     "score": 6,
+     "why": "Real pain for wearable researchers and a clear diff-to-memo demo, but narrow audience and the 'aha' is a memo, not a visceral reveal."
+    },
+    {
+     "id": "H1-c2",
+     "score": 7,
+     "why": "A $12 scale becoming a hive logger is tangible and easy to show live, and beekeepers or small labs want it; BLE scale decoding already exists, which dulls the novelty."
+    },
+    {
+     "id": "H1-c3",
+     "score": 5,
+     "why": "Eval labs would want it, but a leaderboard of agent scores is abstract for a general viewer, and SRE-Bench and AgentRE-Bench already cover close ground."
+    },
+    {
+     "id": "H2-c1",
+     "score": 4,
+     "why": "Useful but already shipped by several tools (env-audit, envsniff), so no 'you can do that?' moment."
+    },
+    {
+     "id": "H2-c2",
+     "score": 7,
+     "why": "Pulling balance numbers out of code into a spreadsheet, editing a goblin's HP, then seeing the game change is a crisp, fun round trip that modders would use."
+    },
+    {
+     "id": "H2-c3",
+     "score": 6,
+     "why": "Verified citations and commit diffs are a genuine edge and the SQL demo is clear, but the demo is dev-centric and CodeRadius and code-graph are close."
+    },
+    {
+     "id": "H3-c1",
+     "score": 6,
+     "why": "Volunteer treasurers do need this and the drag-drop-publish demo is clean, but it is a familiar bookkeeping idea and PTO Today and MoneyMinder already do most of it."
+    },
+    {
+     "id": "H3-c2",
+     "score": 8,
+     "why": "Seeing exactly how neighbors' 'identical' leases differ is a strong reveal, tenant groups would use it at once, and the clause grid demo is very clear."
+    },
+    {
+     "id": "H3-c3",
+     "score": 7,
+     "why": "Community knowledge turned into a living form guide has real social value and a good stale-form demo, but 40 hours and legal-advice risk blunt it."
+    },
+    {
+     "id": "H4-c1",
+     "score": 8,
+     "why": "Recovering years of records from an unreadable file with no export button, checked against screenshots until 412 of 412 invoices reconcile, is a strong 'wait, it can do that?' moment and a real small-business need."
+    },
+    {
+     "id": "H4-c2",
+     "score": 5,
+     "why": "Decoding the Bluetooth log is neat, but phomymo and similar tools already deliver CSV bulk printing, so it lacks surprise."
+    },
+    {
+     "id": "H4-c3",
+     "score": 9,
+     "why": "Reviving a dead vendor server from recorded traffic so paid software works again is the biggest 'you can DO that?' here, with a vivid before and after demo and a real need; the cost is 30 hours and a mock demo app."
+    },
+    {
+     "id": "H5-c1",
+     "score": 6,
+     "why": "Per-member agents bargaining over the week is charming and the live negotiation log is watchable, but it is a gimmick next to a shared calendar and few would trust it."
+    },
+    {
+     "id": "H5-c2",
+     "score": 8,
+     "why": "Reconciling three relatives' conflicting memories into a recipe with a cook-off test is emotional and shareable, and the demo lands in 60 seconds."
+    },
+    {
+     "id": "H5-c3",
+     "score": 6,
+     "why": "A sympathetic, high-stakes use case, but it needs consent, calendars, and months of use, the demo is diffuse, and Shoulder is already close."
+    },
+    {
+     "id": "H6-c1",
+     "score": 7,
+     "why": "Everyone relates to overnight battery drain, and a ranked bar chart of causes with reproducible adb commands is a clean payoff; one night per condition is slow, which hurts the demo."
+    },
+    {
+     "id": "H6-c2",
+     "score": 7,
+     "why": "Checking five years of firmware against what release notes claimed, with a red marker for a telemetry host added in 2022, appeals to journalists and privacy researchers, though it needs a lot of unpacking work."
+    },
+    {
+     "id": "H6-c3",
+     "score": 8,
+     "why": "A live red, amber and green grid of what bricks when each cloud domain dies is very visual, topical, and relevant to anyone with smart gadgets; the owned-hardware setup is the drawback."
+    }
+   ],
+   "top3": [
+    "H4-c3",
+    "H4-c1",
+    "H5-c2"
+   ]
+  },
+  {
+   "scores": [
+    {
+     "id": "H1-c1",
+     "score": 5,
+     "why": "Software-only, but locating step/sleep code in compiled firmware and APKs with jadx/Ghidra is unreliable in a day, and the credible demo leans on synthetic data."
+    },
+    {
+     "id": "H1-c2",
+     "score": 4,
+     "why": "Needs a bought BLE scale and masses, reverse-engineering the protocol is unpredictable, and viewers cannot replicate the demo."
+    },
+    {
+     "id": "H1-c3",
+     "score": 3,
+     "why": "At 24h it is over budget: it needs firmware rebuilds with planted quirks, emulation under WSL/QEMU and an agent harness, and emulating ESP32 or Cortex-M firmware is flaky."
+    },
+    {
+     "id": "H2-c1",
+     "score": 9,
+     "why": "Pure software with regex plus an LLM pass over any cloned repo, a simple table UI and exports, about 6h with little that can go wrong, though similar tools already exist."
+    },
+    {
+     "id": "H2-c2",
+     "score": 7,
+     "why": "Doable with a small open-source Lua/JS/Python game and write-back by file:line, but round-trip edits are brittle and the 'launch the game' step adds risk."
+    },
+    {
+     "id": "H2-c3",
+     "score": 6,
+     "why": "Feasible with tree-sitter, an LLM, SQLite and citation re-checking, but a polyglot multi-service extraction is broad, costly to run and hard to make accurate in a day."
+    },
+    {
+     "id": "H3-c1",
+     "score": 7.5,
+     "why": "Synthetic CSV and receipts, vision LLM matching, a static page and a PDF are all standard Python/Node work, and viewers can try it with sample data."
+    },
+    {
+     "id": "H3-c2",
+     "score": 7.5,
+     "why": "Six synthetic leases, LLM clause extraction and alignment, and a grid UI are straightforward and demo well, with moderate prompt-tuning risk."
+    },
+    {
+     "id": "H3-c3",
+     "score": 4,
+     "why": "At 40h it is far over budget, and it also needs real redacted filings, an agency-site watcher, a volunteer reviewer and legal disclaimers."
+    },
+    {
+     "id": "H4-c1",
+     "score": 6,
+     "why": "The demo works with a synthetic .dat file and screenshots, but the generic format-inference engine is hard, and a stand-in file we author ourselves is less convincing."
+    },
+    {
+     "id": "H4-c2",
+     "score": 5,
+     "why": "A bundled simulator keeps the demo viewable, but real value needs an Android phone with HCI logs and a physical printer, and the prior art is already done."
+    },
+    {
+     "id": "H4-c3",
+     "score": 3.5,
+     "why": "At 30h it is over budget: it needs a purpose-built mock client and server, TLS interception and a protocol-replay server, and the demo is bespoke."
+    },
+    {
+     "id": "H5-c1",
+     "score": 8,
+     "why": "Needs only ICS parsing, four LLM agents in a negotiation loop and a lane UI with a live log; fully software and instantly viewable, with some risk in making the negotiation converge."
+    },
+    {
+     "id": "H5-c2",
+     "score": 8.5,
+     "why": "Text transcripts, per-relative agents and a mediator are mostly prompt design plus a simple card UI, about 9h, and viewers can run it with no hardware; Whisper is optional."
+    },
+    {
+     "id": "H5-c3",
+     "score": 4,
+     "why": "At 32h it is over budget: persistent agents, real calendar access, messaging escalation and consent from every family member make it hard to demo convincingly in a day."
+    },
+    {
+     "id": "H6-c1",
+     "score": 3.5,
+     "why": "Needs an Android phone, a USB cable and several nights of runtime, so the experiment loop cannot be built, tested and shown within a day, and viewers cannot reproduce it."
+    },
+    {
+     "id": "H6-c2",
+     "score": 4.5,
+     "why": "Fetching and unpacking dozens of proprietary firmware images (encrypted or odd formats) and diffing them against release notes is open-ended, with big downloads and fragile tooling."
+    },
+    {
+     "id": "H6-c3",
+     "score": 2.5,
+     "why": "Needs several owned consumer devices, a Windows hotspot with DNS sinkholing and app-driven feature testing; at 24h it is the least reproducible for viewers."
+    }
+   ],
+   "top3": [
+    "H5-c2",
+    "H2-c1",
+    "H5-c1"
+   ]
+  }
+ ],
+ "ranking": [
+  {
+   "id": "H5-c2",
+   "total": 22.5
+  },
+  {
+   "id": "H3-c2",
+   "total": 20.5
+  },
+  {
+   "id": "H2-c2",
+   "total": 20
+  },
+  {
+   "id": "H4-c3",
+   "total": 19.5
+  },
+  {
+   "id": "H5-c1",
+   "total": 19
+  },
+  {
+   "id": "H4-c1",
+   "total": 18
+  },
+  {
+   "id": "H1-c1",
+   "total": 17
+  },
+  {
+   "id": "H3-c3",
+   "total": 17
+  },
+  {
+   "id": "H3-c1",
+   "total": 16.5
+  },
+  {
+   "id": "H6-c2",
+   "total": 16.5
+  },
+  {
+   "id": "H6-c1",
+   "total": 15.5
+  },
+  {
+   "id": "H6-c3",
+   "total": 15.5
+  }
+ ]
+}

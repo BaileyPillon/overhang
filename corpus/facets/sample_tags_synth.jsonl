@@ -1,0 +1,80 @@
+{"id": "anchors-004", "move": "audit or diagnose", "material": "a codebase", "for": "self"}
+{"id": "anchors-021", "move": "draft routine documents", "material": "a codebase", "for": "self"}
+{"id": "anchors-024", "move": "draft routine documents", "material": "business operations", "for": "a business or its customers"}
+{"id": "anchors-046", "move": "tutor or explain", "material": "learning material and skills", "for": "self"}
+{"id": "anchors-048", "move": "tutor or explain", "material": "learning material and skills", "for": "self"}
+{"id": "anchors-057", "move": "distill a corpus", "material": "public datasets and papers", "for": "self"}
+{"id": "anchors-065", "move": "draft routine documents", "material": "creative works", "for": "a business or its customers"}
+{"id": "anchors-068", "move": "create creative media", "material": "creative works", "for": "a business or its customers"}
+{"id": "anchors-072", "move": "investigate a question", "material": "public datasets and papers", "for": "self"}
+{"id": "anchors-076", "move": "plan or schedule", "material": "trips, meals and household logistics", "for": "self"}
+{"id": "devices-005", "move": "design a physical thing", "material": "circuits and printable parts", "for": "self"}
+{"id": "devices-006", "move": "reverse-engineer or unlock", "material": "consumer-device firmware or hardware", "for": "self"}
+{"id": "devices-011", "move": "design a physical thing", "material": "circuits and printable parts", "for": "self"}
+{"id": "devices-012", "move": "design a physical thing", "material": "circuits and printable parts", "for": "self"}
+{"id": "devices-018", "move": "reverse-engineer or unlock", "material": "consumer-device firmware or hardware", "for": "self"}
+{"id": "devices-022", "move": "build or modify software", "material": "robots, vehicles and drones", "for": "self"}
+{"id": "devices-023", "move": "audit or diagnose", "material": "a compiled binary or game ROM", "for": "self"}
+{"id": "devices-039", "move": "audit or diagnose", "material": "consumer-device firmware or hardware", "for": "self"}
+{"id": "devices-041", "move": "operate a live system", "material": "robots, vehicles and drones", "for": "researchers or science"}
+{"id": "devices-044", "move": "operate a live system", "material": "robots, vehicles and drones", "for": "researchers or science"}
+{"id": "devices-050", "move": "build or modify software", "material": "home network and smart home", "for": "self"}
+{"id": "devices-057", "move": "design a physical thing", "material": "circuits and printable parts", "for": "self"}
+{"id": "devices-059", "move": "build or modify software", "material": "circuits and printable parts", "for": "self"}
+{"id": "devices-068", "move": "build or modify software", "material": "consumer-device firmware or hardware", "for": "self"}
+{"id": "devices-079", "move": "audit or diagnose", "material": "a compiled binary or game ROM", "for": "self"}
+{"id": "devices-080", "move": "audit or diagnose", "material": "a codebase", "for": "a business or its customers"}
+{"id": "devices-081", "move": "reverse-engineer or unlock", "material": "a codebase", "for": "researchers or science"}
+{"id": "devices-083", "move": "audit or diagnose", "material": "home network and smart home", "for": "self"}
+{"id": "money-007", "move": "screen rank or map", "material": "a marketplace or other people's offers", "for": "self"}
+{"id": "money-013", "move": "automate a routine chore", "material": "business operations", "for": "a business or its customers"}
+{"id": "money-017", "move": "negotiate or dispute", "material": "a marketplace or other people's offers", "for": "self"}
+{"id": "money-024", "move": "tutor or explain", "material": "business operations", "for": "a business or its customers"}
+{"id": "money-031", "move": "extract and structure", "material": "personal and family archives", "for": "self"}
+{"id": "money-034", "move": "investigate a question", "material": "public records and policy", "for": "a nonprofit or public agency"}
+{"id": "money-055", "move": "draft routine documents", "material": "business operations", "for": "a business or its customers"}
+{"id": "money-056", "move": "extract and structure", "material": "financial and legal paperwork", "for": "self"}
+{"id": "money-062", "move": "extract and structure", "material": "business operations", "for": "a business or its customers"}
+{"id": "money-089", "move": "automate a routine chore", "material": "business operations", "for": "a business or its customers"}
+{"id": "money-095", "move": "automate a routine chore", "material": "a marketplace or other people's offers", "for": "self"}
+{"id": "personal-001", "move": "reverse-engineer or unlock", "material": "a compiled binary or game ROM", "for": "self"}
+{"id": "personal-004", "move": "plan or schedule", "material": "trips, meals and household logistics", "for": "self"}
+{"id": "personal-007", "move": "build or modify software", "material": "a playable game", "for": "a child"}
+{"id": "personal-009", "move": "tutor or explain", "material": "a codebase", "for": "a child"}
+{"id": "personal-022", "move": "investigate a question", "material": "personal and family archives", "for": "family or household"}
+{"id": "personal-023", "move": "investigate a question", "material": "personal and family archives", "for": "family or household"}
+{"id": "personal-030", "move": "build or modify software", "material": "a playable game", "for": "self"}
+{"id": "personal-031", "move": "build or modify software", "material": "a playable game", "for": "self"}
+{"id": "personal-037", "move": "investigate a question", "material": "a playable game", "for": "researchers or science"}
+{"id": "personal-059", "move": "create creative media", "material": "creative works", "for": "self"}
+{"id": "personal-061", "move": "draft routine documents", "material": "learning material and skills", "for": "family or household"}
+{"id": "personal-070", "move": "create creative media", "material": "creative works", "for": "self"}
+{"id": "personal-072", "move": "extract and structure", "material": "personal and family archives", "for": "family or household"}
+{"id": "personal-081", "move": "investigate a question", "material": "personal and family archives", "for": "family or household"}
+{"id": "personal-086", "move": "plan or schedule", "material": "trips, meals and household logistics", "for": "self"}
+{"id": "personal-087", "move": "build or modify software", "material": "a playable game", "for": "the public or a community"}
+{"id": "personal-097", "move": "port or translate", "material": "a body of text or recordings", "for": "self"}
+{"id": "personal-110", "move": "build or modify software", "material": "trips, meals and household logistics", "for": "family or household"}
+{"id": "science-006", "move": "investigate a question", "material": "genome", "for": "researchers or science"}
+{"id": "science-010", "move": "coordinate many agents", "material": "genome", "for": "researchers or science"}
+{"id": "science-034", "move": "design a physical thing", "material": "molecules and lab experiments", "for": "researchers or science"}
+{"id": "science-037", "move": "plan or schedule", "material": "molecules and lab experiments", "for": "researchers or science"}
+{"id": "science-044", "move": "build or modify software", "material": "a codebase", "for": "researchers or science"}
+{"id": "science-048", "move": "audit or diagnose", "material": "public datasets and papers", "for": "researchers or science"}
+{"id": "science-060", "move": "build or modify software", "material": "body and biometric data", "for": "self"}
+{"id": "science-063", "move": "build or modify software", "material": "medical records and bills", "for": "self"}
+{"id": "science-065", "move": "investigate a question", "material": "molecules and lab experiments", "for": "researchers or science"}
+{"id": "science-066", "move": "build or modify software", "material": "public datasets and papers", "for": "researchers or science"}
+{"id": "science-068", "move": "draft routine documents", "material": "public records and policy", "for": "a nonprofit or public agency"}
+{"id": "science-072", "move": "investigate a question", "material": "genome", "for": "self"}
+{"id": "science-073", "move": "monitor over time", "material": "body and biometric data", "for": "self"}
+{"id": "science-087", "move": "build or modify software", "material": "public datasets and papers", "for": "the public or a community"}
+{"id": "science-089", "move": "coordinate many agents", "material": "a codebase", "for": "researchers or science"}
+{"id": "science-090", "move": "investigate a question", "material": "a math or theory problem", "for": "researchers or science"}
+{"id": "video-001", "move": "reverse-engineer or unlock", "material": "consumer-device firmware or hardware", "for": "self"}
+{"id": "video-004", "move": "reverse-engineer or unlock", "material": "consumer-device firmware or hardware", "for": "self"}
+{"id": "video-013", "move": "operate a live system", "material": "a marketplace or other people's offers", "for": "self"}
+{"id": "video-019", "move": "investigate a question", "material": "public datasets and papers", "for": "researchers or science"}
+{"id": "video-026", "move": "investigate a question", "material": "personal and family archives", "for": "family or household"}
+{"id": "video-032", "move": "reverse-engineer or unlock", "material": "a compiled binary or game ROM", "for": "self"}
+{"id": "video-036", "move": "investigate a question", "material": "body and biometric data", "for": "self"}
