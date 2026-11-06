@@ -1,0 +1,800 @@
+{
+ "about": "The family for PREREG-ASSISTANTS.md: every cell of the three facet-pair tables that is empty (observed 0) with quasi-independence expected count E >= 1 (z = 3, max_rounds = 5) in the pooled Claude corpus (run r2, N = 1563, adjudicated tags corpus/facets/tags.jsonl at commit 5f79f20). Frozen by this list: m = 44.",
+ "N_claude": 1563,
+ "source_commit": "5f79f20",
+ "m": 44,
+ "cells": [
+  {
+   "code": "OV-06",
+   "axes": [
+    "move",
+    "material"
+   ],
+   "cell": {
+    "move": "extract and structure",
+    "material": "a codebase"
+   },
+   "O_claude": 0,
+   "E_claude": 6.3339,
+   "E_claude_indep": 18.4562,
+   "n_row_claude": 91,
+   "n_col_claude": 317,
+   "prereg_2026_11_02": true,
+   "replication_verdict": "underpowered"
+  },
+  {
+   "code": "OV-20",
+   "axes": [
+    "move",
+    "material"
+   ],
+   "cell": {
+    "move": "coordinate many agents",
+    "material": "circuits and printable parts"
+   },
+   "O_claude": 0,
+   "E_claude": 2.8495,
+   "E_claude_indep": 6.5336,
+   "n_row_claude": 74,
+   "n_col_claude": 138,
+   "prereg_2026_11_02": false,
+   "replication_verdict": null
+  },
+  {
+   "code": "OV-21",
+   "axes": [
+    "move",
+    "material"
+   ],
+   "cell": {
+    "move": "coordinate many agents",
+    "material": "consumer-device firmware or hardware"
+   },
+   "O_claude": 0,
+   "E_claude": 2.6302,
+   "E_claude_indep": 5.492,
+   "n_row_claude": 74,
+   "n_col_claude": 116,
+   "prereg_2026_11_02": false,
+   "replication_verdict": null
+  },
+  {
+   "code": "OV-22",
+   "axes": [
+    "move",
+    "material"
+   ],
+   "cell": {
+    "move": "extract and structure",
+    "material": "consumer-device firmware or hardware"
+   },
+   "O_claude": 0,
+   "E_claude": 2.4567,
+   "E_claude_indep": 6.7537,
+   "n_row_claude": 91,
+   "n_col_claude": 116,
+   "prereg_2026_11_02": false,
+   "replication_verdict": null
+  },
+  {
+   "code": "OV-23",
+   "axes": [
+    "move",
+    "material"
+   ],
+   "cell": {
+    "move": "investigate a question",
+    "material": "consumer-device firmware or hardware"
+   },
+   "O_claude": 0,
+   "E_claude": 2.2686,
+   "E_claude_indep": 10.6871,
+   "n_row_claude": 144,
+   "n_col_claude": 116,
+   "prereg_2026_11_02": false,
+   "replication_verdict": null
+  },
+  {
+   "code": "OV-24",
+   "axes": [
+    "move",
+    "material"
+   ],
+   "cell": {
+    "move": "operate a live system",
+    "material": "public datasets and papers"
+   },
+   "O_claude": 0,
+   "E_claude": 2.1982,
+   "E_claude_indep": 3.4511,
+   "n_row_claude": 87,
+   "n_col_claude": 62,
+   "prereg_2026_11_02": false,
+   "replication_verdict": null
+  },
+  {
+   "code": "OV-25",
+   "axes": [
+    "move",
+    "material"
+   ],
+   "cell": {
+    "move": "automate a routine chore",
+    "material": "circuits and printable parts"
+   },
+   "O_claude": 0,
+   "E_claude": 1.8825,
+   "E_claude_indep": 5.739,
+   "n_row_claude": 65,
+   "n_col_claude": 138,
+   "prereg_2026_11_02": false,
+   "replication_verdict": null
+  },
+  {
+   "code": "OV-26",
+   "axes": [
+    "move",
+    "material"
+   ],
+   "cell": {
+    "move": "audit or diagnose",
+    "material": "learning material and skills"
+   },
+   "O_claude": 0,
+   "E_claude": 1.7259,
+   "E_claude_indep": 2.9559,
+   "n_row_claude": 132,
+   "n_col_claude": 35,
+   "prereg_2026_11_02": false,
+   "replication_verdict": null
+  },
+  {
+   "code": "OV-08",
+   "axes": [
+    "move",
+    "material"
+   ],
+   "cell": {
+    "move": "coordinate many agents",
+    "material": "financial and legal paperwork"
+   },
+   "O_claude": 0,
+   "E_claude": 1.6625,
+   "E_claude_indep": 5.0186,
+   "n_row_claude": 74,
+   "n_col_claude": 106,
+   "prereg_2026_11_02": true,
+   "replication_verdict": "underpowered"
+  },
+  {
+   "code": "OV-27",
+   "axes": [
+    "move",
+    "material"
+   ],
+   "cell": {
+    "move": "reverse-engineer or unlock",
+    "material": "business operations"
+   },
+   "O_claude": 0,
+   "E_claude": 1.6623,
+   "E_claude_indep": 8.9623,
+   "n_row_claude": 136,
+   "n_col_claude": 103,
+   "prereg_2026_11_02": false,
+   "replication_verdict": null
+  },
+  {
+   "code": "OV-28",
+   "axes": [
+    "move",
+    "material"
+   ],
+   "cell": {
+    "move": "audit or diagnose",
+    "material": "trips, meals and household logistics"
+   },
+   "O_claude": 0,
+   "E_claude": 1.6227,
+   "E_claude_indep": 2.2802,
+   "n_row_claude": 132,
+   "n_col_claude": 27,
+   "prereg_2026_11_02": false,
+   "replication_verdict": null
+  },
+  {
+   "code": "OV-05",
+   "axes": [
+    "move",
+    "material"
+   ],
+   "cell": {
+    "move": "audit or diagnose",
+    "material": "genome"
+   },
+   "O_claude": 0,
+   "E_claude": 1.5541,
+   "E_claude_indep": 2.5336,
+   "n_row_claude": 132,
+   "n_col_claude": 30,
+   "prereg_2026_11_02": true,
+   "replication_verdict": "underpowered"
+  },
+  {
+   "code": "OV-29",
+   "axes": [
+    "move",
+    "material"
+   ],
+   "cell": {
+    "move": "automate a routine chore",
+    "material": "a playable game"
+   },
+   "O_claude": 0,
+   "E_claude": 1.4974,
+   "E_claude_indep": 6.1132,
+   "n_row_claude": 65,
+   "n_col_claude": 147,
+   "prereg_2026_11_02": false,
+   "replication_verdict": null
+  },
+  {
+   "code": "OV-30",
+   "axes": [
+    "move",
+    "material"
+   ],
+   "cell": {
+    "move": "audit or diagnose",
+    "material": "molecules and lab experiments"
+   },
+   "O_claude": 0,
+   "E_claude": 1.4639,
+   "E_claude_indep": 2.7025,
+   "n_row_claude": 132,
+   "n_col_claude": 32,
+   "prereg_2026_11_02": false,
+   "replication_verdict": null
+  },
+  {
+   "code": "OV-31",
+   "axes": [
+    "move",
+    "material"
+   ],
+   "cell": {
+    "move": "tutor or explain",
+    "material": "consumer-device firmware or hardware"
+   },
+   "O_claude": 0,
+   "E_claude": 1.453,
+   "E_claude_indep": 2.8202,
+   "n_row_claude": 38,
+   "n_col_claude": 116,
+   "prereg_2026_11_02": false,
+   "replication_verdict": null
+  },
+  {
+   "code": "OV-32",
+   "axes": [
+    "move",
+    "material"
+   ],
+   "cell": {
+    "move": "reverse-engineer or unlock",
+    "material": "public datasets and papers"
+   },
+   "O_claude": 0,
+   "E_claude": 1.3438,
+   "E_claude_indep": 5.3948,
+   "n_row_claude": 136,
+   "n_col_claude": 62,
+   "prereg_2026_11_02": false,
+   "replication_verdict": null
+  },
+  {
+   "code": "OV-33",
+   "axes": [
+    "move",
+    "material"
+   ],
+   "cell": {
+    "move": "reverse-engineer or unlock",
+    "material": "a playable game"
+   },
+   "O_claude": 0,
+   "E_claude": 1.1886,
+   "E_claude_indep": 12.7908,
+   "n_row_claude": 136,
+   "n_col_claude": 147,
+   "prereg_2026_11_02": false,
+   "replication_verdict": null
+  },
+  {
+   "code": "OV-34",
+   "axes": [
+    "move",
+    "material"
+   ],
+   "cell": {
+    "move": "coordinate many agents",
+    "material": "body and biometric data"
+   },
+   "O_claude": 0,
+   "E_claude": 1.1109,
+   "E_claude_indep": 2.5093,
+   "n_row_claude": 74,
+   "n_col_claude": 53,
+   "prereg_2026_11_02": false,
+   "replication_verdict": null
+  },
+  {
+   "code": "OV-35",
+   "axes": [
+    "move",
+    "material"
+   ],
+   "cell": {
+    "move": "screen rank or map",
+    "material": "a codebase"
+   },
+   "O_claude": 0,
+   "E_claude": 1.0809,
+   "E_claude_indep": 3.245,
+   "n_row_claude": 16,
+   "n_col_claude": 317,
+   "prereg_2026_11_02": false,
+   "replication_verdict": null
+  },
+  {
+   "code": "OV-36",
+   "axes": [
+    "move",
+    "material"
+   ],
+   "cell": {
+    "move": "port or translate",
+    "material": "financial and legal paperwork"
+   },
+   "O_claude": 0,
+   "E_claude": 1.0566,
+   "E_claude_indep": 3.4587,
+   "n_row_claude": 51,
+   "n_col_claude": 106,
+   "prereg_2026_11_02": false,
+   "replication_verdict": null
+  },
+  {
+   "code": "OV-37",
+   "axes": [
+    "move",
+    "material"
+   ],
+   "cell": {
+    "move": "draft routine documents",
+    "material": "circuits and printable parts"
+   },
+   "O_claude": 0,
+   "E_claude": 1.021,
+   "E_claude_indep": 5.033,
+   "n_row_claude": 57,
+   "n_col_claude": 138,
+   "prereg_2026_11_02": false,
+   "replication_verdict": null
+  },
+  {
+   "code": "OV-38",
+   "axes": [
+    "move",
+    "for"
+   ],
+   "cell": {
+    "move": "coordinate many agents",
+    "for": "family or household"
+   },
+   "O_claude": 0,
+   "E_claude": 3.5,
+   "E_claude_indep": 3.0301,
+   "n_row_claude": 74,
+   "n_col_claude": 64,
+   "prereg_2026_11_02": false,
+   "replication_verdict": null
+  },
+  {
+   "code": "OV-39",
+   "axes": [
+    "move",
+    "for"
+   ],
+   "cell": {
+    "move": "port or translate",
+    "for": "family or household"
+   },
+   "O_claude": 0,
+   "E_claude": 2.7974,
+   "E_claude_indep": 2.0883,
+   "n_row_claude": 51,
+   "n_col_claude": 64,
+   "prereg_2026_11_02": false,
+   "replication_verdict": null
+  },
+  {
+   "code": "OV-40",
+   "axes": [
+    "move",
+    "for"
+   ],
+   "cell": {
+    "move": "tutor or explain",
+    "for": "the public or a community"
+   },
+   "O_claude": 0,
+   "E_claude": 2.762,
+   "E_claude_indep": 4.0115,
+   "n_row_claude": 38,
+   "n_col_claude": 165,
+   "prereg_2026_11_02": false,
+   "replication_verdict": null
+  },
+  {
+   "code": "OV-09",
+   "axes": [
+    "move",
+    "for"
+   ],
+   "cell": {
+    "move": "reverse-engineer or unlock",
+    "for": "a business or its customers"
+   },
+   "O_claude": 0,
+   "E_claude": 2.6559,
+   "E_claude_indep": 20.0998,
+   "n_row_claude": 136,
+   "n_col_claude": 231,
+   "prereg_2026_11_02": true,
+   "replication_verdict": "underpowered"
+  },
+  {
+   "code": "OV-41",
+   "axes": [
+    "move",
+    "for"
+   ],
+   "cell": {
+    "move": "plan or schedule",
+    "for": "the public or a community"
+   },
+   "O_claude": 0,
+   "E_claude": 1.9994,
+   "E_claude_indep": 3.4837,
+   "n_row_claude": 33,
+   "n_col_claude": 165,
+   "prereg_2026_11_02": false,
+   "replication_verdict": null
+  },
+  {
+   "code": "OV-42",
+   "axes": [
+    "move",
+    "for"
+   ],
+   "cell": {
+    "move": "create creative media",
+    "for": "researchers or science"
+   },
+   "O_claude": 0,
+   "E_claude": 1.3927,
+   "E_claude_indep": 3.1273,
+   "n_row_claude": 26,
+   "n_col_claude": 188,
+   "prereg_2026_11_02": false,
+   "replication_verdict": null
+  },
+  {
+   "code": "OV-43",
+   "axes": [
+    "move",
+    "for"
+   ],
+   "cell": {
+    "move": "monitor over time",
+    "for": "a business or its customers"
+   },
+   "O_claude": 0,
+   "E_claude": 1.3439,
+   "E_claude_indep": 1.4779,
+   "n_row_claude": 10,
+   "n_col_claude": 231,
+   "prereg_2026_11_02": false,
+   "replication_verdict": null
+  },
+  {
+   "code": "OV-44",
+   "axes": [
+    "move",
+    "for"
+   ],
+   "cell": {
+    "move": "negotiate or dispute",
+    "for": "researchers or science"
+   },
+   "O_claude": 0,
+   "E_claude": 1.1836,
+   "E_claude_indep": 1.5637,
+   "n_row_claude": 13,
+   "n_col_claude": 188,
+   "prereg_2026_11_02": false,
+   "replication_verdict": null
+  },
+  {
+   "code": "OV-45",
+   "axes": [
+    "move",
+    "for"
+   ],
+   "cell": {
+    "move": "extract and structure",
+    "for": "a child"
+   },
+   "O_claude": 0,
+   "E_claude": 1.0984,
+   "E_claude_indep": 3.6097,
+   "n_row_claude": 91,
+   "n_col_claude": 62,
+   "prereg_2026_11_02": false,
+   "replication_verdict": null
+  },
+  {
+   "code": "OV-15",
+   "axes": [
+    "material",
+    "for"
+   ],
+   "cell": {
+    "material": "consumer-device firmware or hardware",
+    "for": "researchers or science"
+   },
+   "O_claude": 0,
+   "E_claude": 10.5138,
+   "E_claude_indep": 13.9527,
+   "n_row_claude": 116,
+   "n_col_claude": 188,
+   "prereg_2026_11_02": true,
+   "replication_verdict": "underpowered"
+  },
+  {
+   "code": "OV-19",
+   "axes": [
+    "material",
+    "for"
+   ],
+   "cell": {
+    "material": "financial and legal paperwork",
+    "for": "the public or a community"
+   },
+   "O_claude": 0,
+   "E_claude": 4.0284,
+   "E_claude_indep": 11.19,
+   "n_row_claude": 106,
+   "n_col_claude": 165,
+   "prereg_2026_11_02": true,
+   "replication_verdict": "underpowered"
+  },
+  {
+   "code": "OV-46",
+   "axes": [
+    "material",
+    "for"
+   ],
+   "cell": {
+    "material": "robots, vehicles and drones",
+    "for": "family or household"
+   },
+   "O_claude": 0,
+   "E_claude": 3.0353,
+   "E_claude_indep": 3.0301,
+   "n_row_claude": 74,
+   "n_col_claude": 64,
+   "prereg_2026_11_02": false,
+   "replication_verdict": null
+  },
+  {
+   "code": "OV-17",
+   "axes": [
+    "material",
+    "for"
+   ],
+   "cell": {
+    "material": "consumer-device firmware or hardware",
+    "for": "a business or its customers"
+   },
+   "O_claude": 0,
+   "E_claude": 1.9038,
+   "E_claude_indep": 17.144,
+   "n_row_claude": 116,
+   "n_col_claude": 231,
+   "prereg_2026_11_02": true,
+   "replication_verdict": "underpowered"
+  },
+  {
+   "code": "OV-47",
+   "axes": [
+    "material",
+    "for"
+   ],
+   "cell": {
+    "material": "personal and family archives",
+    "for": "researchers or science"
+   },
+   "O_claude": 0,
+   "E_claude": 1.7957,
+   "E_claude_indep": 2.7665,
+   "n_row_claude": 23,
+   "n_col_claude": 188,
+   "prereg_2026_11_02": false,
+   "replication_verdict": null
+  },
+  {
+   "code": "OV-48",
+   "axes": [
+    "material",
+    "for"
+   ],
+   "cell": {
+    "material": "a body of text or recordings",
+    "for": "family or household"
+   },
+   "O_claude": 0,
+   "E_claude": 1.7515,
+   "E_claude_indep": 2.2521,
+   "n_row_claude": 55,
+   "n_col_claude": 64,
+   "prereg_2026_11_02": false,
+   "replication_verdict": null
+  },
+  {
+   "code": "OV-49",
+   "axes": [
+    "material",
+    "for"
+   ],
+   "cell": {
+    "material": "a compiled binary or game ROM",
+    "for": "family or household"
+   },
+   "O_claude": 0,
+   "E_claude": 1.7207,
+   "E_claude_indep": 2.1292,
+   "n_row_claude": 52,
+   "n_col_claude": 64,
+   "prereg_2026_11_02": false,
+   "replication_verdict": null
+  },
+  {
+   "code": "OV-50",
+   "axes": [
+    "material",
+    "for"
+   ],
+   "cell": {
+    "material": "medical records and bills",
+    "for": "the public or a community"
+   },
+   "O_claude": 0,
+   "E_claude": 1.6131,
+   "E_claude_indep": 2.9559,
+   "n_row_claude": 28,
+   "n_col_claude": 165,
+   "prereg_2026_11_02": false,
+   "replication_verdict": null
+  },
+  {
+   "code": "OV-51",
+   "axes": [
+    "material",
+    "for"
+   ],
+   "cell": {
+    "material": "trips, meals and household logistics",
+    "for": "researchers or science"
+   },
+   "O_claude": 0,
+   "E_claude": 1.5122,
+   "E_claude_indep": 3.2476,
+   "n_row_claude": 27,
+   "n_col_claude": 188,
+   "prereg_2026_11_02": false,
+   "replication_verdict": null
+  },
+  {
+   "code": "OV-52",
+   "axes": [
+    "material",
+    "for"
+   ],
+   "cell": {
+    "material": "robots, vehicles and drones",
+    "for": "a child"
+   },
+   "O_claude": 0,
+   "E_claude": 1.3855,
+   "E_claude_indep": 2.9354,
+   "n_row_claude": 74,
+   "n_col_claude": 62,
+   "prereg_2026_11_02": false,
+   "replication_verdict": null
+  },
+  {
+   "code": "OV-53",
+   "axes": [
+    "material",
+    "for"
+   ],
+   "cell": {
+    "material": "a marketplace or other people's offers",
+    "for": "the public or a community"
+   },
+   "O_claude": 0,
+   "E_claude": 1.3661,
+   "E_claude_indep": 3.8004,
+   "n_row_claude": 36,
+   "n_col_claude": 165,
+   "prereg_2026_11_02": false,
+   "replication_verdict": null
+  },
+  {
+   "code": "OV-54",
+   "axes": [
+    "material",
+    "for"
+   ],
+   "cell": {
+    "material": "a playable game",
+    "for": "a business or its customers"
+   },
+   "O_claude": 0,
+   "E_claude": 1.3152,
+   "E_claude_indep": 21.7255,
+   "n_row_claude": 147,
+   "n_col_claude": 231,
+   "prereg_2026_11_02": false,
+   "replication_verdict": null
+  },
+  {
+   "code": "OV-55",
+   "axes": [
+    "material",
+    "for"
+   ],
+   "cell": {
+    "material": "genome",
+    "for": "family or household"
+   },
+   "O_claude": 0,
+   "E_claude": 1.2305,
+   "E_claude_indep": 1.2284,
+   "n_row_claude": 30,
+   "n_col_claude": 64,
+   "prereg_2026_11_02": false,
+   "replication_verdict": null
+  },
+  {
+   "code": "OV-56",
+   "axes": [
+    "material",
+    "for"
+   ],
+   "cell": {
+    "material": "financial and legal paperwork",
+    "for": "a child"
+   },
+   "O_claude": 0,
+   "E_claude": 1.0727,
+   "E_claude_indep": 4.2047,
+   "n_row_claude": 106,
+   "n_col_claude": 62,
+   "prereg_2026_11_02": false,
+   "replication_verdict": null
+  }
+ ]
+}
